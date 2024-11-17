@@ -11,7 +11,7 @@ setlocale(LC_ALL, "portuguese");
     do{
     printf("Escolha o que deseja fazer:\n");
     printf("1 - Cadastrar passageiro\n");
-    printf("2 - Cadastrar tripulação\n");
+    printf("2 - Cadastrar tripulaÃ§Ã£o\n");
     printf("3 - Cadastrar voo\n");
     printf("4 - Cadastrar assento\n");
     printf("5 - Cadastrar reserva\n");
