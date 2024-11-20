@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <locale.h>
+#include "cadastroVoo.cpp"
 #include "Laura/Endereco.h"
 #include "Laura/Passageiro.h"
 
@@ -44,7 +45,6 @@ int main() {
             break;
         }
 
-
         case 2:
             system("cls");
             cout << "escolha 2\n" << endl;
@@ -52,7 +52,7 @@ int main() {
 
         case 3:
             system("cls");
-            cout << "escolha 3\n" << endl;
+            menuVoos();
             break;
 
         case 4:
