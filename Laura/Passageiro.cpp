@@ -1,10 +1,13 @@
 #include <iostream>
+#include <string>
 #include "Passageiro.h"
+#include "Endereco.h"
 
+using namespace std;
 // Inicialize a variável estática
 int Passageiro::contadorID = 1;
 
-Passageiro::Passageiro(string nome, bool fidelidade, Endereco endereco)
+Passageiro::Passageiro(string nome, bool fidelidade, Endereco endereco) : endereco(endereco)
 {
     this->id = contadorID++; // Atribui o ID atual e incrementa para o próximo
     this->nome = nome;

@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Endereco.h"
+#include <string>
 
 using namespace std;
 
@@ -18,7 +19,7 @@ void Endereco::setNumero(int numero)
 void Endereco::setCidade(string cidade)
 {
     this->cidade = cidade;
-}
+};
 
 void Endereco::setRua(string rua)
 {
@@ -32,12 +33,12 @@ int Endereco::getNumero()
 
 string Endereco:: getCidade(){
     return cidade;
-}
+};
 
 string Endereco:: getRua(){
     return rua;
-}
+};
 
-void Endereco:: imprimeEndereco(){
+void Endereco::imprimeEndereco(){
     cout << rua << ", " << numero << " - " << cidade << endl;
-}
+};

@@ -1,3 +1,6 @@
+#ifndef ENDERECO_H
+#define ENDERECO_H
+
 #include <string>
 
 using namespace std;
@@ -18,3 +21,5 @@ class Endereco{
     string getRua();
     void imprimeEndereco();
 };
+
+#endif
