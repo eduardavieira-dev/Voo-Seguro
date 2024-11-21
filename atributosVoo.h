@@ -13,8 +13,11 @@ class atributosVoo {
     int codigoVoo;
     int status;
     int tarifa;
-    string data;
-    string hora;
+    int dia;
+    int mes;
+    int ano;
+    int hora;
+    int minuto;
     string origem;
     string destino;
 
@@ -47,12 +50,23 @@ class atributosVoo {
         return tarifa;
     }
 
-    string getData() {
-        return data;
+     int getDia() {        return dia;
     }
 
-    string getHora() {
+     int getMes() {
+        return mes;
+    }
+
+     int getAno() {
+        return ano;
+    }
+
+     int getHora() {
         return hora;
+    }
+
+     int getMinuto() {
+        return minuto;
     }
 
     string getOrigem() {
@@ -91,12 +105,24 @@ class atributosVoo {
         this->tarifa = tarifa;
     }
 
-    void setData(string data) {
-        this->data = data;
+    void setDia (int dia) {
+        this->dia = dia;
     }
 
-    void setHora(string hora) {
+    void setMes(int mes) {
+        this->mes = mes;
+    }
+
+    void setAno(int ano) {
+        this->ano = ano;
+    }
+
+    void setHora(int hora) {
         this->hora = hora;
+    }
+
+    void setMinuto(int minuto) {
+        this->minuto = minuto;
     }
 
     void setOrigem(string origem) {

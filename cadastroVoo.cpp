@@ -23,8 +23,8 @@ void cadastroVoo (){
 
     atributosVoo voo;
 
-    string origem, destino, data, hora;
-    int codigoAviao, codigoComissario, codigoCopiloto, codigoVoo, codigoPiloto, tarifa, status;
+    string origem, destino;
+    int codigoAviao, codigoComissario, codigoCopiloto, codigoPiloto, tarifa, status, dia, mes, ano, hora, minuto;
 
     cout << "Informe a origem do voo:" << endl;
     getline(cin, origem);
@@ -34,13 +34,32 @@ void cadastroVoo (){
     getline(cin, destino);
     voo.setDestino(destino);
 
-    cout << "Informe a data do voo (DD/MM/AAAA):" << endl;
-    getline(cin, data);
-    voo.setData(data);
+    cout << "Informe a data do voo:" << endl;
+    cout << "Dia:";
+    cin >> dia;
+    cin.ignore();
+    voo.setDia(dia);
 
-    cout << "Informe horário do voo (HH:MM):" << endl;
-    getline(cin, hora);
+    cout << "Mes:";
+    cin >> mes;
+    cin.ignore();
+    voo.setMes(mes);
+
+    cout << "Ano:";
+    cin >> ano;
+    cin.ignore();
+    voo.setAno(ano);
+
+    cout << "Informe a hora do voo:" << endl;
+    cout << "Hora:";
+    cin >> hora;
+    cin.ignore();
     voo.setHora(hora);
+
+    cout << "Minutos:";
+    cin >> minuto;
+    cin.ignore();
+    voo.setMinuto(minuto);
 
     cout << "Informe o código do avião:" << endl;
     cin >> codigoAviao;
@@ -86,17 +105,17 @@ void cadastroVoo (){
 
 void listarVoo(){
     system("cls");
-    int opcao;
     if(contagemVoo == 0){
         cout << "Nenhum voo cadastrado" << endl;
     }else{
         for(int i = 0; i<contagemVoo; i++){
             cout << "\nInformações de Voo:" << endl;
             cout << "Código de voo: " << voos[i].getCodigoVoo() << endl;
+            cout << "Código do avião: " << voos[i].getCodigoAviao() << endl;
             cout << "Local de origem: " << voos[i].getOrigem() << endl;
             cout << "Local de destino: " << voos[i].getDestino() << endl;
-            cout << "Data: " << voos[i].getData() << endl;
-            cout << "Horário: " << voos[i].getHora() << endl;
+            cout << "Data: " << voos[i].getDia() << "/" << voos[i].getMes() << "/" << voos[i].getAno()  << endl;
+            cout << "Horário: " << voos[i].getHora() << ":" <<voos[i].getMinuto() << endl;
             cout << "Piloto: " << voos[i].getCodigoPiloto() << endl;
             cout << "Copiloto: " << voos[i].getCodigoCopiloto() << endl;
             cout << "Comissário: " << voos[i].getCodigoComissario() << endl;
@@ -141,7 +160,7 @@ void menuVoos (){
 
 }
 
-/*  int main(){
+  int main(){
     menuVoos();
     return 0;
-}*/
+}
