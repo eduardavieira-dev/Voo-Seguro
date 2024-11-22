@@ -2,15 +2,71 @@
 #include <string>
 #include <vector>
 #include <locale>
-#include "atributosVoo.h"
+#include "Voo.h"
 
 using namespace std;
 
 #define MAX_VOOS 100
 
+void Voo::setCodigoAviao(int codigoAviao) {
+        this->codigoAviao = codigoAviao;
+    }
+
+    void Voo::setCodigoPiloto(intcodigoPiloto) {
+        this->codigoPiloto = codigoPiloto;
+    }
+
+    void Voo::setCodigoCopiloto(int codigoCopiloto) {
+        this->codigoCopiloto = codigoCopiloto;
+    }
+
+    void Voo::setCodigoComissario(int codigoComissario) {
+        this->codigoComissario = codigoComissario;
+    }
+
+    void Voo::setCodigoVoo(int codigoVoo) {
+        this->codigoVoo = codigoVoo;
+    }
+
+    void Voo::setStatus(int status) {
+        this->status = status;
+    }
+
+    void Voo::setTarifa(int tarifa) {
+        this->tarifa = tarifa;
+    }
+
+    void Voo::setDia (int dia) {
+        this->dia = dia;
+    }
+
+    void Voo::setMes(int mes) {
+        this->mes = mes;
+    }
+
+    void Voo::setAno(int ano) {
+        this->ano = ano;
+    }
+
+    void Voo::setHora(int hora) {
+        this->hora = hora;
+    }
+
+    void Voo::setMinuto(int minuto) {
+        this->minuto = minuto;
+    }
+
+    void Voo::setOrigem(string origem) {
+        this->origem = origem;
+    }
+
+    void Voo::setDestino(string destino) {
+        this->destino = destino;
+}
+
 void menuVoos();
 
-vector<atributosVoo>voos;
+vector<Voo>voos;
 
 int contagemVoo = 0;
 void cadastroVoo (){
@@ -21,7 +77,7 @@ void cadastroVoo (){
         return;
     };
 
-    atributosVoo voo;
+    Voo voo;
 
     string origem, destino;
     int codigoAviao, codigoComissario, codigoCopiloto, codigoPiloto, tarifa, status, dia, mes, ano, hora, minuto;
