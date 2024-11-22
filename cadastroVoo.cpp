@@ -8,11 +8,67 @@ using namespace std;
 
 #define MAX_VOOS 100
 
+    int Voo::getCodigoAviao() {
+        return codigoAviao;
+    }
+
+    int Voo::getCodigoPiloto() {
+        return codigoPiloto;
+    }
+
+    int Voo::getCodigoCopiloto() {
+        return codigoCopiloto;
+    }
+
+    int Voo::getCodigoComissario() {
+        return codigoComissario;
+    }
+
+    int Voo::getCodigoVoo() {
+        return codigoVoo;
+    }
+
+    int Voo::getStatus() {
+        return status;
+    }
+
+    int Voo::getTarifa() {
+        return tarifa;
+    }
+
+     int Voo::getDia() {        return dia;
+    }
+
+     int Voo::getMes() {
+        return mes;
+    }
+
+     int Voo::getAno() {
+        return ano;
+    }
+
+     int Voo::getHora() {
+        return hora;
+    }
+
+     int Voo::getMinuto() {
+        return minuto;
+    }
+
+    string Voo::getOrigem() {
+        return origem;
+    }
+
+    string Voo::getDestino() {
+        return destino;
+    }
+
+
 void Voo::setCodigoAviao(int codigoAviao) {
         this->codigoAviao = codigoAviao;
     }
 
-    void Voo::setCodigoPiloto(intcodigoPiloto) {
+    void Voo::setCodigoPiloto(int codigoPiloto) {
         this->codigoPiloto = codigoPiloto;
     }
 
