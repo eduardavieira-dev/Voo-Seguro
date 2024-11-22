@@ -4,7 +4,7 @@
 #include <string>
 using namespace std;
 
-class atributosVoo {
+class Voo {
     private:
     int codigoAviao;
     int codigoPiloto;
@@ -22,116 +22,62 @@ class atributosVoo {
     string destino;
 
     public:
-    int getCodigoAviao() {
-        return codigoAviao;
-    }
+    int getCodigoAviao()
 
-    int getCodigoPiloto() {
-        return codigoPiloto;
-    }
+    int getCodigoPiloto() 
 
-    int getCodigoCopiloto() {
-        return codigoCopiloto;
-    }
+    int getCodigoCopiloto() 
 
-    int getCodigoComissario() {
-        return codigoComissario;
-    }
+    int getCodigoComissario() 
 
-    int getCodigoVoo() {
-        return codigoVoo;
-    }
+    int getCodigoVoo() 
 
-    int getStatus() {
-        return status;
-    }
+    int getStatus() 
 
-    int getTarifa() {
-        return tarifa;
-    }
+    int getTarifa() 
 
-     int getDia() {        return dia;
-    }
+     int getDia() 
 
-     int getMes() {
-        return mes;
-    }
+     int getMes() 
 
-     int getAno() {
-        return ano;
-    }
+     int getAno() 
 
-     int getHora() {
-        return hora;
-    }
+     int getHora() 
 
-     int getMinuto() {
-        return minuto;
-    }
+     int getMinuto() 
 
-    string getOrigem() {
-        return origem;
-    }
+    string getOrigem() 
 
-    string getDestino() {
-        return destino;
-    }
+    string getDestino() 
 
-    void setCodigoAviao(int codigoAviao) {
-        this->codigoAviao = codigoAviao;
-    }
+    void setCodigoAviao(int codigoAviao)       
 
-    void setCodigoPiloto(int codigoPiloto) {
-        this->codigoPiloto = codigoPiloto;
-    }
+    void setCodigoPiloto(int codigoPiloto) 
 
-    void setCodigoCopiloto(int codigoCopiloto) {
-        this->codigoCopiloto = codigoCopiloto;
-    }
+    void setCodigoCopiloto(int codigoCopiloto) 
 
-    void setCodigoComissario(int codigoComissario) {
-        this->codigoComissario = codigoComissario;
-    }
+    void setCodigoComissario(int codigoComissario) 
 
-    void setCodigoVoo(int codigoVoo) {
-        this->codigoVoo = codigoVoo;
-    }
+    void setCodigoVoo(int codigoVoo) 
 
-    void setStatus(int status) {
-        this->status = status;
-    }
+    void setStatus(int status) 
 
-    void setTarifa(int tarifa) {
-        this->tarifa = tarifa;
-    }
+    void setTarifa(int tarifa) 
 
-    void setDia (int dia) {
-        this->dia = dia;
-    }
+    void setDia (int dia) 
 
-    void setMes(int mes) {
-        this->mes = mes;
-    }
+    void setMes(int mes) 
 
-    void setAno(int ano) {
-        this->ano = ano;
-    }
+    void setAno(int ano) 
 
-    void setHora(int hora) {
-        this->hora = hora;
-    }
+    void setHora(int hora) 
 
-    void setMinuto(int minuto) {
-        this->minuto = minuto;
-    }
+    void setMinuto(int minuto)
 
-    void setOrigem(string origem) {
-        this->origem = origem;
-    }
+    void setOrigem(string origem)
 
-    void setDestino(string destino) {
-        this->destino = destino;
-    }
+    void setDestino(string destino)
+
 };
 
 #endif // ATRIBUTOSVOO_H
