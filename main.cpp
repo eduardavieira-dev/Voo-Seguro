@@ -2,8 +2,7 @@
 #include <cstdlib>
 #include <locale.h>
 #include "cadastroVoo.cpp"
-#include "Laura/Endereco.h"
-#include "Laura/Passageiro.h"
+
 
 using namespace std;
 
@@ -26,24 +25,8 @@ int main() {
 
         switch (escolha) {
         case 1:
-            {
             system("cls");
-            int numero;
-            string cidade;
-            string rua;
-
-            cout << "Cadastrar passageiro\n";
-            cout << "Digite o número residencial:" << endl;
-            cin >> numero;
-            cout << "Informe a cidade do passageiro: " << endl;
-            cin >> cidade;
-            cout << "Informe a rua do endereço: " << endl;
-            cin >> rua;
-
-            Endereco enderecoN(numero, cidade, rua);
-            enderecoN.imprimeEndereco();
             break;
-        }
 
         case 2:
             system("cls");
