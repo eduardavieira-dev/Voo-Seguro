@@ -36,7 +36,8 @@ using namespace std;
         return tarifa;
     }
 
-     int Voo::getDia() {        return dia;
+     int Voo::getDia() {
+        return dia;
     }
 
      int Voo::getMes() {
@@ -120,20 +121,19 @@ void Voo::setCodigoAviao(int codigoAviao) {
         this->destino = destino;
 }
 
-void menuVoos();
-
 vector<Voo>voos;
 
 int contagemVoo = 0;
-void cadastroVoo (){
+
+Voo voo;
+
+void Voo::cadastroVoo(){
     system("cls");
 
     if(contagemVoo >= MAX_VOOS){
         cout << "Limite de voos cadastrados atingido!" << endl;
         return;
     };
-
-    Voo voo;
 
     string origem, destino;
     int codigoAviao, codigoComissario, codigoCopiloto, codigoPiloto, tarifa, status, dia, mes, ano, hora, minuto;
@@ -212,67 +212,29 @@ void cadastroVoo (){
     voo.setCodigoVoo(contagemVoo);
 
     voos.push_back(voo);
-    menuVoos();
 }
 
-void listarVoo(){
+void Voo::listarVoo(){
     system("cls");
     if(contagemVoo == 0){
         cout << "Nenhum voo cadastrado" << endl;
     }else{
         for(int i = 0; i<contagemVoo; i++){
             cout << "\nInformações de Voo:" << endl;
-            cout << "Código de voo: " << voos[i].getCodigoVoo() << endl;
-            cout << "Código do avião: " << voos[i].getCodigoAviao() << endl;
-            cout << "Local de origem: " << voos[i].getOrigem() << endl;
-            cout << "Local de destino: " << voos[i].getDestino() << endl;
-            cout << "Data: " << voos[i].getDia() << "/" << voos[i].getMes() << "/" << voos[i].getAno()  << endl;
-            cout << "Horário: " << voos[i].getHora() << ":" <<voos[i].getMinuto() << endl;
-            cout << "Piloto: " << voos[i].getCodigoPiloto() << endl;
-            cout << "Copiloto: " << voos[i].getCodigoCopiloto() << endl;
-            cout << "Comissário: " << voos[i].getCodigoComissario() << endl;
+            cout << "Código de voo: " << codigoVoo << endl;
+            cout << "Código do avião: " << codigoAviao << endl;
+            cout << "Local de origem: " << origem << endl;
+            cout << "Local de destino: " << destino << endl;
+            cout << "Data: " << dia << "/" << mes << "/" << ano  << endl;
+            cout << "Horário: " << hora << ":" << minuto << endl;
+            cout << "Piloto: " << codigoPiloto << endl;
+            cout << "Copiloto: " << codigoCopiloto << endl;
+            cout << "Comissário: " << codigoComissario << endl;
+            cout << "Tarifa:" << tarifa << endl;
         }
     }
 
     cout << "Pressione 'ENTER' para voltar" << endl;
     cin.get();
-    menuVoos();
-}
 
-void menuVoos (){
-    system("cls");
-    setlocale(LC_ALL, "portuguese");
-
-    int opcao;
-    cout << "Menu de Cadastro de Voos" << endl;
-    cout << "1 - Cadastrar voo" << endl;
-    cout << "2 - Listar voos" << endl;
-    cout << "3 - Voltar" << endl;
-    cout << "Escolha uma opção:" << endl;
-    cin >> opcao;
-    cin.ignore();
-
-    switch(opcao){
-        case 1:
-            cadastroVoo();
-            break;
-
-        case 2:
-            listarVoo();
-            break;
-
-        case 3:
-            break;
-
-        default:
-            cout << "Opcção inválida" << endl;
-            menuVoos();
-            break;
-    }
-
-}
-
-  int main(){
-    menuVoos();
-    return 0;
 }
