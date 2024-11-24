@@ -1,6 +1,3 @@
-#ifndef ATRIBUTOSVOO_H
-#define ATRIBUTOSVOO_H
-
 #include <string>
 using namespace std;
 
@@ -54,7 +51,8 @@ class Voo {
     
     void cadastroVoo();
     void listarVoo();
+
+    void salvarVoos();
+    void carregarVoos(); 
     
 };
-
-#endif // ATRIBUTOSVOO_H

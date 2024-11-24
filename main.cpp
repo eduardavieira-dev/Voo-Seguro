@@ -5,8 +5,8 @@
 
 using namespace std;
 
-    void menuVoos (){
-    Voo voo;
+    void menuVoos (Voo& voo){
+    
     system("cls");
     setlocale(LC_ALL, "portuguese");
 
@@ -25,14 +25,15 @@ using namespace std;
             break;
 
         case 2:
+            voo.listarVoo();
+            system("cls");
             break;
 
         case 3:
             break;
 
         default:
-            cout << "Opção inválida" << endl;
-            menuVoos();
+            menuVoos(voo);
             break;
     }
 
@@ -41,7 +42,8 @@ using namespace std;
 int main() {
     setlocale(LC_ALL, "portuguese");
     int escolha;
-
+    Voo voo;
+    voo.carregarVoos();
     do {
         cout << "Escolha o que deseja fazer:" << endl;
         cout << "1 - Cadastrar passageiro" << endl;
@@ -67,7 +69,7 @@ int main() {
 
         case 3:
             system("cls");
-            menuVoos();
+            menuVoos(voo);
             break;
 
         case 4:
