@@ -3,8 +3,43 @@
 #include <locale.h>
 #include "Voo.h"
 #include "tripulacao.h"
+#include "Passageiro.h"
 
 using namespace std;
+
+// Função para gerar o menu de ações para passageiros
+void menuPassageiro(Passageiro& pass)
+{
+    system("cls");
+
+    int opcao;
+    cout << "Menu de Cadastro de Passageiros:" << endl;
+    cout << "1 - Cadastrar novo passageiro" << endl;
+    cout << "2 - Listar passageiros cadastrados" << endl;
+    cout << "3 - Voltar" << endl;
+    cout << "Escolha uma opção:" << endl;
+    cin >> opcao;
+    cin.ignore();
+
+    switch (opcao)
+    {
+    case 1:
+        cadastroPassageiro();
+        break;
+
+    case 2:
+        listarPassageiros();
+        break;
+
+    case 3:
+        break;
+
+    default:
+        cout << "Opcção inválida. Tente novamente!" << endl;
+        menuPassageiro(pass);
+        break;
+    }
+}
 
 // Funcao para gerenciar o menu de tripulantes
 void menuTripulacao(Tripulacao& tripulacao) {
@@ -73,7 +108,9 @@ int main() {
     int escolha;
     Voo voo;
     Tripulacao tripulacao;
+    Passageiro pass;
 
+    pass.carregarPassageiros();
     voo.carregarVoos();
     do {
         cout << "Escolha o que deseja fazer:" << endl;
@@ -91,6 +128,7 @@ int main() {
         switch (escolha) {
         case 1:
             system("cls");
+            menuPassageiro(pass);
             break;
 
         case 2:
