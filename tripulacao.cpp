@@ -4,15 +4,29 @@
 #include <iomanip>
 
 using namespace std;
-//rode no terminal: g++ -o Eduarda main.cpp tripulacao.cpp voo.cpp
+
 
 // Construtor de Tripulante
-Tripulante::Tripulante(int id_tripulante, const string& nome, const string& telefone, const string& cargo)
+//rode no terminal: g++ -o Eduarda main.cpp tripulacao.cpp voo.cpp
+
+Tripulante::Tripulante(const string& id_tripulante, const string& nome, const string& telefone, const string& cargo)
     : id_tripulante(id_tripulante), nome(nome), telefone(telefone), cargo(cargo) {}
 
 // Construtor de Tripulacao
-Tripulacao::Tripulacao() : proximo_id(1) {
+Tripulacao::Tripulacao() : contadorPiloto(1), contadorCopiloto(1), contadorComissario(1) {
     carregarDados();
+}
+
+// Método para gerar IDs únicos com base no cargo
+string Tripulacao::gerarId(const string& cargo) {
+    if (cargo == "Piloto") {
+        return "codigoPiloto" + to_string(contadorPiloto++);
+    } else if (cargo == "Copiloto") {
+        return "codigoCopiloto" + to_string(contadorCopiloto++);
+    } else if (cargo == "Comissario") {
+        return "codigoComissario" + to_string(contadorComissario++);
+    }
+    return "codigoIndefinido";
 }
 
 // Método para salvar os dados no arquivo binário
@@ -23,12 +37,17 @@ void Tripulacao::salvarDados() {
         return;
     }
 
-    arquivo.write((char*)&proximo_id, sizeof(proximo_id));
+    arquivo.write((char*)&contadorPiloto, sizeof(contadorPiloto));
+    arquivo.write((char*)&contadorCopiloto, sizeof(contadorCopiloto));
+    arquivo.write((char*)&contadorComissario, sizeof(contadorComissario));
+
     int tamanho = tripulantes.size();
     arquivo.write((char*)&tamanho, sizeof(tamanho));
 
     for (const auto& t : tripulantes) {
-        arquivo.write((char*)&t.id_tripulante, sizeof(t.id_tripulante));  // Alterado para id_tripulante
+        size_t tamanhoId = t.id_tripulante.size();
+        arquivo.write((char*)&tamanhoId, sizeof(tamanhoId));
+        arquivo.write(t.id_tripulante.c_str(), tamanhoId);
 
         size_t tamanhoNome = t.nome.size();
         arquivo.write((char*)&tamanhoNome, sizeof(tamanhoNome));
@@ -54,27 +73,50 @@ void Tripulacao::carregarDados() {
         return;
     }
 
-    arquivo.read((char*)&proximo_id, sizeof(proximo_id));
+    arquivo.read((char*)&contadorPiloto, sizeof(contadorPiloto));
+    arquivo.read((char*)&contadorCopiloto, sizeof(contadorCopiloto));
+    arquivo.read((char*)&contadorComissario, sizeof(contadorComissario));
+
     int tamanho = 0;
     arquivo.read((char*)&tamanho, sizeof(tamanho));
 
     tripulantes.clear();
     for (int i = 0; i < tamanho; i++) {
-        Tripulante t(0, "", "", "");
-        arquivo.read((char*)&t.id_tripulante, sizeof(t.id_tripulante));  // Alterado para id_tripulante
+        Tripulante t("", "", "", "");
+
+        size_t tamanhoId;
+        arquivo.read((char*)&tamanhoId, sizeof(tamanhoId));
+        if (arquivo.eof() || tamanhoId > 1000) { // Verificação adicional para evitar excessos
+            cout << "Erro ao carregar o ID do tripulante.\n";
+            return;
+        }
+        t.id_tripulante.resize(tamanhoId);
+        arquivo.read(&t.id_tripulante[0], tamanhoId);
 
         size_t tamanhoNome;
         arquivo.read((char*)&tamanhoNome, sizeof(tamanhoNome));
+        if (arquivo.eof() || tamanhoNome > 1000) {
+            cout << "Erro ao carregar o nome do tripulante.\n";
+            return;
+        }
         t.nome.resize(tamanhoNome);
         arquivo.read(&t.nome[0], tamanhoNome);
 
         size_t tamanhoTelefone;
         arquivo.read((char*)&tamanhoTelefone, sizeof(tamanhoTelefone));
+        if (arquivo.eof() || tamanhoTelefone > 1000) {
+            cout << "Erro ao carregar o telefone do tripulante.\n";
+            return;
+        }
         t.telefone.resize(tamanhoTelefone);
         arquivo.read(&t.telefone[0], tamanhoTelefone);
 
         size_t tamanhoCargo;
         arquivo.read((char*)&tamanhoCargo, sizeof(tamanhoCargo));
+        if (arquivo.eof() || tamanhoCargo > 1000) {
+            cout << "Erro ao carregar o cargo do tripulante.\n";
+            return;
+        }
         t.cargo.resize(tamanhoCargo);
         arquivo.read(&t.cargo[0], tamanhoCargo);
 
@@ -83,6 +125,7 @@ void Tripulacao::carregarDados() {
 
     cout << "Dados carregados com sucesso!\n";
 }
+
 
 // Método para cadastrar um novo tripulante
 void Tripulacao::cadastrarTripulante() {
@@ -106,7 +149,7 @@ void Tripulacao::cadastrarTripulante() {
         default: cargo = "Indefinido"; break;
     }
 
-    Tripulante novo(proximo_id++, nome, telefone, cargo);
+    Tripulante novo(gerarId(cargo), nome, telefone, cargo);
     tripulantes.push_back(novo);
 
     salvarDados();
@@ -120,15 +163,15 @@ void Tripulacao::listarTripulantes() {
         return;
     }
 
-    cout << left << setw(5) << "ID"
+    cout << left << setw(20) << "ID"
         << setw(20) << "Nome"
         << setw(15) << "Telefone"
         << setw(15) << "Cargo" << endl;
 
-    cout << string(5 + 20 + 15 + 15, '-') << endl;
+    cout << string(20 + 20 + 15 + 15, '-') << endl;
 
     for (const auto& t : tripulantes) {
-        cout << left << setw(5) << t.id_tripulante  // Alterado para id_tripulante
+        cout << left << setw(20) << t.id_tripulante
              << setw(20) << t.nome
              << setw(15) << t.telefone
              << setw(15) << t.cargo << endl;

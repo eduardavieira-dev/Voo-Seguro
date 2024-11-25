@@ -7,21 +7,26 @@ using namespace std;
 
 class Tripulante {
 public:
-    int id_tripulante;  
+    string id_tripulante;  
     string nome;
     string telefone;
     string cargo;
-
-    // Construtor
-    Tripulante(int id_tripulante, const string& nome, const string& telefone, const string& cargo);
+    
+    Tripulante(const string& id_tripulante, const string& nome, const string& telefone, const string& cargo);
 };
 
 class Tripulacao {
 private:
     vector<Tripulante> tripulantes;
-    int proximo_id;
+ 
+    int contadorPiloto;
+    int contadorCopiloto;
+    int contadorComissario;
 
     const string arquivoBinario = "tripulantes.dat";
+
+    string gerarId(const string& cargo);
+
 public:
     Tripulacao();
 
