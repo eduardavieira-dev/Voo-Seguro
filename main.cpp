@@ -2,9 +2,38 @@
 #include <cstdlib>
 #include <locale.h>
 #include "Voo.h"
+#include "tripulacao.h"
 
 using namespace std;
 
+// Funcao para gerenciar o menu de tripulantes
+void menuTripulacao(Tripulacao& tripulacao) {
+    int opt;
+    do {
+        system("cls");
+        cout << "Menu de Cadastro de Tripulantes\n";
+        cout << "1 - Cadastrar tripulante\n";
+        cout << "2 - Listar tripulantes\n";
+        cout << "3 - Voltar\n";
+        cout << "Escolha uma opcao: ";
+        cin >>opt;
+
+        switch (opt) {
+            case 1:
+                tripulacao.cadastrarTripulante();
+                break;
+            case 2:
+                tripulacao.listarTripulantes();
+                system("pause");
+                break;
+            case 3:
+                return; 
+            default:
+                cout << "Opcao inválida! Tente novamente.\n";
+        }
+    } while (opt != 3);
+
+}
     void menuVoos (Voo& voo){
     
     system("cls");
@@ -15,7 +44,7 @@ using namespace std;
     cout << "1 - Cadastrar voo" << endl;
     cout << "2 - Listar voos" << endl;
     cout << "3 - Voltar" << endl;
-    cout << "Escolha uma opção:" << endl;
+    cout << "Escolha uma opcao:" << endl;
     cin >> opcao;
     cin.ignore();
 
@@ -43,11 +72,13 @@ int main() {
     setlocale(LC_ALL, "portuguese");
     int escolha;
     Voo voo;
+    Tripulacao tripulacao;
+
     voo.carregarVoos();
     do {
         cout << "Escolha o que deseja fazer:" << endl;
         cout << "1 - Cadastrar passageiro" << endl;
-        cout << "2 - Cadastrar tripulação" << endl;
+        cout << "2 - Cadastrar tripulacao" << endl;
         cout << "3 - Cadastrar voo" << endl;
         cout << "4 - Cadastrar assento" << endl;
         cout << "5 - Cadastrar reserva" << endl;
@@ -64,7 +95,7 @@ int main() {
 
         case 2:
             system("cls");
-            cout << "escolha 2" << endl;
+            menuTripulacao(tripulacao);
             break;
 
         case 3:
