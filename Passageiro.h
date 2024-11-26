@@ -19,7 +19,6 @@ private:
     string rua;
 
 public:
-
     Passageiro();
 
     Passageiro(string nome, string telefone, int numResidencia, string cidade, string rua);
@@ -55,9 +54,10 @@ public:
     void salvarDadosPassageiro();
 
     void carregarPassageiros();
+
+    void cadastroPassageiro();
+
+    void listarPassageiros();
 };
 
-void cadastroPassageiro();
-void listarPassageiros();
-
-#endif 
+#endif

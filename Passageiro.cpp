@@ -11,14 +11,14 @@ vector<Passageiro>passageiros;
 
 // CONSTRUTOR------------------------------------------------------------------------------------------------
 Passageiro::Passageiro(){
-    this->id = 0;
-    this->nome = ' ';
-    this->numResidencia = 0;
-    this->cidade = ' ';
-    this->telefone = ' ';
-    this->rua = ' ';
-    this->fidelidade = false;
-    this->pontuacao = 0;
+    id = 0;
+    nome = ' ';
+    numResidencia = 0;
+    cidade = ' ';
+    telefone = ' ';
+    rua = ' ';
+    fidelidade = false;
+    pontuacao = 0;
 }
 
 Passageiro::Passageiro(string nome, string telefone, int numResidencia, string cidade, string rua)
@@ -109,7 +109,7 @@ string Passageiro::getRua()
 
 // Função para cadastro______________________________________________________________________________________
 
-void cadastroPassageiro() {
+void Passageiro::cadastroPassageiro() {
     system("chcp 65001");
     system("cls");
     string nome, cidade, rua, telefone;
@@ -145,7 +145,7 @@ void cadastroPassageiro() {
     NovoPassageiro.salvarDadosPassageiro(); // Salva apenas o novo passageiro
 }
 
-void listarPassageiros()
+void Passageiro::listarPassageiros()
 {
     system("cls");
     if(passageiros.size() == 0){

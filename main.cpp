@@ -3,8 +3,43 @@
 #include "Voo.h"
 #include "tripulacao.h"
 #include "Passageiro.h"
+#include "Assento.h"
 
 using namespace std;
+
+// Função para gerar o menu de ações para assentos
+void menuAssento(Assento& assento)
+{
+    system("cls");
+
+    int opcao;
+    cout << "Menu de Cadastro de Assento:" << endl;
+    cout << "1 - Cadastrar novo assento" << endl;
+    cout << "2 - Listar assentos cadastrados" << endl;
+    cout << "3 - Voltar" << endl;
+    cout << "Escolha uma opção:" << endl;
+    cin >> opcao;
+    cin.ignore();
+
+    switch (opcao)
+    {
+    case 1:
+        assento.cadastroAssento();
+        break;
+
+    case 2:
+        assento.ExibirAssentos();
+        break;
+
+    case 3:
+        break;
+
+    default:
+        cout << "Opcção inválida. Tente novamente!" << endl;
+        menuAssento(assento);
+        break;
+    }
+}
 
 // Função para gerar o menu de ações para passageiros
 void menuPassageiro(Passageiro& pass)
@@ -23,11 +58,11 @@ void menuPassageiro(Passageiro& pass)
     switch (opcao)
     {
     case 1:
-        cadastroPassageiro();
+        pass.cadastroPassageiro();
         break;
 
     case 2:
-        listarPassageiros();
+        pass.listarPassageiros();
         break;
 
     case 3:
@@ -107,9 +142,11 @@ int main() {
     Voo voo;
     Tripulacao tripulacao;
     Passageiro pass;
+    Assento assento;
 
     pass.carregarPassageiros();
     voo.carregarVoos();
+    assento.cadastroAssento();
     do {
         cout << "Escolha o que deseja fazer:" << endl;
         cout << "1 - Cadastrar passageiro" << endl;
@@ -141,7 +178,7 @@ int main() {
 
         case 4:
             system("cls");
-            cout << "escolha 4" << endl;
+            menuAssento(assento);
             break;
 
         case 5:
