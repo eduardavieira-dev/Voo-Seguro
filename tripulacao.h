@@ -11,6 +11,7 @@ class Tripulacao{
     int cargo;
     int codigoTripulante;
     int codigoTripulacao;
+    vector<Tripulacao> tripulantes;
 
     public:
     string getNome();

@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <locale>
 #include "Passageiro.h"
 #include <fstream>
 
@@ -111,6 +110,7 @@ string Passageiro::getRua()
 // Função para cadastro______________________________________________________________________________________
 
 void cadastroPassageiro() {
+    system("chcp 65001");
     system("cls");
     string nome, cidade, rua, telefone;
     int numResidencia;

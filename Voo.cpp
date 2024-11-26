@@ -1,12 +1,13 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <locale>
 #include <iomanip>
 #include <fstream>
 #include "Voo.h"
 
 using namespace std;
+
+
 
 #define MAX_VOOS 100
 
@@ -187,6 +188,7 @@ void Voo::carregarVoos() {
 }
 
 void Voo::cadastroVoo(){
+    system("chcp 65001");
     system("cls");
     Voo voo;
     if(contagemVoo >= MAX_VOOS){

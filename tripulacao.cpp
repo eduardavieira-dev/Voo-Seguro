@@ -1,13 +1,13 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <locale>
 #include "Tripulacao.h"
 
 using namespace std;
 
-vector<Tripulacao>tripulacao;
+vector<Tripulacao>tripulacaoVet;
 void menuTripulacao();
+
 int contagemTripulacao = 0;
 
 
@@ -54,12 +54,14 @@ void  Tripulacao::setCodigoTripulacao(int codigoTripulacao){
 
 
 void Tripulacao::cadastrarTripulacao(){
+    system("chcp 65001");
     system("cls");
     Tripulacao tripulacao;
 
     string nome;
-    int telefone, codigoTripulante, codigoTripulacao, cargo;
+    int telefone, codigoTripulante, cargo;
 
+    for(int i =0; i < 3; i++){
     cout << "Informe o nome do tripulante:" << endl;
     getline(cin, nome);
     tripulacao.setNome(nome);
@@ -76,17 +78,50 @@ void Tripulacao::cadastrarTripulacao(){
     cin >> cargo;
     cin.ignore();
     tripulacao.setCargo(cargo);
+    codigoTripulante++;
+    tripulacao.setCodigoTripulante(codigoTripulante);
 
+    tripulacao.tripulantes.push_back(tripulacao);
+    }
+
+    contagemTripulacao++;
+    tripulacao.setCodigoTripulacao(contagemTripulacao);
+
+    tripulacaoVet.push_back(tripulacao);
+
+    
+    
+    menuTripulacao();
 }
 
 void Tripulacao::listarTripulacao(){
 
+    if(contagemTripulacao == 0){
+        cout << "Nenhuma tripulação cadastrada." << endl;
+    }else{
+
+    
+    for(int i = 0; i< contagemTripulacao; i++){
+        cout << "Tripulação: " << tripulacaoVet[i].getCodigoTripulacao() << endl;
+        
+        for(int j =0; j<3; j++ ){
+            
+            cout << "Nome: " << tripulacaoVet[i].tripulantes[j].getNome() << endl;
+            cout << "Telefone: " << tripulacaoVet[i].tripulantes[j].getTelefone() << endl;
+            cout << "Cargo: " << tripulacaoVet[i].tripulantes[j].getCargo() << endl;
+            cout << "Código do tripulante: " << tripulacaoVet[i].tripulantes[j].getCodigoTripulante() << endl;
+        }
+        }
+    }
+    cout << "Pressione 'ENTER' para voltar" << endl;
+    cin.get();
+    menuTripulacao();
 }
 
 void menuTripulacao(){
+    
     Tripulacao tripulacao;
     system("cls");
-    setlocale(LC_ALL, "portuguese");
 
     int opcao;
     cout << "Menu de Cadastro de Tripulação" << endl;
@@ -104,7 +139,6 @@ void menuTripulacao(){
 
         case 2:
             tripulacao.listarTripulacao();
-            system("cls");
             break;
 
         case 3:
@@ -117,8 +151,8 @@ void menuTripulacao(){
 
 }
 
-int main(){
-
+ int main(){
+    system("chcp 65001");
     menuTripulacao();
 
-}
+} 
