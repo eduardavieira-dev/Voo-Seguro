@@ -13,6 +13,7 @@ using namespace std;
 
 
 Tripulacao tripulacaoDoVoo;
+vector<Voo> voos;
 
 int contagemVoo = 0;
 

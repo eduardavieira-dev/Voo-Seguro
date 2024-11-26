@@ -17,7 +17,7 @@ class Voo {
     int codigoTripulacao;
 
     public:
-    vector<Voo> voos;
+    
     int getCodigoAviao();
     int getCodigoVoo(); 
     int getStatus(); 
