@@ -102,7 +102,6 @@ void Assento:: carregarAssentos(){
 void Assento::cadastroAssento()
 {
     system("cls");
-    system("chcp 65001");
     int codVoo;
     bool verificaExistenciaVoo = false;
 
@@ -133,7 +132,6 @@ void Assento::cadastroAssento()
 
 void Assento::ExibirAssentos(){
     system("cls");
-    system("chcp 65001");
     if(assentos.size() == 0){
         cout << "Nenhum assento cadastrado." << endl;
     }else{

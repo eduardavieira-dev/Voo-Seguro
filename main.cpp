@@ -13,7 +13,7 @@ void menuAssento(Assento& assento)
     system("cls");
 
     int opcao;
-    cout << "Menu de Cadastro de Assento:" << endl;
+    cout << "\nMenu de Cadastro de Assento:" << endl;
     cout << "1 - Cadastrar novo assento" << endl;
     cout << "2 - Listar assentos cadastrados" << endl;
     cout << "3 - Voltar" << endl;
@@ -47,7 +47,7 @@ void menuPassageiro(Passageiro& pass)
     system("cls");
 
     int opcao;
-    cout << "Menu de Cadastro de Passageiros:" << endl;
+    cout << "\nMenu de Cadastro de Passageiros:" << endl;
     cout << "1 - Cadastrar novo passageiro" << endl;
     cout << "2 - Listar passageiros cadastrados" << endl;
     cout << "3 - Voltar" << endl;
@@ -95,7 +95,7 @@ void menuPassageiro(Passageiro& pass)
                 system("pause");
                 break;
             case 3:
-                return; 
+                return;
             default:
                 cout << "Opcao inválida! Tente novamente.\n";
         }
@@ -103,7 +103,7 @@ void menuPassageiro(Passageiro& pass)
 
 } */
     void menuVoos (Voo& voo){
-    
+
     system("cls");
 
     int opcao;
@@ -117,7 +117,7 @@ void menuPassageiro(Passageiro& pass)
 
     switch(opcao){
         case 1:
-        
+
             voo.cadastroVoo();
             break;
 
@@ -148,7 +148,7 @@ int main() {
     voo.carregarVoos();
     assento.cadastroAssento();
     do {
-        cout << "Escolha o que deseja fazer:" << endl;
+        cout << "\nEscolha o que deseja fazer:" << endl;
         cout << "1 - Cadastrar passageiro" << endl;
         cout << "2 - Cadastrar tripulação" << endl;
         cout << "3 - Cadastrar voo" << endl;
