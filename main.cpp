@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 #include "Voo.h"
-#include "tripulacao.h"
+#include "Tripulacao.h"
 #include "Passageiro.h"
 #include "Assento.h"
 
@@ -75,33 +75,37 @@ void menuPassageiro(Passageiro& pass)
     }
 }
 
-/* void menuTripulacao(Tripulacao& tripulacao) {
-    int opt;
-    do {
-        system("cls");
-        cout << "Menu de Cadastro de Tripulantes\n";
-        cout << "1 - Cadastrar tripulante\n";
-        cout << "2 - Listar tripulantes\n";
-        cout << "3 - Voltar\n";
-        cout << "Escolha uma opcao: ";
-        cin >>opt;
+void menuTripulacao(Tripulacao& tripulacao)
+{
+    system("cls");
 
-        switch (opt) {
-            case 1:
-                tripulacao.cadastrarTripulante();
-                break;
-            case 2:
-                tripulacao.listarTripulantes();
-                system("pause");
-                break;
-            case 3:
-                return; 
-            default:
-                cout << "Opcao inválida! Tente novamente.\n";
-        }
-    } while (opt != 3);
+    int opcao;
+    cout << "Menu de Cadastro de Tripulação" << endl;
+    cout << "1 - Cadastrar tripulação" << endl;
+    cout << "2 - Listar tripulação" << endl;
+    cout << "3 - Voltar" << endl;
+    cout << "Escolha uma opção:" << endl;
+    cin >> opcao;
+    cin.ignore();
 
-} */
+    switch (opcao)
+    {
+    case 1:
+        tripulacao.cadastrarTripulacao();
+        break;
+
+    case 2:
+        tripulacao.listarTripulacao();
+        break;
+
+    case 3:
+        break;
+
+    default:
+        menuTripulacao(tripulacao);
+        break;
+    }
+}
     void menuVoos (Voo& voo){
     
     system("cls");
@@ -142,11 +146,11 @@ int main() {
     Voo voo;
     Tripulacao tripulacao;
     Passageiro pass;
-    Assento assento;
+    Assento assento; 
 
     pass.carregarPassageiros();
     voo.carregarVoos();
-    assento.cadastroAssento();
+    assento.cadastroAssento(); 
     do {
         cout << "Escolha o que deseja fazer:" << endl;
         cout << "1 - Cadastrar passageiro" << endl;
@@ -168,7 +172,7 @@ int main() {
 
         case 2:
             system("cls");
-            /* menuTripulacao(tripulacao); */
+            menuTripulacao(tripulacao); 
             break;
 
         case 3:
@@ -178,7 +182,7 @@ int main() {
 
         case 4:
             system("cls");
-            menuAssento(assento);
+            menuAssento(assento); 
             break;
 
         case 5:

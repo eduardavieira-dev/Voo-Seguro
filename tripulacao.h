@@ -8,17 +8,20 @@ class Tripulacao{
     private:
     string nome;
     int telefone;
-    int cargo;
+    string cargo;
     int codigoTripulante;
     int codigoTripulacao;
     vector<Tripulacao> tripulantes;
+    
 
     public:
     string getNome();
     int getTelefone();
-    int getCargo();
+    string getCargo();
     int getCodigoTripulante();
     int getCodigoTripulacao();
+    /* int getTotalTripulacao(); */
+    
 
     void setNome(string nome);
     void setTelefone(int telefone);
@@ -28,11 +31,14 @@ class Tripulacao{
 
     void cadastrarTripulacao();
     void listarTripulacao();
+    
+    void salvarTripulacao();
+    void carregarTripulacao();
 
-    void salvarDados();
-    void carregarDados();
-
+    /* Tripulacao* getTripulacaoPorCodigo(int codigoTripulacao);
+    bool Tripulacao::elegivelVoo(int codigoTripulacao); */
 };
+
 
 
 #endif // TRIPULACAO2_H
