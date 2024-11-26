@@ -1,40 +1,37 @@
-#ifndef TRIPULACAO_H
-#define TRIPULACAO_H
-
-#include <vector>
+#ifndef TRIPULACAO2_H
+#define TRIPULACAO2_H
 #include <string>
+#include <vector>
+
 using namespace std;
-
-class Tripulante {
-public:
-    string id_tripulante;  
+class Tripulacao{
+    private:
     string nome;
-    string telefone;
-    string cargo;
-    
-    Tripulante(const string& id_tripulante, const string& nome, const string& telefone, const string& cargo);
+    int telefone;
+    int cargo;
+    int codigoTripulante;
+    int codigoTripulacao;
+
+    public:
+    string getNome();
+    int getTelefone();
+    int getCargo();
+    int getCodigoTripulante();
+    int getCodigoTripulacao();
+
+    void setNome(string nome);
+    void setTelefone(int telefone);
+    void setCargo(int cargo);
+    void setCodigoTripulante(int codigoTripulante);
+    void setCodigoTripulacao(int codigoTripulacao);
+
+    void cadastrarTripulacao();
+    void listarTripulacao();
+
+    void salvarDados();
+    void carregarDados();
+
 };
 
-class Tripulacao {
-private:
-    vector<Tripulante> tripulantes;
- 
-    int contadorPiloto;
-    int contadorCopiloto;
-    int contadorComissario;
 
-    const string arquivoBinario = "tripulantes.dat";
-
-    string gerarId(const string& cargo);
-
-public:
-    Tripulacao();
-
-    void cadastrarTripulante();
-    void listarTripulantes();
-
-    void salvarDados();   
-    void carregarDados(); 
-};
-
-#endif
+#endif // TRIPULACAO2_H

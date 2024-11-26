@@ -2,8 +2,9 @@
 #include <string>
 #include <vector>
 #include <locale>
-#include "Voo.h"
+#include <iomanip>
 #include <fstream>
+#include "Voo.h"
 
 using namespace std;
 
@@ -17,21 +18,18 @@ void Voo::salvarVoos() {
     ofstream arquivo("voos.dat", ios::binary);
 
     if (arquivo.is_open()) {
-       
+
         for (int i = 0; i < contagemVoo; i++) {
-            
+
             arquivo.write(reinterpret_cast<char*>(&voos[i].codigoVoo), sizeof(voos[i].codigoVoo));
             arquivo.write(reinterpret_cast<char*>(&voos[i].codigoAviao), sizeof(voos[i].codigoAviao));
-            arquivo.write(voos[i].origem.c_str(), voos[i].origem.size() + 1);  
+            arquivo.write(voos[i].origem.c_str(), voos[i].origem.size() + 1);
             arquivo.write(voos[i].destino.c_str(), voos[i].destino.size() + 1);
             arquivo.write(reinterpret_cast<char*>(&voos[i].dia), sizeof(voos[i].dia));
             arquivo.write(reinterpret_cast<char*>(&voos[i].mes), sizeof(voos[i].mes));
             arquivo.write(reinterpret_cast<char*>(&voos[i].ano), sizeof(voos[i].ano));
             arquivo.write(reinterpret_cast<char*>(&voos[i].hora), sizeof(voos[i].hora));
             arquivo.write(reinterpret_cast<char*>(&voos[i].minuto), sizeof(voos[i].minuto));
-            arquivo.write(reinterpret_cast<char*>(&voos[i].codigoPiloto), sizeof(voos[i].codigoPiloto));
-            arquivo.write(reinterpret_cast<char*>(&voos[i].codigoCopiloto), sizeof(voos[i].codigoCopiloto));
-            arquivo.write(reinterpret_cast<char*>(&voos[i].codigoComissario), sizeof(voos[i].codigoComissario));
             arquivo.write(reinterpret_cast<char*>(&voos[i].tarifa), sizeof(voos[i].tarifa));
             arquivo.write(reinterpret_cast<char*>(&voos[i].status), sizeof(voos[i].status));
         }
@@ -41,23 +39,19 @@ void Voo::salvarVoos() {
     }
 }
 
-
 void Voo::carregarVoos() {
     ifstream arquivo("voos.dat", ios::binary);
 
     if (arquivo.is_open()) {
         while (arquivo.read(reinterpret_cast<char*>(&codigoVoo), sizeof(codigoVoo))) {
             arquivo.read(reinterpret_cast<char*>(&codigoAviao), sizeof(codigoAviao));
-            getline(arquivo, origem, '\0'); 
+            getline(arquivo, origem, '\0');
             getline(arquivo, destino, '\0');
             arquivo.read(reinterpret_cast<char*>(&dia), sizeof(dia));
             arquivo.read(reinterpret_cast<char*>(&mes), sizeof(mes));
             arquivo.read(reinterpret_cast<char*>(&ano), sizeof(ano));
             arquivo.read(reinterpret_cast<char*>(&hora), sizeof(hora));
             arquivo.read(reinterpret_cast<char*>(&minuto), sizeof(minuto));
-            arquivo.read(reinterpret_cast<char*>(&codigoPiloto), sizeof(codigoPiloto));
-            arquivo.read(reinterpret_cast<char*>(&codigoCopiloto), sizeof(codigoCopiloto));
-            arquivo.read(reinterpret_cast<char*>(&codigoComissario), sizeof(codigoComissario));
             arquivo.read(reinterpret_cast<char*>(&tarifa), sizeof(tarifa));
             arquivo.read(reinterpret_cast<char*>(&status), sizeof(status));
 
@@ -71,9 +65,6 @@ void Voo::carregarVoos() {
             novoVoo.setAno(ano);
             novoVoo.setHora(hora);
             novoVoo.setMinuto(minuto);
-            novoVoo.setCodigoPiloto(codigoPiloto);
-            novoVoo.setCodigoCopiloto(codigoCopiloto);
-            novoVoo.setCodigoComissario(codigoComissario);
             novoVoo.setTarifa(tarifa);
             novoVoo.setStatus(status);
 
@@ -88,18 +79,6 @@ void Voo::carregarVoos() {
 
     int Voo::getCodigoAviao() {
         return codigoAviao;
-    }
-
-    int Voo::getCodigoPiloto() {
-        return codigoPiloto;
-    }
-
-    int Voo::getCodigoCopiloto() {
-        return codigoCopiloto;
-    }
-
-    int Voo::getCodigoComissario() {
-        return codigoComissario;
     }
 
     int Voo::getCodigoVoo() {
@@ -142,21 +121,8 @@ void Voo::carregarVoos() {
         return destino;
     }
 
-
-void Voo::setCodigoAviao(int codigoAviao) {
+    void Voo::setCodigoAviao(int codigoAviao) {
         this->codigoAviao = codigoAviao;
-    }
-
-    void Voo::setCodigoPiloto(int codigoPiloto) {
-        this->codigoPiloto = codigoPiloto;
-    }
-
-    void Voo::setCodigoCopiloto(int codigoCopiloto) {
-        this->codigoCopiloto = codigoCopiloto;
-    }
-
-    void Voo::setCodigoComissario(int codigoComissario) {
-        this->codigoComissario = codigoComissario;
     }
 
     void Voo::setCodigoVoo(int codigoVoo) {
@@ -172,23 +138,44 @@ void Voo::setCodigoAviao(int codigoAviao) {
     }
 
     void Voo::setDia (int dia) {
+        if(dia > 0 && dia <= 31){
         this->dia = dia;
+        }else{
+            cout << "Dia inválido" << endl;
+        }
     }
 
     void Voo::setMes(int mes) {
+        if(mes > 0 && mes <= 12){
         this->mes = mes;
+        }else{
+            cout << "Mês inválido" << endl;
+        }
     }
 
     void Voo::setAno(int ano) {
+        if(ano >= 2024 && ano <= 2030){ 
         this->ano = ano;
+         }else{
+            cout << "Deve ser cadastrado voos entre 2024 e 2030" << endl;
+        } 
     }
 
     void Voo::setHora(int hora) {
+        if(hora >= 0 && hora <= 23){
         this->hora = hora;
+        }else{
+            cout << "Hora invalida" << endl;
+        }
     }
 
     void Voo::setMinuto(int minuto) {
-        this->minuto = minuto;
+        if(minuto >= 0 && minuto <=59){
+            this->minuto = minuto;
+        }else{
+            cout << "Minuto invalido" << endl;
+        }
+
     }
 
     void Voo::setOrigem(string origem) {
@@ -208,7 +195,8 @@ void Voo::cadastroVoo(){
     };
 
     string origem, destino;
-    int codigoAviao, codigoComissario, codigoCopiloto, codigoPiloto, tarifa, status, dia, mes, ano, hora, minuto;
+    int codigoAviao, tarifa, status, dia, mes, ano, hora, minuto;
+    bool diaValido = false, mesValido = false, anoValido = false, horaValida = false, minutoValido = false;
 
     cout << "Informe a origem do voo:" << endl;
     getline(cin, origem);
@@ -219,58 +207,55 @@ void Voo::cadastroVoo(){
     voo.setDestino(destino);
 
     cout << "Informe a data do voo:" << endl;
-    cout << "Dia:";
+
+    while(!diaValido){
+    cout << "Dia (1-31):" << endl;
     cin >> dia;
     cin.ignore();
     voo.setDia(dia);
+    diaValido = (dia >0 && dia <= 31);
+    }
 
-    cout << "Mes:";
+    while(!mesValido){
+    cout << "Mes (1-12):" << endl;
     cin >> mes;
     cin.ignore();
     voo.setMes(mes);
+    mesValido = (mes > 0 && mes <= 12);
+    }
 
-    cout << "Ano:";
+    while(!anoValido){
+    cout << "Ano: (2024-2030)" << endl;
     cin >> ano;
     cin.ignore();
     voo.setAno(ano);
+    anoValido = (ano > 2023 && ano <=2030);
+    }
 
-    cout << "Informe a hora do voo:" << endl;
-    cout << "Hora:";
-    cin >> hora;
-    cin.ignore();
-    voo.setHora(hora);
-
-    cout << "Minutos:";
-    cin >> minuto;
-    cin.ignore();
-    voo.setMinuto(minuto);
+    while (!horaValida || !minutoValido) {
+        cout << "Digite o horário do voo (HH:MM): ";
+        char doisPontos;
+        cin >> hora >> doisPontos >> minuto; 
+        cin.ignore();
+        if (doisPontos == ':') {
+        voo.setHora(hora);
+        voo.setMinuto(minuto);
+        horaValida = (hora >= 0 && hora <= 23);
+        minutoValido = (minuto >= 0 && minuto <= 59);
+        }
+    }
 
     cout << "Informe o código do avião:" << endl;
     cin >> codigoAviao;
     cin.ignore();
     voo.setCodigoAviao(codigoAviao);
 
-    cout << "Informe o código do Piloto:" << endl;
-    cin >> codigoPiloto;
-    cin.ignore();
-    voo.setCodigoPiloto(codigoPiloto);
-
-    cout << "Informe o código do Copiloto:" << endl;
-    cin >> codigoCopiloto;
-    cin.ignore();
-    voo.setCodigoCopiloto(codigoCopiloto);
-
-    cout << "Informe o código do Comissário:" << endl;
-    cin >> codigoComissario;
-    cin.ignore();
-    voo.setCodigoComissario(codigoComissario);
-
     cout << "Informe a tarifa:" << endl;
     cin >> tarifa;
     cin.ignore();
     voo.setTarifa(tarifa);
 
-    if(codigoPiloto !=0 && codigoCopiloto !=0){
+    /* if(codigoPiloto !=0 && codigoCopiloto !=0){
         cout << "Voo ativo" << endl;
         status = 1;
         voo.setStatus(status);
@@ -278,7 +263,7 @@ void Voo::cadastroVoo(){
         cout << "Voo inativo, falta piloto ou copiloto" << endl;
         status = 0;
         voo.setStatus(status);
-    }
+    } */
 
     contagemVoo++;
     voo.setCodigoVoo(contagemVoo);
@@ -286,7 +271,6 @@ void Voo::cadastroVoo(){
     voos.push_back(voo);
 
     voo.salvarVoos();
-
 }
 
 void Voo::listarVoo(){
@@ -296,20 +280,59 @@ void Voo::listarVoo(){
     }else{
         for(int i = 0; i<contagemVoo; i++){
             cout << "\nInformações de Voo:" << endl;
-            cout << "Código de voo: " << voos[i].getCodigoVoo() << endl;               
-            cout << "Código do avião: " << voos[i].getCodigoAviao() << endl;           
-            cout << "Local de origem: " << voos[i].getOrigem() << endl;                
-            cout << "Local de destino: " << voos[i].getDestino() << endl;              
-            cout << "Data: " << voos[i].getDia() << "/" << voos[i].getMes() << "/" << voos[i].getAno() << endl;
-            cout << "Horário: " << voos[i].getHora() << ":" << voos[i].getMinuto() << endl; 
-            cout << "Piloto: " << voos[i].getCodigoPiloto() << endl;                   
-            cout << "Copiloto: " << voos[i].getCodigoCopiloto() << endl;               
-            cout << "Comissário: " << voos[i].getCodigoComissario() << endl;           
-            cout << "Tarifa: " << voos[i].getTarifa() << endl;                         
+            cout << "Código de voo: " << voos[i].getCodigoVoo() << endl;
+            cout << "Código do avião: " << voos[i].getCodigoAviao() << endl;
+            cout << "Local de origem: " << voos[i].getOrigem() << endl;
+            cout << "Local de destino: " << voos[i].getDestino() << endl;
+            cout << "Data: " << setfill('0') << setw(2) <<  voos[i].getDia() << "/" << setfill('0') << setw(2) << voos[i].getMes() << "/" << voos[i].getAno() << endl;
+            cout << "Horário: " << setfill('0') << setw(2) << voos[i].getHora() << ":" << setfill('0') << setw(2) << voos[i].getMinuto() << endl;
+            cout << "Tarifa: " << voos[i].getTarifa() << endl;
         }
     }
 
     cout << "Pressione 'ENTER' para voltar" << endl;
     cin.get();
 
+
 }
+
+/* void menuVoos (){
+    Voo voo;
+    system("cls");
+    setlocale(LC_ALL, "portuguese");
+
+    int opcao;
+    cout << "Menu de Cadastro de Voos" << endl;
+    cout << "1 - Cadastrar voo" << endl;
+    cout << "2 - Listar voos" << endl;
+    cout << "3 - Voltar" << endl;
+    cout << "Escolha uma opção:" << endl;
+    cin >> opcao;
+    cin.ignore();
+
+    switch(opcao){
+        case 1:
+            voo.cadastroVoo();
+            break;
+
+        case 2:
+            voo.listarVoo();
+            system("cls");
+            break;
+
+        case 3:
+            break;
+
+        default:
+            menuVoos();
+            break;
+    }
+
+}*/
+
+
+/* int main(){
+
+}
+
+ */
