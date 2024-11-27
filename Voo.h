@@ -6,7 +6,7 @@
 
 using namespace std;
 
-extern vector<Tripulacao> tripulacao;
+extern vector<Tripulacao> tripulacaoVet;
 
 class Voo {
     private:

@@ -8,9 +8,10 @@
 using namespace std;
 
 vector<Tripulacao> tripulacaoVet;
+
 /* vector<Tripulacao> tripulantes; */
 
-void menuTripulacao();
+/* void menuTripulacao(); */
 
 int contagemTripulacao = 0;
 int contagemTripulante = 0;
@@ -203,7 +204,7 @@ void Tripulacao::cadastrarTripulacao()
     tripulacaoVet.push_back(tripulacao);
 
     tripulacao.salvarTripulacao();
-    menuTripulacao();
+    /* menuTripulacao(); */
 }
 
 void Tripulacao::listarTripulacao()
@@ -231,7 +232,7 @@ void Tripulacao::listarTripulacao()
     }
     cout << "Pressione 'ENTER' para voltar" << endl;
     cin.get();
-    menuTripulacao();
+   /*  menuTripulacao(); */
 
 }
 
@@ -281,7 +282,7 @@ Tripulacao* Tripulacao::getTripulacaoPorCodigo(int codigoTripulacao)
 
 
 
- 
+/*  
 void menuTripulacao()
 {
 
@@ -322,4 +323,4 @@ int main()
     tripu.carregarTripulacao();
     system("chcp 65001");
     menuTripulacao();
-}
+} */
