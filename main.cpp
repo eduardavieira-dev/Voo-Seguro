@@ -14,11 +14,13 @@ void menuReserva(Reserva& reserva)
     system("cls");
 
     int opcao;
-    cout << "Menu de Cadastro de Reservas:" << endl;
-    cout << "1 - Cadastrar nova reserva" << endl;
-    cout << "2 - Listar reservas cadastradas" << endl;
-    cout << "3 - Voltar" << endl;
-    cout << "Escolha uma opção:" << endl;
+    cout << "          Escolha uma opção:          " << endl;
+    cout << "+------------------------------------+" << endl;
+    cout << "| Menu de Cadastro de Reservas:      |" << endl;
+    cout << "| 1 - Cadastrar nova reserva         |" << endl;
+    cout << "| 2 - Listar reservas cadastradas    |" << endl;
+    cout << "| 3 - Voltar                         |" << endl;
+    cout << "+------------------------------------+" << endl;
     cin >> opcao;
     cin.ignore();
 
@@ -48,11 +50,13 @@ void menuAssento(Assento& assento)
     system("cls");
 
     int opcao;
-    cout << "Menu de Cadastro de Assento:" << endl;
-    cout << "1 - Cadastrar novo assento" << endl;
-    cout << "2 - Listar assentos cadastrados" << endl;
-    cout << "3 - Voltar" << endl;
-    cout << "Escolha uma opção:" << endl;
+    cout << "+----------------------------------+" << endl;
+    cout << "| Menu de Cadastro de Assento:     |" << endl;
+    cout << "| 1 - Cadastrar novo assento       |" << endl;
+    cout << "| 2 - Listar assentos cadastrados  |" << endl;
+    cout << "| 3 - Voltar                       |" << endl;
+    cout << "| Escolha uma opção:               |" << endl;
+    cout << "+----------------------------------+" << endl;
     cin >> opcao;
     cin.ignore();
 
@@ -82,11 +86,13 @@ void menuPassageiro(Passageiro& pass)
     system("cls");
 
     int opcao;
-    cout << "Menu de Cadastro de Passageiros:" << endl;
-    cout << "1 - Cadastrar novo passageiro" << endl;
-    cout << "2 - Listar passageiros cadastrados" << endl;
-    cout << "3 - Voltar" << endl;
-    cout << "Escolha uma opção:" << endl;
+    cout << "          Escolha uma opção:           " << endl;
+    cout << "+-------------------------------------+" << endl;
+    cout << "| Menu de Cadastro de Passageiros:    |" << endl;
+    cout << "| 1 - Cadastrar novo passageiro       |" << endl;
+    cout << "| 2 - Listar passageiros cadastrados  |" << endl;
+    cout << "| 3 - Voltar                          |" << endl;
+    cout << "+-------------------------------------+" << endl;
     cin >> opcao;
     cin.ignore();
 
@@ -114,12 +120,14 @@ void menuTripulacao(Tripulacao& tripulacao)
 {
     system("cls");
 
-    int opcao;
-    cout << "Menu de Cadastro de Tripulação" << endl;
-    cout << "1 - Cadastrar tripulação" << endl;
-    cout << "2 - Listar tripulação" << endl;
-    cout << "3 - Voltar" << endl;
-    cout << "Escolha uma opção:" << endl;
+     int opcao;
+    cout << "        Escolha uma opção:         " << endl;
+    cout << "+---------------------------------+" << endl;
+    cout << "| Menu de Cadastro de Tripulação  |" << endl;
+    cout << "| 1 - Cadastrar tripulação        |" << endl;
+    cout << "| 2 - Listar tripulação           |" << endl;
+    cout << "| 3 - Voltar                      |" << endl;
+    cout << "+---------------------------------+" << endl;
     cin >> opcao;
     cin.ignore();
 
@@ -146,11 +154,13 @@ void menuTripulacao(Tripulacao& tripulacao)
     system("cls");
 
     int opcao;
-    cout << "Menu de Cadastro de Voos" << endl;
-    cout << "1 - Cadastrar voo" << endl;
-    cout << "2 - Listar voos" << endl;
-    cout << "3 - Voltar" << endl;
-    cout << "Escolha uma opção:" << endl;
+    cout << "      Escolha uma opção:     " << endl;
+    cout << "+---------------------------+" << endl;
+    cout << "| Menu de Cadastro de Voos  |" << endl;
+    cout << "| 1 - Cadastrar voo         |" << endl;
+    cout << "| 2 - Listar voos           |" << endl;
+    cout << "| 3 - Voltar                |" << endl;
+    cout << "+---------------------------+" << endl;
     cin >> opcao;
     cin.ignore();
 
@@ -176,7 +186,7 @@ void menuTripulacao(Tripulacao& tripulacao)
 }
 
 int main() {
-    system("chcp 65001");
+    system("chcp 65001 > nul");
     int escolha;
     Voo voo;
     Tripulacao tripulacao;
@@ -191,16 +201,27 @@ int main() {
     reserva.carregarReservas();
     
     do {
-        cout << "Escolha o que deseja fazer:" << endl;
-        cout << "1 - Cadastrar passageiro" << endl;
-        cout << "2 - Cadastrar tripulação" << endl;
-        cout << "3 - Cadastrar voo" << endl;
-        cout << "4 - Cadastrar assento" << endl;
-        cout << "5 - Cadastrar reserva" << endl;
-        cout << "6 - Baixa em reservas" << endl;
-        cout << "7 - Pesquisa" << endl;
-        cout << "8 - Consulta ao programa de fidelidade" << endl;
-        cout << "0 - Sair" << endl;
+        cout << "+-------------------------------------+" << endl;
+        cout << "|            __                       |" << endl;                
+        cout << "|            \\ \\ _______________      |" << endl;
+        cout << "|     VOO     \\   O O O O O O |_|\\    |" << endl;
+        cout << "|    SEGURO   /_______|  |________|>  |" << endl;        
+        cout << "|                     |  |            |" << endl;
+        cout << "|                      \\/             |" << endl;
+        cout << "+-------------------------------------+" << endl;
+      
+        cout << "|     Escolha o que deseja fazer      |" << endl;
+        cout << "+-------------------------------------+" << endl;
+        cout << "| 1 - Cadastrar passageiro            |" << endl;
+        cout << "| 2 - Cadastrar tripulação            |" << endl;
+        cout << "| 3 - Cadastrar voo                   |" << endl;
+        cout << "| 4 - Cadastrar assento               |" << endl;
+        cout << "| 5 - Cadastrar reserva               |" << endl;
+        cout << "| 6 - Baixa em reservas               |" << endl;
+        cout << "| 7 - Pesquisa                        |" << endl;
+        cout << "| 8 - Consulta fidelidade             |" << endl;
+        cout << "| 0 - Sair                            |" << endl;
+        cout << "+-------------------------------------+" << endl;
         cin >> escolha;
 
         switch (escolha) {

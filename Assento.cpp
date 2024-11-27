@@ -63,9 +63,7 @@ void Assento:: salvarAssento(){
         arquivo.write(reinterpret_cast<char*>(&codVoo), sizeof(codVoo));
         arquivo.write(reinterpret_cast<char*>(&status), sizeof(status));
         arquivo.close();
-    } else {
-        cout << "Erro ao abrir o arquivo para salvar os assentos." << endl;
-    }
+    } 
 }
 
 void Assento:: carregarAssentos(){
@@ -87,8 +85,6 @@ void Assento:: carregarAssentos(){
             assentos.push_back(novoAssento);
         }
         arquivo.close();
-    } else {
-        cout << "Erro ao abrir o arquivo para carregar os assentos." << endl;
     }
 }
 

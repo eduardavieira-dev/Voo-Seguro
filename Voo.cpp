@@ -42,10 +42,7 @@ void Voo::salvarVoos()
         }
         arquivo.close();
     }
-    else
-    {
-        cout << "Erro ao abrir o arquivo para salvar os voos." << endl;
-    }
+
 }
 
 void Voo::carregarVoos()
@@ -84,10 +81,6 @@ void Voo::carregarVoos()
             contagemVoo++;
         }
         arquivo.close();
-    }
-    else
-    {
-        cout << "Erro ao abrir o arquivo para carregar os voos." << endl;
     }
 }
 
@@ -259,7 +252,7 @@ void Voo::setDestino(string destino)
 
 void Voo::cadastroVoo()
 {
-    system("chcp 65001");
+    system("chcp 65001 > nul");
     system("cls");
     Voo voo;
     if (contagemVoo >= MAX_VOOS)

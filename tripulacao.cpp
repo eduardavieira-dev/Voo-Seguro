@@ -38,10 +38,7 @@ void Tripulacao::salvarTripulacao()
         }
         arquivo.close();
     }
-    else
-    {
-        cout << "Erro ao abrir o arquivo para salvar a tripulação." << endl;
-    }
+
 }
 
 
@@ -81,10 +78,7 @@ void Tripulacao::carregarTripulacao()
         }
         arquivo.close();
     }
-    else
-    {
-        cout << "Erro ao abrir o arquivo para carregar a tripulação." << endl;
-    }
+
 }
 
 
@@ -157,7 +151,7 @@ void Tripulacao::setCodigoTripulacao(int codigoTripulacao)
 
 void Tripulacao::cadastrarTripulacao()
 {
-    system("chcp 65001");
+    system("chcp 65001 > nul");
     system("cls");
     Tripulacao tripulacao;
 

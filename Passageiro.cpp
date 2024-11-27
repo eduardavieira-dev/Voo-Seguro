@@ -110,7 +110,7 @@ string Passageiro::getRua()
 // Função para cadastro______________________________________________________________________________________
 
 void Passageiro::cadastroPassageiro() {
-    system("chcp 65001");
+    system("chcp 65001 > nul");
     system("cls");
     string nome, cidade, rua, telefone;
     int numResidencia;
@@ -184,8 +184,6 @@ void Passageiro::salvarDadosPassageiro() {
         arquivo.write(reinterpret_cast<char*>(&pontuacao), sizeof(pontuacao));
 
         arquivo.close();
-    } else {
-        cout << "Erro ao abrir o arquivo para salvar os passageiros." << endl;
     }
 }
 
@@ -218,8 +216,6 @@ void Passageiro::carregarPassageiros() {
         }
 
         arquivo.close();
-    } else {
-        cout << "Erro ao abrir o arquivo para carregar os passageiros." << endl;
     }
 }
 

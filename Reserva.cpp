@@ -127,9 +127,7 @@ void Reserva::salvarReserva(){
         arquivo.write(reinterpret_cast<char*>(&numeroAssentoReserva), sizeof(numeroAssentoReserva));
         arquivo.write(reinterpret_cast<char*>(&codPassageiroReserva), sizeof(codPassageiroReserva));
         arquivo.close();
-    } else {
-        cout << "Erro ao abrir o arquivo para salvar os assentos." << endl;
-    }
+    } 
 }
 
 void Reserva::carregarReservas(){
@@ -150,8 +148,6 @@ void Reserva::carregarReservas(){
             reservas.push_back(novaReserva);
         }
         arquivo.close();
-    } else {
-        cout << "Erro ao abrir o arquivo para carregar as reservas." << endl;
     }
 }
 
