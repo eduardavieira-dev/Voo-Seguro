@@ -8,7 +8,6 @@ using namespace std;
 
 extern vector<Voo> voos;
 
-int Assento::contadorNumAssento = 0;
 vector<Assento> assentos;
 
 Assento::Assento()
@@ -18,10 +17,10 @@ Assento::Assento()
     status = false;
 }
 
-Assento::Assento(int codVoo)
+Assento::Assento(int codVoo, int numAssento)
 {
     this->codVoo = codVoo;
-    this->numAssento = ++contadorNumAssento;
+    this->numAssento = numAssento;
     this->status = false;
 }
 
@@ -74,7 +73,6 @@ void Assento:: carregarAssentos(){
 
     if (arquivo.is_open()) {
         assentos.clear(); // Limpa o vetor
-        contadorNumAssento = 0; // Reinicia o contador de assentos
 
         int numAssentoTemp;
         int codVooTemp;
@@ -84,16 +82,12 @@ void Assento:: carregarAssentos(){
             arquivo.read(reinterpret_cast<char*>(&codVooTemp), sizeof(codVooTemp));
             arquivo.read(reinterpret_cast<char*>(&statusTemp), sizeof(statusTemp));
 
-            Assento novoAssento(codVooTemp);
+            Assento novoAssento(codVooTemp, numAssentoTemp);
             novoAssento.setNumAssento(numAssentoTemp);
             novoAssento.setStatusAssento();
             if (statusTemp) novoAssento.setStatusAssento(); // Define o status correto
 
             assentos.push_back(novoAssento);
-
-            if (numAssento > contadorNumAssento) {
-                contadorNumAssento = numAssento;
-            }
         }
         arquivo.close();
     } else {
@@ -105,18 +99,22 @@ void Assento::cadastroAssento()
 {
     system("cls");
     
-    int codVoo;
+    int codVoo, numAssento;
     bool verificaExistenciaVoo = false;
 
     cout << "Digite o código do voo: \n";
     cin >> codVoo;
     cin.ignore();
 
+    cout << "Digite o número do assento: \n";
+    cin >> numAssento;
+    cin.ignore();
+
     for (int i = 0; i < voos.size(); i++)
     {
         if (voos[i].getCodigoVoo() == codVoo)
         {
-            Assento NovoAssento(codVoo);
+            Assento NovoAssento(codVoo, numAssento);
             cout << "Assento cadastrado com sucesso: \n";
             cout << "Número do assento: " << NovoAssento.getNumAssento() << "\n";
             cout << "Código do Voo: " << NovoAssento.getCodVoo() << "\n";

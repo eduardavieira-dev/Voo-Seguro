@@ -10,7 +10,6 @@ extern vector<Voo> voos;
 class Assento
 {
 private:
-    static int contadorNumAssento;
     int codVoo;
     int numAssento;
     bool status;
@@ -18,7 +17,7 @@ private:
 public:
     Assento();
 
-    Assento(int codVoo);
+    Assento(int codVoo, int numAssento);
 
     void setCodVoo(int codVoo);
 
