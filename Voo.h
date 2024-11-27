@@ -29,6 +29,7 @@ class Voo {
     int getMinuto(); 
     string getOrigem(); 
     string getDestino(); 
+    int getTotalVoo();
     /* int getCodigoTripulacao(); */
 
     void setCodigoAviao(int codigoAviao);       
@@ -48,5 +49,6 @@ class Voo {
 
     void salvarVoos();
     void carregarVoos(); 
+    Voo* getVooPorCodigo(int codigoVoo);
     
 };

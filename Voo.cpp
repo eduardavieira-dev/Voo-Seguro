@@ -414,3 +414,22 @@ void Voo::listarVoo()
 }
 
  */
+
+
+
+int Voo::getTotalVoo(){
+    return contagemVoo;
+}
+
+Voo* Voo::getVooPorCodigo(int codigoVoo)
+{
+   for (int i = 0; i < contagemVoo; i++) 
+   {
+        if(voos[i].codigoVoo == codigoVoo) 
+        {
+            return &voos[i];
+        }
+   }
+
+   return nullptr;
+} 
