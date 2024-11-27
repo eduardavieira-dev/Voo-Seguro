@@ -148,6 +148,7 @@ int main() {
     Passageiro pass;
     Assento assento; 
 
+    tripulacao.carregarTripulacao();
     assento.carregarAssentos();
     pass.carregarPassageiros();
     voo.carregarVoos();
