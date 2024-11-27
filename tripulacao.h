@@ -13,7 +13,7 @@ class Tripulacao{
     string cargo;
     int codigoTripulante;
     int codigoTripulacao;
-  /*   vector<Tripulacao> tripulantes; */
+    vector<Tripulacao> tripulantes;
 
     public:
     string getNome();
@@ -22,6 +22,7 @@ class Tripulacao{
     int getCodigoTripulante();
     int getCodigoTripulacao();
     int getTotalTripulacao(); 
+    vector<Tripulacao>& getTripulantes();
 
     void setNome(string nome);
     void setTelefone(int telefone);

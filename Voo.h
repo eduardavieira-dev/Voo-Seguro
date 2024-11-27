@@ -2,7 +2,11 @@
 #define VOOS_H
 #include <string>
 #include <vector>
+#include "tripulacao.h"
+
 using namespace std;
+
+extern vector<Tripulacao> tripulacao;
 
 class Voo {
     private:

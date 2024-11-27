@@ -12,8 +12,9 @@ using namespace std;
 
 
 
-Tripulacao tripulacaoDoVoo;
+/* Tripulacao tripulacaoDoVoo; */
 vector<Voo> voos;
+extern vector<Tripulacao> tripulacao;
 
 int contagemVoo = 0;
 
@@ -235,17 +236,15 @@ void Voo::cadastroVoo()
         cout << "Limite de voos cadastrados atingido!" << endl;
         return;
     };
-    
-    tripulacaoDoVoo.carregarTripulacao();
 
     string origem, destino;
-    int codigoAviao, tarifa, status, dia, mes, ano, hora, minuto, codigoTripulacao;
+    int codigoAviao, tarifa, status, dia, mes, ano, hora, minuto, codigoTripulacao, codigoTripulacao;
     bool diaValido = false, mesValido = false, anoValido = false, horaValida = false, minutoValido = false;
 
-   /*  if(tripulacaoDoVoo.getTotalTripulacao() == 0){
-        return;
-    } */
-
+    if (tripulacao.empty()) {
+        cout << "Não há tripulação cadastrada. Cadastre uma tripulação antes de cadastrar um voo." << endl;
+        return; // Impede o cadastro do voo se não houver tripulação
+    }
     cout << "Informe a origem do voo:" << endl;
     getline(cin, origem);
     voo.setOrigem(origem);
@@ -298,11 +297,19 @@ void Voo::cadastroVoo()
         }
     }
 
-/*     cout << "Informe o código da tripulação:" << endl;
+    cout << "Informe o código da tripulação:" << endl;
     cin >> codigoTripulacao; 
     cin.ignore();
-    voo.setCodigoTripulacao(codigoTripulacao);
- */
+    for (int i = 0; i < voos.size(); i++)
+    {
+        if (tripulacao[i].getCodigoTripulacao() == codigoTripulacao)
+        {
+            cout << "tripulacao cadastrada" << endl;
+        }else{
+            cout << "Não foi possivel cadastrar tripulacao para o voo" << endl;
+        }
+    }
+ 
     cout << "Informe o código do avião:" << endl;
     cin >> codigoAviao;
     cin.ignore();

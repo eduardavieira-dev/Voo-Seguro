@@ -8,7 +8,7 @@
 using namespace std;
 
 vector<Tripulacao> tripulacaoVet;
-vector<Tripulacao> tripulantes;
+/* vector<Tripulacao> tripulantes; */
 
 void menuTripulacao();
 
@@ -23,15 +23,16 @@ void Tripulacao::salvarTripulacao()
     {
         for (int i = 0; i < contagemTripulacao; i++)
         {
-
+            // Escrever código da tripulação
             arquivo.write(reinterpret_cast<char *>(&tripulacaoVet[i].codigoTripulacao), sizeof(tripulacaoVet[i].codigoTripulacao));
 
+            // Iterar sobre os tripulantes da tripulação e salvar seus dados
             for (int j = 0; j < 3; j++)
             {
-                arquivo.write(tripulantes[j].getNome().c_str(), tripulantes[j].getNome().size() + 1);
-                arquivo.write(reinterpret_cast<char *>(&tripulantes[j].telefone), sizeof(tripulantes[j].telefone));
-                arquivo.write(tripulantes[j].getCargo().c_str(), tripulantes[j].getCargo().size() + 1);
-                arquivo.write(reinterpret_cast<char *>(&tripulantes[j].codigoTripulante), sizeof(tripulantes[j].codigoTripulante));
+                arquivo.write(tripulacaoVet[i].tripulantes[j].getNome().c_str(), tripulacaoVet[i].tripulantes[j].getNome().size() + 1);
+                arquivo.write(reinterpret_cast<char *>(&tripulacaoVet[i].tripulantes[j].telefone), sizeof(tripulacaoVet[i].tripulantes[j].telefone));
+                arquivo.write(tripulacaoVet[i].tripulantes[j].getCargo().c_str(), tripulacaoVet[i].tripulantes[j].getCargo().size() + 1);
+                arquivo.write(reinterpret_cast<char *>(&tripulacaoVet[i].tripulantes[j].codigoTripulante), sizeof(tripulacaoVet[i].tripulantes[j].codigoTripulante));
             }
         }
         arquivo.close();
@@ -42,6 +43,7 @@ void Tripulacao::salvarTripulacao()
     }
 }
 
+
 void Tripulacao::carregarTripulacao()
 {
     ifstream arquivo("tripulacao.dat", ios::binary);
@@ -50,7 +52,6 @@ void Tripulacao::carregarTripulacao()
     {
         while (arquivo.read(reinterpret_cast<char *>(&codigoTripulacao), sizeof(codigoTripulacao)))
         {
-
             Tripulacao novaTripulacao;
             novaTripulacao.setCodigoTripulacao(codigoTripulacao);
 
@@ -71,7 +72,7 @@ void Tripulacao::carregarTripulacao()
                 tripulante.setCargo(cargo == "Piloto" ? 1 : (cargo == "Copiloto" ? 2 : 3));
                 tripulante.setCodigoTripulante(codigoTripulante);
 
-                tripulantes.push_back(tripulante);
+                novaTripulacao.tripulantes.push_back(tripulante);  // Adicionando ao vetor tripulantes da tripulação
             }
 
             tripulacaoVet.push_back(novaTripulacao);
@@ -84,6 +85,7 @@ void Tripulacao::carregarTripulacao()
         cout << "Erro ao abrir o arquivo para carregar a tripulação." << endl;
     }
 }
+
 
 string Tripulacao::getNome()
 {
@@ -191,7 +193,7 @@ void Tripulacao::cadastrarTripulacao()
 
         tripulacao.setCodigoTripulante(codigoTripulante);
 
-        tripulantes.push_back(tripulacao);
+        tripulacao.tripulantes.push_back(tripulacao);
     }
 
     contagemTripulacao++;
@@ -220,10 +222,10 @@ void Tripulacao::listarTripulacao()
 
             for (int j = 0; j < 3; j++)
             {
-                cout << "Nome: " << tripulantes[j].getNome() << endl;
-                cout << "Telefone: " << tripulantes[j].getTelefone() << endl;
-                cout << "Cargo: " << tripulantes[j].getCargo() << endl;
-                cout << "Código do tripulante: " << tripulantes[j].getCodigoTripulante() << endl;
+                cout << "Nome: " << tripulacaoVet[i].tripulantes[j].getNome() << endl;
+                cout << "Telefone: " << tripulacaoVet[i].tripulantes[j].getTelefone() << endl;
+                cout << "Cargo: " << tripulacaoVet[i].tripulantes[j].getCargo() << endl;
+                cout << "Código do tripulante: " << tripulacaoVet[i].tripulantes[j].getCodigoTripulante() << endl;
             }
         }
     }
