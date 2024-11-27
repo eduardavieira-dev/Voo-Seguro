@@ -15,18 +15,20 @@ class Voo {
     int tarifa;
     int dia;
     int mes;
+    string status;
     int ano;
     int hora;
     int minuto;
     string origem;
     string destino;
     int codigoTripulacao;
+   /*  bool tripulacaoEmUso; */
 
     public:
     
     int getCodigoAviao();
     int getCodigoVoo(); 
-    int getStatus(); 
+    string getStatus(); 
     int getTarifa(); 
     int getDia(); 
     int getMes(); 
@@ -35,6 +37,7 @@ class Voo {
     int getMinuto(); 
     string getOrigem(); 
     string getDestino(); 
+    /* bool getTripulacaoEmUso(); */
 
     void setCodigoAviao(int codigoAviao);       
     void setCodigoVoo(int codigoVoo);
@@ -47,6 +50,7 @@ class Voo {
     void setMinuto(int minuto);
     void setOrigem(string origem);
     void setDestino(string destino);
+    /* void setTripulacaoEmUso(bool tripulacaoEmUso); */
     
     void cadastroVoo();
     void listarVoo();

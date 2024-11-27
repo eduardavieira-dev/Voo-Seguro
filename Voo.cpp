@@ -136,9 +136,21 @@ string Voo::getOrigem()
     return origem;
 }
 
+string Voo::getStatus(){
+    return status;
+}
+
 string Voo::getDestino()
 {
     return destino;
+}
+
+bool Tripulacao::getTripulacaoEmUso(){
+    return tripulacaoEmUso;
+}
+
+vector<Tripulacao>& Tripulacao::getTripulantes() {
+    return tripulantes;
 }
 
 void Voo::setCodigoAviao(int codigoAviao)
@@ -154,6 +166,25 @@ void Voo::setCodigoVoo(int codigoVoo)
 void Voo::setTarifa(int tarifa)
 {
     this->tarifa = tarifa;
+}
+
+void Tripulacao::setTripulacaoEmUso(bool tripualacaoEmUso){
+    this->tripulacaoEmUso = tripualacaoEmUso;
+
+} 
+
+void Voo::setStatus(int status){
+    switch (status)
+    {
+    case 1:
+        this->status = "Ativo";
+        break;
+
+    case 2:
+        this->status = "Inativo";
+        break;
+
+    }
 }
 
 void Voo::setDia(int dia)
@@ -240,10 +271,14 @@ void Voo::cadastroVoo()
     string origem, destino;
     int codigoAviao, tarifa, status, dia, mes, ano, hora, minuto, codigoTripulacao;
     bool diaValido = false, mesValido = false, anoValido = false, horaValida = false, minutoValido = false, tripulacaoValida = false;
+    bool temPiloto = false;
+    bool temCopiloto = false;
+    bool tripulacaoEmUso = false;
+    
 
     if (tripulacaoVet.empty()) {
         cout << "Não há tripulação cadastrada. Cadastre uma tripulação antes de cadastrar um voo." << endl;
-        return; // Impede o cadastro do voo se não houver tripulação
+        return; 
     }
     cout << "Informe a origem do voo:" << endl;
     getline(cin, origem);
@@ -297,19 +332,29 @@ void Voo::cadastroVoo()
         }
     }
 
+    while (!tripulacaoValida) {
     cout << "Informe o código da tripulação:" << endl;
     cin >> codigoTripulacao; 
     cin.ignore();
-    for (int i = 0; i < voos.size(); i++)
-    {
-        if (tripulacaoVet[i].getCodigoTripulacao() == codigoTripulacao)
-        {
-            cout << "tripulacao cadastrada" << endl;
-        }else{
-            cout << "Não foi possivel cadastrar tripulacao para o voo" << endl;
+    
+    tripulacaoValida = false;
+    
+    for (int i = 0; i < tripulacaoVet.size(); i++) {
+    if (tripulacaoVet[i].getCodigoTripulacao() == codigoTripulacao) {
+        if (tripulacaoVet[i].getTripulacaoEmUso()) {
+            cout << "Tripulação já está em uso. Tente usar outro código" << endl;
+            return;
+        }
+        tripulacaoVet[i].setTripulacaoEmUso(true);
+        tripulacaoValida = true;
+    }
+}
+    
+    if (!tripulacaoValida) {
+        cout << "Código de tripulação inválido. Tente novamente." << endl;
         }
     }
- 
+
     cout << "Informe o código do avião:" << endl;
     cin >> codigoAviao;
     cin.ignore();
@@ -320,15 +365,29 @@ void Voo::cadastroVoo()
     cin.ignore();
     voo.setTarifa(tarifa);
 
-    /* if(codigoPiloto !=0 && codigoCopiloto !=0){
+    vector<Tripulacao>& tripulantes = tripulacaoVet[codigoTripulacao - 1].getTripulantes();  // Acessa a tripulação específica
+
+    for (int j = 0; j < tripulantes.size(); j++) {
+    
+        if (tripulantes[j].getCargo() == "Piloto") {
+            temPiloto = true;
+        }
+        
+        if (tripulantes[j].getCargo() == "Copiloto") {
+            temCopiloto = true;
+        }
+        
+    }
+
+    if (temPiloto && temCopiloto) {
         cout << "Voo ativo" << endl;
         status = 1;
         voo.setStatus(status);
-    }else{
+    } else {
         cout << "Voo inativo, falta piloto ou copiloto" << endl;
-        status = 0;
+        status = 2;
         voo.setStatus(status);
-    } */
+    }
 
     contagemVoo++;
     voo.setCodigoVoo(contagemVoo);
@@ -357,6 +416,7 @@ void Voo::listarVoo()
             cout << "Data: " << setfill('0') << setw(2) << voos[i].getDia() << "/" << setfill('0') << setw(2) << voos[i].getMes() << "/" << voos[i].getAno() << endl;
             cout << "Horário: " << setfill('0') << setw(2) << voos[i].getHora() << ":" << setfill('0') << setw(2) << voos[i].getMinuto() << endl;
             cout << "Tarifa: " << voos[i].getTarifa() << endl;
+            cout << "Status:" <<voos[i].getStatus() << endl;
         }
     }
 

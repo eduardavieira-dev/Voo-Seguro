@@ -13,6 +13,7 @@ class Tripulacao{
     string cargo;
     int codigoTripulante;
     int codigoTripulacao;
+    bool tripulacaoEmUso = false;
     vector<Tripulacao> tripulantes;
 
     public:
@@ -21,7 +22,7 @@ class Tripulacao{
     string getCargo();
     int getCodigoTripulante();
     int getCodigoTripulacao();
-    int getTotalTripulacao(); 
+    bool getTripulacaoEmUso();
     vector<Tripulacao>& getTripulantes();
 
     void setNome(string nome);
@@ -29,6 +30,7 @@ class Tripulacao{
     void setCargo(int cargo);
     void setCodigoTripulante(int codigoTripulante);
     void setCodigoTripulacao(int codigoTripulacao);
+    void setTripulacaoEmUso(bool tripulacaoEmUso);
 
     void cadastrarTripulacao();
     void listarTripulacao();
