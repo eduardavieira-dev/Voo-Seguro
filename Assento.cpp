@@ -2,9 +2,11 @@
 #include <vector>
 #include <fstream>
 #include "Assento.h"
-#include "Voo.cpp"
+#include "Voo.h"
 
 using namespace std;
+
+extern vector<Voo> voos;
 
 int Assento::contadorNumAssento = 0;
 vector<Assento> assentos;
@@ -102,6 +104,7 @@ void Assento:: carregarAssentos(){
 void Assento::cadastroAssento()
 {
     system("cls");
+    
     int codVoo;
     bool verificaExistenciaVoo = false;
 
@@ -131,7 +134,7 @@ void Assento::cadastroAssento()
 }
 
 void Assento::ExibirAssentos(){
-    system("cls");
+    system("cls");   
     if(assentos.size() == 0){
         cout << "Nenhum assento cadastrado." << endl;
     }else{

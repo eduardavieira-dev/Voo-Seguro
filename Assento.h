@@ -1,7 +1,11 @@
 #ifndef ASSENTO_H
 #define ASSENTO_H
 
+#include "Voo.h"
+#include <vector>
+
 using namespace std;
+extern vector<Voo> voos;
 
 class Assento
 {

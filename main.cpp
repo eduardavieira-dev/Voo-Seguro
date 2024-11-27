@@ -39,7 +39,7 @@ void menuAssento(Assento& assento)
         menuAssento(assento);
         break;
     }
-}
+} 
 
 // Função para gerar o menu de ações para passageiros
 void menuPassageiro(Passageiro& pass)
@@ -148,9 +148,10 @@ int main() {
     Passageiro pass;
     Assento assento; 
 
+    assento.carregarAssentos();
     pass.carregarPassageiros();
     voo.carregarVoos();
-    assento.cadastroAssento(); 
+     
     do {
         cout << "Escolha o que deseja fazer:" << endl;
         cout << "1 - Cadastrar passageiro" << endl;

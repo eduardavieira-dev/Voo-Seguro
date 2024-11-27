@@ -1,3 +1,5 @@
+#ifndef VOOS_H
+#define VOOS_H
 #include <string>
 #include <vector>
 using namespace std;
@@ -29,11 +31,10 @@ class Voo {
     int getMinuto(); 
     string getOrigem(); 
     string getDestino(); 
-    int getTotalVoo();
-    /* int getCodigoTripulacao(); */
 
     void setCodigoAviao(int codigoAviao);       
     void setCodigoVoo(int codigoVoo);
+    void setStatus(int status);
     void setTarifa(int tarifa); 
     void setDia (int dia); 
     void setMes(int mes); 
@@ -42,13 +43,12 @@ class Voo {
     void setMinuto(int minuto);
     void setOrigem(string origem);
     void setDestino(string destino);
-    /* void setCodigoTripulacao(int tripulacao); */
     
     void cadastroVoo();
     void listarVoo();
 
     void salvarVoos();
     void carregarVoos(); 
-    Voo* getVooPorCodigo(int codigoVoo);
     
 };
+#endif // VOOS_H

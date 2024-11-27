@@ -8,7 +8,9 @@
 using namespace std;
 
 vector<Tripulacao> tripulacaoVet;
+vector<Tripulacao> tripulantes;
 
+void menuTripulacao();
 
 int contagemTripulacao = 0;
 int contagemTripulante = 0;
@@ -26,10 +28,10 @@ void Tripulacao::salvarTripulacao()
 
             for (int j = 0; j < 3; j++)
             {
-                arquivo.write(tripulacaoVet[i].tripulantes[j].getNome().c_str(), tripulacaoVet[i].tripulantes[j].getNome().size() + 1);
-                arquivo.write(reinterpret_cast<char *>(&tripulacaoVet[i].tripulantes[j].telefone), sizeof(tripulacaoVet[i].tripulantes[j].telefone));
-                arquivo.write(tripulacaoVet[i].tripulantes[j].getCargo().c_str(), tripulacaoVet[i].tripulantes[j].getCargo().size() + 1);
-                arquivo.write(reinterpret_cast<char *>(&tripulacaoVet[i].tripulantes[j].codigoTripulante), sizeof(tripulacaoVet[i].tripulantes[j].codigoTripulante));
+                arquivo.write(tripulantes[j].getNome().c_str(), tripulantes[j].getNome().size() + 1);
+                arquivo.write(reinterpret_cast<char *>(&tripulantes[j].telefone), sizeof(tripulantes[j].telefone));
+                arquivo.write(tripulantes[j].getCargo().c_str(), tripulantes[j].getCargo().size() + 1);
+                arquivo.write(reinterpret_cast<char *>(&tripulantes[j].codigoTripulante), sizeof(tripulantes[j].codigoTripulante));
             }
         }
         arquivo.close();
@@ -69,7 +71,7 @@ void Tripulacao::carregarTripulacao()
                 tripulante.setCargo(cargo == "Piloto" ? 1 : (cargo == "Copiloto" ? 2 : 3));
                 tripulante.setCodigoTripulante(codigoTripulante);
 
-                novaTripulacao.tripulantes.push_back(tripulante);
+                tripulantes.push_back(tripulante);
             }
 
             tripulacaoVet.push_back(novaTripulacao);
@@ -189,7 +191,7 @@ void Tripulacao::cadastrarTripulacao()
 
         tripulacao.setCodigoTripulante(codigoTripulante);
 
-        tripulacao.tripulantes.push_back(tripulacao);
+        tripulantes.push_back(tripulacao);
     }
 
     contagemTripulacao++;
@@ -199,6 +201,7 @@ void Tripulacao::cadastrarTripulacao()
     tripulacaoVet.push_back(tripulacao);
 
     tripulacao.salvarTripulacao();
+    menuTripulacao();
 }
 
 void Tripulacao::listarTripulacao()
@@ -217,15 +220,16 @@ void Tripulacao::listarTripulacao()
 
             for (int j = 0; j < 3; j++)
             {
-                cout << "Nome: " << tripulacaoVet[i].tripulantes[j].getNome() << endl;
-                cout << "Telefone: " << tripulacaoVet[i].tripulantes[j].getTelefone() << endl;
-                cout << "Cargo: " << tripulacaoVet[i].tripulantes[j].getCargo() << endl;
-                cout << "Código do tripulante: " << tripulacaoVet[i].tripulantes[j].getCodigoTripulante() << endl;
+                cout << "Nome: " << tripulantes[j].getNome() << endl;
+                cout << "Telefone: " << tripulantes[j].getTelefone() << endl;
+                cout << "Cargo: " << tripulantes[j].getCargo() << endl;
+                cout << "Código do tripulante: " << tripulantes[j].getCodigoTripulante() << endl;
             }
         }
     }
     cout << "Pressione 'ENTER' para voltar" << endl;
     cin.get();
+    menuTripulacao();
 
 }
 
@@ -264,7 +268,18 @@ Tripulacao* Tripulacao::getTripulacaoPorCodigo(int codigoTripulacao)
         return pilotoEncontrado && copilotoEncontrado;
 } */
 
-/* 
+
+
+
+
+
+
+
+
+
+
+
+ 
 void menuTripulacao()
 {
 
@@ -305,4 +320,4 @@ int main()
     tripu.carregarTripulacao();
     system("chcp 65001");
     menuTripulacao();
-} */
+}

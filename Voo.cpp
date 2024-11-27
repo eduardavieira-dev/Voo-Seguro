@@ -100,13 +100,6 @@ int Voo::getCodigoVoo()
     return codigoVoo;
 }
 
-/* int Voo::getStatus()
-{
-    int codigo = this->codigoTripulacao;
-    Tripulacao* atual =  tripulacaoDoVoo.getTripulacaoPorCodigo(codigo);
-    return atual->elegivelVoo(codigoTripulacao);
-}
- */
 int Voo::getTarifa()
 {
     return tarifa;
@@ -231,17 +224,6 @@ void Voo::setDestino(string destino)
 {
     this->destino = destino;
 }
-
-/* void Voo::setCodigoTripulacao(int codigoTripulacao)
-{
-    Tripulacao* atual = tripulacaoDoVoo.getTripulacaoPorCodigo(codigoTripulacao);
-    if(atual != nullptr)
-    {
-        this->codigoTripulacao = codigoTripulacao;
-    }else{
-        cout << "tripulacao nao existe";
-    }
-} */
 
 void Voo::cadastroVoo()
 {
@@ -414,22 +396,3 @@ void Voo::listarVoo()
 }
 
  */
-
-
-
-int Voo::getTotalVoo(){
-    return contagemVoo;
-}
-
-Voo* Voo::getVooPorCodigo(int codigoVoo)
-{
-   for (int i = 0; i < contagemVoo; i++) 
-   {
-        if(voos[i].codigoVoo == codigoVoo) 
-        {
-            return &voos[i];
-        }
-   }
-
-   return nullptr;
-} 

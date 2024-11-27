@@ -4,6 +4,8 @@
 #include <vector>
 
 using namespace std;
+
+
 class Tripulacao{
     private:
     string nome;
@@ -11,8 +13,7 @@ class Tripulacao{
     string cargo;
     int codigoTripulante;
     int codigoTripulacao;
-    vector<Tripulacao> tripulantes;
-    
+  /*   vector<Tripulacao> tripulantes; */
 
     public:
     string getNome();
@@ -20,8 +21,7 @@ class Tripulacao{
     string getCargo();
     int getCodigoTripulante();
     int getCodigoTripulacao();
-    /* int getTotalTripulacao(); */
-    
+    int getTotalTripulacao(); 
 
     void setNome(string nome);
     void setTelefone(int telefone);
@@ -35,8 +35,6 @@ class Tripulacao{
     void salvarTripulacao();
     void carregarTripulacao();
 
-    /* Tripulacao* getTripulacaoPorCodigo(int codigoTripulacao);
-    bool Tripulacao::elegivelVoo(int codigoTripulacao); */
 };
 
 
