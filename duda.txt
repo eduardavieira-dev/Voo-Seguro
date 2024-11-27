@@ -1,0 +1,51 @@
+#ifndef RESERVA_H
+#define RESERVA_H
+
+#include "Voo.h"
+#include "Assento.h"
+#include "Passageiro.h"
+
+
+using namespace std;
+extern vector<Voo> voos;
+extern vector<Assento> assentos;
+extern vector<Passageiro>passageiros;
+extern vector<Reserva>reservas;
+
+class Reserva
+{
+private:
+    int codVoo;
+    int numAssento;
+    int id;
+    bool status;
+
+public:
+    Assento();
+
+    Assento(int codVoo);
+
+    void setCodVoo(int codVoo);
+
+    void setNumAssento(int numAssento);
+
+    void setStatusAssento();
+
+    int getCodVoo();
+    
+    int getID();
+
+    int getNumAssento();
+
+    bool getStatusAssento();
+
+    void salvarAssento();
+
+    void carregarAssentos();
+
+    void cadastroAssento();
+
+    void ExibirAssentos();
+};
+
+#endif //RESERVA.H
