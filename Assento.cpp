@@ -34,9 +34,9 @@ void Assento::setNumAssento(int numAssento)
     this->numAssento = numAssento;
 }
 
-void Assento::setStatusAssento()
+void Assento::setStatusAssento(bool status)
 {
-    status = !status;
+    this->status = status;
 }
 
 int Assento::getCodVoo()
@@ -83,15 +83,12 @@ void Assento:: carregarAssentos(){
             arquivo.read(reinterpret_cast<char*>(&statusTemp), sizeof(statusTemp));
 
             Assento novoAssento(codVooTemp, numAssentoTemp);
-            novoAssento.setNumAssento(numAssentoTemp);
-            novoAssento.setStatusAssento();
-            if (statusTemp) novoAssento.setStatusAssento(); // Define o status correto
 
             assentos.push_back(novoAssento);
         }
         arquivo.close();
     } else {
-        cout << "Erro ao abrir o arquivo para carregar os passageiros." << endl;
+        cout << "Erro ao abrir o arquivo para carregar os assentos." << endl;
     }
 }
 

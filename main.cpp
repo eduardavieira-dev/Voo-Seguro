@@ -4,8 +4,43 @@
 #include "Tripulacao.h"
 #include "Passageiro.h"
 #include "Assento.h"
+#include "Reserva.h"
 
 using namespace std;
+
+// Função para gerar o menu de ações para reservas
+void menuReserva(Reserva& reserva)
+{
+    system("cls");
+
+    int opcao;
+    cout << "Menu de Cadastro de Reservas:" << endl;
+    cout << "1 - Cadastrar nova reserva" << endl;
+    cout << "2 - Listar reservas cadastradas" << endl;
+    cout << "3 - Voltar" << endl;
+    cout << "Escolha uma opção:" << endl;
+    cin >> opcao;
+    cin.ignore();
+
+    switch (opcao)
+    {
+    case 1:
+        reserva.cadastroReserva();
+        break;
+
+    case 2:
+        reserva.listaReservas();
+        break;
+
+    case 3:
+        break;
+
+    default:
+        cout << "Opcção inválida. Tente novamente!" << endl;
+        menuReserva(reserva);
+        break;
+    }
+} 
 
 // Função para gerar o menu de ações para assentos
 void menuAssento(Assento& assento)
@@ -147,12 +182,14 @@ int main() {
     Tripulacao tripulacao;
     Passageiro pass;
     Assento assento; 
+    Reserva reserva;
 
     tripulacao.carregarTripulacao();
     assento.carregarAssentos();
     pass.carregarPassageiros();
     voo.carregarVoos();
-     
+    reserva.carregarReservas();
+    
     do {
         cout << "Escolha o que deseja fazer:" << endl;
         cout << "1 - Cadastrar passageiro" << endl;
@@ -189,7 +226,7 @@ int main() {
 
         case 5:
             system("cls");
-            cout << "escolha 5" << endl;
+            menuReserva(reserva);
             break;
 
         case 6:

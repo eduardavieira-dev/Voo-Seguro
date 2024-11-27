@@ -23,7 +23,7 @@ public:
 
     void setNumAssento(int numAssento);
 
-    void setStatusAssento();
+    void setStatusAssento(bool status);
 
     int getCodVoo();
 

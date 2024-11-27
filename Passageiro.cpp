@@ -39,14 +39,14 @@ void Passageiro::setNome(string nome)
     this->nome = nome;
 };
 
-void Passageiro::setPontuacao()
+void Passageiro::setPontuacao(int pontuacao)
 {
-    if (fidelidade == false)
-    {
-        fidelidade = true;
-    }
-    pontuacao += 10;
+    this->pontuacao += pontuacao;
 };
+
+void Passageiro::setFidelidade(bool fidelidade){
+    this->fidelidade = fidelidade;
+}
 
 void Passageiro:: setTelefone(string telefone){
     this->telefone = telefone;

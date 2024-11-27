@@ -27,7 +27,9 @@ public:
 
     void setTelefone(string telefone);
 
-    void setPontuacao();
+    void setPontuacao(int pontuacao);
+
+    void setFidelidade(bool fidelidade);
 
     int getID();
 
