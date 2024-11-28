@@ -6,39 +6,20 @@
 #include "Pesquisa.h"
 #include "Passageiro.h"
 #include "Tripulacao.h"
+#include "Reserva.h"
 
 
 using namespace std;
-// Criação de um objeto global da classe Pesquisa
-Pesquisa pesquisa;
-void 
 
-// Métodos da classe Pesquisa para definir os valores dos atributos (Setters)
-// Define o código do passageiro
-Pesquisa::setCodPassageiro(int codPassageiro)
-{
-    IdPassageiro = codPassageiro;
-}
-// Define o código do tripulante
-void Pesquisa::setCodTripulacao(int codTripulante)
-{
-    IdTripulante = codTripulante;
-}
-// Define o nome do tripulante
-void Pesquisa::setNomeTripulacao(string nomeTripulante)
-{
-    this->NomeTripulante = nomeTripulante;
-}
-// Define o nome do passageiro
-void Pesquisa::setNomePassageiro(string nomePassageiro) {
-    this->NomePassageiro = nomePassageiro;
-}
+extern vector<Reserva> reservas;
+extern vector<Passageiro> passageiros;
+extern vector<Tripulacao> tripulacaoVet;
 
 // Implementação do método de pesquisa de passageiros
-void Pesquisa::pesquisarPassageiro() {
+void pesquisarPassageiro() {
     system("chcp 65001");
     int opcao, codPassageiro;
-    string nomePassageiro;
+   // string nomePassageiro;
     cout << "Pesquisa de passageiro" << endl;
         cout << "1 - Pesquisar passageiros por nome" << endl;
         cout << "2 - Pesquisar passageiros por ID" << endl;
@@ -49,15 +30,12 @@ void Pesquisa::pesquisarPassageiro() {
         cin.ignore();
         switch (opcao) {
             case 1:
-                  cout << "Informe o nome do Passageiro:" << endl;
-                    getline(cin, nomePassageiro);
-                    pesquisa.setNomePassageiro(nomePassageiro);             
+                  pesquisarNomePassageiro();
+              
                 break;
             case 2:
-                  cout << "Informe o código do Passageiro:" << endl;
-                    cin >> codPassageiro;
-                    pesquisa.setCodPassageiro(codPassageiro);
-                    cin.ignore();
+                  pesquisarIdPassageiro();
+                
                 break;
             case 3:
                 return;
@@ -67,10 +45,10 @@ void Pesquisa::pesquisarPassageiro() {
         }
 }
 // Implementação do método de pesquisa de tripulação
-void Pesquisa::pesquisarTripulacao() {
+void pesquisarTripulacao() {
     system("chcp 65001");
     int opcao, codTripulante;
-    string nomeTripulante;
+   // string nomeTripulante;
     cout << "Pesquisa de membro da tripulação" << endl;
         cout << "1 - Pesquisar tripulante por nome" << endl;
         cout << "2 - Pesquisar tripulante por código" << endl;
@@ -80,15 +58,12 @@ void Pesquisa::pesquisarTripulacao() {
  cin.ignore();
         switch (opcao) {
             case 1:
-                  cout << "Informe o nome do Tripulannte:" << endl;
-                    getline(cin, nomeTripulante);
-                    pesquisa.setNomeTripulacao(nomeTripulante);             
+                pesquisarNomeTripulante();
+              
                 break;
             case 2:
-                  cout << "Informe o código do Tripulannte:" << endl;
-                    cin >> codTripulante;
-                    pesquisa.setCodTripulacao(codTripulante);
-                    cin.ignore();
+                pesquisarIdTripulante();
+              
                 break;
             case 3:
                 return;
@@ -98,38 +73,66 @@ void Pesquisa::pesquisarTripulacao() {
         }
 }
 
-// Função para exibir o menu principal de pesquisa
-void menuPesquisa() {
-    system("chcp 65001");
-    system("cls");
-    
-    int opcao;
+void pesquisarIdTripulante(){
+     system("cls");
+     int codTripulante;
+     bool verificaExistenciaTripulante = false;
 
-    while (true) {
-        cout << "Menu de Pesquisa de passageiros e membros da tripulação" << endl;
-        cout << "1 - Pesquisar Passageiros" << endl;
-        cout << "2 - Pesquisar Membro da Tripulação" << endl;
-        cout << "3 - Voltar" << endl;
-        cout << "Escolha uma opção: ";
-        cin >> opcao;
+    cout<<"Pesquisa id tripulante\n";
+      cout << "Informe o código do Tripulannte:" << endl;
+        cin >> codTripulante;
+        cin.ignore();
 
-        switch (opcao) {
-            case 1:
-                pesquisa.pesquisarPassageiro();
-                break;
-            case 2:
-                pesquisa.pesquisarTripulacao();
-                break;
-            case 3:
-                return;
-            default:
-                cout << "Opção inválida! Tente novamente." << endl;
-                break;
+ for (int i = 0; i < tripulacaoVet.size(); i++) {
+    vector<Tripulacao>& tripulantes = tripulacaoVet[i].getTripulantes();  // Acessa a tripulação específica
+
+    for (int j = 0; j < tripulantes.size(); j++) {
+
+        if (tripulantes[j].getCodigoTripulante() == codTripulante) {
+            verificaExistenciaTripulante = true;
+            cout << "Existe" << endl;
         }
+
     }
+
+    cout<<"\n";
+}
 }
 
-int main() {
-    menuPesquisa();
-    return 0;
+
+
+void pesquisarNomeTripulante(){
+     system("cls");
+     string nomeTripulante;
+     bool verificaExistenciaTripulante = false;
+
+    cout<<"Pesquisa nome tripulante\n";
+       cout << "Informe o nome do Tripulannte:" << endl;
+       getline(cin, nomeTripulante);
+
+    cout<<"\n";
+}
+void pesquisarIdPassageiro(){
+     system("cls");
+    cout<<"Pesquisa id passageiro\n";
+    bool verificaExistenciaPassageiro = false;
+    int codPassageiro;
+
+      cout << "Informe o código do Passageiro:" << endl;
+      cin >> codPassageiro;
+        
+
+    cout<<"\n";
+}
+void pesquisarNomePassageiro(){
+     system("cls");
+     string NomePassageiro;
+     bool verificaExistenciaPassageiro = false;
+
+    cout<<"Pesquisa nome passageiro\n";
+    cout << "Informe o nome do Passageiro:" << endl;
+     getline(cin, NomePassageiro);
+
+    cout<<"\n";
+
 }

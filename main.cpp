@@ -5,6 +5,7 @@
 #include "Passageiro.h"
 #include "Assento.h"
 #include "Reserva.h"
+#include "Pesquisa.h"
 
 using namespace std;
 
@@ -41,7 +42,7 @@ void menuReserva(Reserva& reserva)
         menuReserva(reserva);
         break;
     }
-} 
+}
 
 // Função para gerar o menu de ações para assentos
 void menuAssento(Assento& assento)
@@ -76,7 +77,7 @@ void menuAssento(Assento& assento)
         menuAssento(assento);
         break;
     }
-} 
+}
 
 // Função para gerar o menu de ações para passageiros
 void menuPassageiro(Passageiro& pass)
@@ -146,7 +147,7 @@ void menuTripulacao(Tripulacao& tripulacao)
     }
 }
     void menuVoos (Voo& voo){
-    
+
     system("cls");
 
     int opcao;
@@ -161,7 +162,7 @@ void menuTripulacao(Tripulacao& tripulacao)
 
     switch(opcao){
         case 1:
-        
+
             voo.cadastroVoo();
             break;
 
@@ -179,6 +180,37 @@ void menuTripulacao(Tripulacao& tripulacao)
     }
 
 }
+void menuPesquisa() {
+    system("chcp 65001");
+    system("cls");
+    
+    int opcao;
+
+    while (true) {
+        cout << "Menu de Pesquisa de passageiros e membros da tripulação" << endl;
+        cout << "1 - Pesquisar Passageiros" << endl;
+        cout << "2 - Pesquisar Membro da Tripulação" << endl;
+        cout << "3 - Voltar" << endl;
+        cout << "Escolha uma opção: ";
+        cin >> opcao;
+
+        switch (opcao) {
+            case 1:
+                pesquisarPassageiro();
+                break;
+            case 2:
+                pesquisarTripulacao();
+                break;
+            case 3:
+                return;
+            default:
+                cout << "Opção inválida! Tente novamente." << endl;
+                break;
+        }
+    }
+}
+
+
 
 int main() {
     system("chcp 65001 > nul");
@@ -186,7 +218,7 @@ int main() {
     Voo voo;
     Tripulacao tripulacao;
     Passageiro pass;
-    Assento assento; 
+    Assento assento;
     Reserva reserva;
 
     tripulacao.carregarTripulacao();
@@ -194,17 +226,17 @@ int main() {
     pass.carregarPassageiros();
     voo.carregarVoos();
     reserva.carregarReservas();
-    
+
     do {
         cout << "+-------------------------------------+" << endl;
-        cout << "|            __                       |" << endl;                
+        cout << "|            __                       |" << endl;
         cout << "|            \\ \\ _______________      |" << endl;
         cout << "|     VOO     \\   O O O O O O |_|\\    |" << endl;
-        cout << "|    SEGURO   /_______|  |________|>  |" << endl;        
+        cout << "|    SEGURO   /_______|  |________|>  |" << endl;
         cout << "|                     |  |            |" << endl;
         cout << "|                      \\/             |" << endl;
         cout << "+-------------------------------------+" << endl;
-      
+
         cout << "|     Escolha o que deseja fazer      |" << endl;
         cout << "+-------------------------------------+" << endl;
         cout << "| 1 - Cadastrar passageiro            |" << endl;
@@ -226,7 +258,7 @@ int main() {
 
         case 2:
             system("cls");
-            menuTripulacao(tripulacao); 
+            menuTripulacao(tripulacao);
             break;
 
         case 3:
@@ -236,7 +268,7 @@ int main() {
 
         case 4:
             system("cls");
-            menuAssento(assento); 
+            menuAssento(assento);
             break;
 
         case 5:
@@ -251,6 +283,7 @@ int main() {
 
         case 7:
             system("cls");
+            menuPesquisa();
             cout << "escolha 7" << endl;
             break;
 
