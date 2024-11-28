@@ -22,6 +22,7 @@ class Reserva{
     void listaReservas();
     void salvarReserva();
     void carregarReservas();
+    void baixaReserva();
 };
 
 #endif //ASSENTO.H

@@ -113,8 +113,12 @@ void Reserva::cadastroReserva()
     bool verificaExistenciaVoo = false;
 
     cout << "Digite o código do voo: \n";
-    cin >> codVoo;
-    cin.ignore();
+    while (!(cin >> codVoo))
+    {
+        cout << "Entrada inválida, insira um número." << endl;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
 
     for (size_t i = 0; i < voos.size(); i++)
     {
@@ -259,4 +263,98 @@ void Reserva::listaReservas()
 
     cout << "Pressione 'ENTER' para voltar" << endl;
     cin.get();
+}
+
+void Reserva::baixaReserva()
+{
+    system("cls");
+
+    int assentoBaixa = 0, codPassageiro = 0;
+    bool verificaExistenciaPassageiro = false;
+    int contadorReservas = 0;
+    int salvaCodVoo = 0;
+
+    cout << "Digite o código do passageiro: \n";
+    while (!(cin >> codPassageiro))
+    {
+        cout << "Entrada inválida, insira um número." << endl;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
+
+    for (size_t i = 0; i < passageiros.size(); i++)
+    {
+        if (passageiros[i].getID() == codPassageiro)
+        {
+            verificaExistenciaPassageiro = true;
+            cout << passageiros[i].getNome() << " possue:" << endl;
+            cout << "Fidelidade: " << (passageiros[i].getFidelidade() ? "Sim" : "Não") << endl;
+            cout << "Pontos de fidelidade: " << passageiros[i].getPontuacao() << endl;
+
+            for (size_t j = 0; j < reservas.size(); j++)
+            {
+                if (reservas[j].getCodPassageiroReserva() == codPassageiro)
+                {
+                    contadorReservas++;
+                }
+            }
+
+            if (contadorReservas != 0)
+            {
+                cout << "Número de reservas: " << contadorReservas << endl;
+                cout << "Assentos reservados: " << endl;
+                for (size_t a = 0; a < reservas.size(); a++)
+                {
+                    if (reservas[a].getCodPassageiroReserva() == codPassageiro)
+                    {
+                        cout << "Assento " << reservas[a].getNumAssentoReserva() << " - " << "Voo: " << reservas[a].getcodigVooReserva() << endl;
+                    }
+                }
+
+                bool verificaAssentoBaixa = false;
+                while (verificaAssentoBaixa == false)
+                {
+                    cout << "Informe qual assento deseja realizar a baixa: " << endl;
+                    while (!(cin >> assentoBaixa))
+                    {
+                        cout << "Entrada inválida, insira um número." << endl;
+                        cin.clear();
+                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    }
+
+                    for (size_t b = 0; b < reservas.size(); b++)
+                    {
+                        if (reservas[b].getCodPassageiroReserva() == codPassageiro && reservas[b].getNumAssentoReserva() == assentoBaixa)
+                        {
+                            salvaCodVoo = reservas[b].getcodigVooReserva();
+                            verificaAssentoBaixa = true;
+                            passageiros[i].setPontuacao(-10);
+                            alteraDadosPassageiro(passageiros);
+                            for(size_t g = 0; g < assentos.size(); g++){
+                                if(assentos[g].getStatusAssento() == true && assentos[g].getCodVoo() == salvaCodVoo && assentos[g].getNumAssento() == assentoBaixa){
+                                    assentos[g].setStatusAssento(false);
+                                    alteraDadosAssento(assentos);
+                                }
+                            }
+
+                        }
+                    }
+
+                    if (verificaAssentoBaixa == false)
+                    {
+                        cout << "Erro: O assento informado não consta nas reservas do passageiro. Tente novamente" << endl;
+                    }
+                }
+            }
+            else
+            {
+                cout << "Não possui reservas" << endl;
+            }
+        }
+    }
+
+    if (verificaExistenciaPassageiro == false)
+    {
+        cout << "Erro: Nenhum passageiro encontrado com o código fornecido." << endl;
+    }
 }
