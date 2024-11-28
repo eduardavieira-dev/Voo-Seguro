@@ -37,7 +37,7 @@ void menuReserva(Reserva& reserva)
         break;
 
     default:
-        cout << "Opcção inválida. Tente novamente!" << endl;
+        cout << "Opção inválida. Tente novamente!" << endl;
         menuReserva(reserva);
         break;
     }
@@ -72,7 +72,7 @@ void menuAssento(Assento& assento)
         break;
 
     default:
-        cout << "Opcção inválida. Tente novamente!" << endl;
+        cout << "Opção inválida. Tente novamente!" << endl;
         menuAssento(assento);
         break;
     }
@@ -107,7 +107,7 @@ void menuPassageiro(Passageiro& pass)
         break;
 
     default:
-        cout << "Opcção inválida. Tente novamente!" << endl;
+        cout << "Opção inválida. Tente novamente!" << endl;
         menuPassageiro(pass);
         break;
     }
