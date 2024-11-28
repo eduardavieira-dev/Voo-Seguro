@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
+#include <limits>
 #include "Assento.h"
 #include "Voo.h"
 
@@ -54,31 +55,36 @@ bool Assento::getStatusAssento()
     return status;
 }
 
-void Assento:: salvarAssento(){
+void Assento::salvarAssento()
+{
     ofstream arquivo("assentos.dat", ios::app | ios::binary);
 
-    if (arquivo.is_open()) {
+    if (arquivo.is_open())
+    {
         // Salva apenas os dados do objeto atual (this)
-        arquivo.write(reinterpret_cast<char*>(&numAssento), sizeof(numAssento));
-        arquivo.write(reinterpret_cast<char*>(&codVoo), sizeof(codVoo));
-        arquivo.write(reinterpret_cast<char*>(&status), sizeof(status));
+        arquivo.write(reinterpret_cast<char *>(&numAssento), sizeof(numAssento));
+        arquivo.write(reinterpret_cast<char *>(&codVoo), sizeof(codVoo));
+        arquivo.write(reinterpret_cast<char *>(&status), sizeof(status));
         arquivo.close();
-    } 
+    }
 }
 
-void Assento:: carregarAssentos(){
+void Assento::carregarAssentos()
+{
     ifstream arquivo("assentos.dat", ios::binary);
 
-    if (arquivo.is_open()) {
+    if (arquivo.is_open())
+    {
         assentos.clear(); // Limpa o vetor
 
         int numAssentoTemp;
         int codVooTemp;
         bool statusTemp;
 
-        while (arquivo.read(reinterpret_cast<char*>(&numAssentoTemp), sizeof(numAssentoTemp))) {
-            arquivo.read(reinterpret_cast<char*>(&codVooTemp), sizeof(codVooTemp));
-            arquivo.read(reinterpret_cast<char*>(&statusTemp), sizeof(statusTemp));
+        while (arquivo.read(reinterpret_cast<char *>(&numAssentoTemp), sizeof(numAssentoTemp)))
+        {
+            arquivo.read(reinterpret_cast<char *>(&codVooTemp), sizeof(codVooTemp));
+            arquivo.read(reinterpret_cast<char *>(&statusTemp), sizeof(statusTemp));
 
             Assento novoAssento(codVooTemp, numAssentoTemp);
 
@@ -91,17 +97,25 @@ void Assento:: carregarAssentos(){
 void Assento::cadastroAssento()
 {
     system("cls");
-    
+
     int codVoo, numAssento;
     bool verificaExistenciaVoo = false;
 
     cout << "Digite o código do voo: \n";
-    cin >> codVoo;
-    cin.ignore();
+    while (!(cin >> codVoo))
+    {
+        cout << "Entrada inválida, insira um número." << endl;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
 
     cout << "Digite o número do assento: \n";
-    cin >> numAssento;
-    cin.ignore();
+    while (!(cin >> numAssento))
+    {
+        cout << "Entrada inválida, insira um número." << endl;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
 
     for (int i = 0; i < voos.size(); i++)
     {
@@ -109,39 +123,44 @@ void Assento::cadastroAssento()
         {
             Assento NovoAssento(codVoo, numAssento);
             cout << "Assento cadastrado com sucesso: \n";
-            cout << "+---------------------------------+"<<endl;
+            cout << "+---------------------------------+" << endl;
             cout << "| Número do assento: " << NovoAssento.getNumAssento() << "\n";
             cout << "| Código do Voo: " << NovoAssento.getCodVoo() << "\n";
             cout << "| Status: " << (NovoAssento.getStatusAssento() ? "Ocupado" : "Livre") << "\n";
-            cout << "+---------------------------------+"<<endl;
-            assentos.push_back(NovoAssento);  // Adiciona ao vetor
-            NovoAssento.salvarAssento(); // Salva apenas o novo assento
+            cout << "+---------------------------------+" << endl;
+            assentos.push_back(NovoAssento); // Adiciona ao vetor
+            NovoAssento.salvarAssento();     // Salva apenas o novo assento
             verificaExistenciaVoo = true;
         }
-        
     }
-        cout << "Pressione 'ENTER' para voltar" << endl;
-        cin.get();
-        system("cls");
+    cout << "Pressione 'ENTER' para voltar" << endl;
+    cin.get();
+    system("cls");
+    
     if (verificaExistenciaVoo == false)
     {
         cout << "O voo informado não existe. Escolha outro voo ou faça o cadastro de um novo antes." << endl;
     }
 }
 
-void Assento::ExibirAssentos(){
-    system("cls");   
-    if(assentos.size() == 0){
+void Assento::ExibirAssentos()
+{
+    system("cls");
+    if (assentos.size() == 0)
+    {
         cout << "Nenhum assento cadastrado." << endl;
-    }else{
-        for (size_t i = 0; i < assentos.size(); i++) {
+    }
+    else
+    {
+        for (size_t i = 0; i < assentos.size(); i++)
+        {
             cout << endl;
             cout << "     Informações do assento " << i + 1 << ":" << endl;
-            cout << "+---------------------------------+"<<endl;
+            cout << "+---------------------------------+" << endl;
             cout << "| Número: " << assentos[i].getNumAssento() << endl;
             cout << "| Código do voo: " << assentos[i].getCodVoo() << endl;
             cout << "| Status: " << (assentos[i].getStatusAssento() ? "Ocupado" : "Livre") << endl;
-            cout << "+---------------------------------+"<<endl;
+            cout << "+---------------------------------+" << endl;
         }
     }
 
