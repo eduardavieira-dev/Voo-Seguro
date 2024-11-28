@@ -214,7 +214,6 @@ int main() {
         cout << "| 5 - Cadastrar reserva               |" << endl;
         cout << "| 6 - Baixa em reservas               |" << endl;
         cout << "| 7 - Pesquisa                        |" << endl;
-        cout << "| 8 - Consulta fidelidade             |" << endl;
         cout << "| 0 - Sair                            |" << endl;
         cout << "+-------------------------------------+" << endl;
         cin >> escolha;
@@ -253,11 +252,6 @@ int main() {
         case 7:
             system("cls");
             cout << "escolha 7" << endl;
-            break;
-
-        case 8:
-            system("cls");
-            cout << "escolha 9" << endl;
             break;
 
         case 0:
