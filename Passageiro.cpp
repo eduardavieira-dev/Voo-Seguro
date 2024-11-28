@@ -1,3 +1,22 @@
+/********************************************************
+* FILENAME : Passageiro.cpp
+* DESCRIPTION : Implementação de cadastro, salvamento, 
+*               carregamento e listagem de passageiros.
+* PUBLIC FUNCTIONS :
+*   void Passageiro::cadastroPassageiro()    - Realiza o cadastro de um novo passageiro.
+*   void Passageiro::listarPassageiros()     - Lista todos os passageiros cadastrados.
+*   void Passageiro::salvarDadosPassageiro() - Salva os dados de um passageiro em arquivo binário.
+*   void Passageiro::carregarPassageiros()   - Carrega os dados dos passageiros a partir de um arquivo binário.
+*
+* NOTES :
+* Essas funções fazem parte de um sistema de cadastro e listagem de passageiros.
+* O código realiza o armazenamento e a leitura de informações dos passageiros 
+* em um arquivo binário, além de realizar o cadastro e a listagem de passageiros.
+*
+* AUTHOR : Laura
+* START DATE : 22 Nov 24
+********************************************************/
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -110,6 +129,16 @@ string Passageiro::getRua()
 
 // Função para cadastro______________________________________________________________________________________
 
+/********************************************************
+* NAME : void Passageiro::cadastroPassageiro()
+* DESCRIPTION : Realiza o cadastro de um novo passageiro.
+* INPUTS :
+* PARAMETERS : Nenhum
+* RETURN :
+* Type : void
+* Error code :
+* Values : Nenhum
+*******************************************************/
 void Passageiro::cadastroPassageiro() {
     system("chcp 65001 > nul");
     system("cls");
@@ -154,6 +183,16 @@ void Passageiro::cadastroPassageiro() {
     system("cls");
 }
 
+/********************************************************
+* NAME : void Passageiro::listarPassageiros()
+* DESCRIPTION : Lista todos os passageiros cadastrados.
+* INPUTS :
+* PARAMETERS : Nenhum
+* RETURN :
+* Type : void
+* Error code :
+* Values : Nenhum
+*******************************************************/
 void Passageiro::listarPassageiros()
 {
     system("cls");
@@ -161,7 +200,7 @@ void Passageiro::listarPassageiros()
         cout << "Nenhum passageiro cadastrado." << endl;
     }else{
         for (size_t i = 0; i < passageiros.size(); i++) {
-            
+
             cout << endl;
             cout << "    Informações do Passageiro " << i + 1 << ":" << endl;
             cout << "+---------------------------------+"<<endl;
@@ -183,6 +222,16 @@ void Passageiro::listarPassageiros()
 }
 
 // Métodos da classe para salvar os dados no arquivo e ler -____________________________________________________
+/********************************************************
+* NAME : void Passageiro::salvarPassageiros()
+* DESCRIPTION : Salva os passageiros cadastrados em um arquivo binário.
+* INPUTS :
+* PARAMETERS : Nenhum
+* RETURN :
+* Type : void
+* Error code :
+* Values : Nenhum
+*******************************************************/
 void Passageiro::salvarDadosPassageiro() {
     ofstream arquivo("passageiros.dat", ios::app | ios::binary);
 
@@ -201,6 +250,16 @@ void Passageiro::salvarDadosPassageiro() {
     }
 }
 
+/********************************************************
+* NAME : void Passageiro::carregarPassageiros()
+* DESCRIPTION : Carrega os passageiros a partir de um arquivo binário.
+* INPUTS :
+* PARAMETERS : Nenhum
+* RETURN :
+* Type : void
+* Error code :
+* Values : Nenhum
+*******************************************************/
 void Passageiro::carregarPassageiros() {
     ifstream arquivo("passageiros.dat", ios::binary);
 

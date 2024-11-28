@@ -1,3 +1,23 @@
+/********************************************************
+* FILENAME : Tripulacao.cpp
+* DESCRIPTION : Implementação de cadastro, listagem, salvamento e carregamento de tripulações  e tripulantes.
+*                          
+* PUBLIC FUNCTIONS :
+*   void Tripulacao::salvarTripulacao()     - Salva a tripulação cadastrada em um arquivo binário.
+*   void Tripulacao::carregarTripulacao()   - Carrega os dados das tripulações a partir de um arquivo binário.
+*   void Tripulacao::cadastrarTripulacao()  - Realiza o cadastro de uma nova tripulação.
+*   void Tripulacao::listarTripulacao()     - Lista todas as tripulações cadastradas.
+*
+* NOTES :
+* Esse código gerencia informações sobre tripulações e tripulantes, 
+* incluindo funcionalidades para cadastrar, listar, salvar e carregar os dados 
+* de tripulação a partir de arquivos binários. Cada tripulação pode ter até 
+* 3 tripulantes (piloto, copiloto e comissário).
+*
+* AUTHOR : Eric
+* START DATE : 22 Nov 24
+********************************************************/
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -17,12 +37,26 @@ vector<Tripulacao> tripulacaoVet;
 int contagemTripulacao = 0;
 int contagemTripulante = 0;
 
+/********************************************************
+* NAME : void Tripulacao::salvarTripulacao()
+* DESCRIPTION : Salva os tripulacao cadastrados em um arquivo binário.
+* INPUTS :
+* PARAMETERS : Nenhum
+* RETURN :
+* Type : void
+* Error code :
+* Values : Nenhum
+*******************************************************/
 void Tripulacao::salvarTripulacao()
 {
     ofstream arquivo("tripulacao.dat", ios::binary);
 
     if (arquivo.is_open())
     {
+        // Salvar a contagem de tripulações e tripulantes antes de salvar as tripulações
+        arquivo.write(reinterpret_cast<char *>(&contagemTripulacao), sizeof(contagemTripulacao));
+        arquivo.write(reinterpret_cast<char *>(&contagemTripulante), sizeof(contagemTripulante));
+
         for (int i = 0; i < contagemTripulacao; i++)
         {
             // Escrever código da tripulação
@@ -39,16 +73,30 @@ void Tripulacao::salvarTripulacao()
         }
         arquivo.close();
     }
-
 }
 
 
+
+/********************************************************
+* NAME : void Tripulacao::carregarTripulacao()
+* DESCRIPTION : Carrega a tripulacao a partir de um arquivo binário.
+* INPUTS :
+* PARAMETERS : Nenhum
+* RETURN :
+* Type : void
+* Error code :
+* Values : Nenhum
+*******************************************************/
 void Tripulacao::carregarTripulacao()
 {
     ifstream arquivo("tripulacao.dat", ios::binary);
 
     if (arquivo.is_open())
     {
+        // Ler a contagem de tripulações e tripulantes do arquivo
+        arquivo.read(reinterpret_cast<char *>(&contagemTripulacao), sizeof(contagemTripulacao));
+        arquivo.read(reinterpret_cast<char *>(&contagemTripulante), sizeof(contagemTripulante));
+
         while (arquivo.read(reinterpret_cast<char *>(&codigoTripulacao), sizeof(codigoTripulacao)))
         {
             Tripulacao novaTripulacao;
@@ -75,12 +123,11 @@ void Tripulacao::carregarTripulacao()
             }
 
             tripulacaoVet.push_back(novaTripulacao);
-            contagemTripulacao++;
         }
         arquivo.close();
     }
-
 }
+
 
 
 string Tripulacao::getNome()
@@ -150,6 +197,16 @@ void Tripulacao::setCodigoTripulacao(int codigoTripulacao)
     this->codigoTripulacao = codigoTripulacao;
 }
 
+/********************************************************
+* NAME : void Tripulacao::cadastroTripulacao()
+* DESCRIPTION : Realiza o cadastro de uma nova tripulação.
+* INPUTS :
+* PARAMETERS : Nenhum
+* RETURN :
+* Type : void
+* Error code :
+* Values : Nenhum
+*******************************************************/
 void Tripulacao::cadastrarTripulacao()
 {
     system("chcp 65001 > nul");
@@ -203,6 +260,7 @@ void Tripulacao::cadastrarTripulacao()
         tripulacao.setCodigoTripulante(codigoTripulante);
 
         tripulacao.tripulantes.push_back(tripulacao);
+        cout << "cotnage"<<contagemTripulante;
     }
 
     contagemTripulacao++;

@@ -1,3 +1,23 @@
+/********************************************************
+* FILENAME : Voo.cpp
+* DESCRIPTION : Implementação de cadastro, salvamento, 
+*               carregamento e listagem de voos.
+* PUBLIC FUNCTIONS :
+*   void Voo::cadastroVoo()        - Realiza o cadastro de um novo voo.
+*   void Voo::listarVoo()          - Lista todos os voos cadastrados.
+*   void Voo::salvarVoos()         - Salva os voos em arquivo binário.
+*   void Voo::carregarVoos()       - Carrega os voos de um arquivo binário.
+*
+* NOTES :
+* Essas funções fazem parte de um sistema de cadastro e listagem de voos.
+* O código realiza o armazenamento e a leitura de informações dos voos 
+* em um arquivo binário, além de realizar o cadastro e a listagem de voos.
+*
+* AUTHOR : Eric
+* START DATE : 22 Nov 24
+********************************************************/
+
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -16,6 +36,16 @@ extern vector<Tripulacao> tripulacaoVet;
 
 int contagemVoo = 0;
 
+/********************************************************
+* NAME : void Voo::salvarVoos()
+* DESCRIPTION : Salva os voos cadastrados em um arquivo binário.
+* INPUTS :
+* PARAMETERS : Nenhum
+* RETURN :
+* Type : void
+* Error code :
+* Values : Nenhum
+*******************************************************/
 void Voo::salvarVoos()
 {
     ofstream arquivo("voos.dat", ios::binary);
@@ -43,6 +73,16 @@ void Voo::salvarVoos()
 
 }
 
+/********************************************************
+* NAME : void Voo::carregarVoos()
+* DESCRIPTION : Carrega os voos a partir de um arquivo binário.
+* INPUTS :
+* PARAMETERS : Nenhum
+* RETURN :
+* Type : void
+* Error code :
+* Values : Nenhum
+*******************************************************/
 void Voo::carregarVoos()
 {
     ifstream arquivo("voos.dat", ios::binary);
@@ -248,6 +288,17 @@ void Voo::setDestino(string destino)
     this->destino = destino;
 }
 
+
+/********************************************************
+* NAME : void Voo::cadastroVoo()
+* DESCRIPTION : Realiza o cadastro de um novo voo.
+* INPUTS :
+* PARAMETERS : Nenhum
+* RETURN :
+* Type : void
+* Error code :
+* Values : Nenhum
+*******************************************************/
 void Voo::cadastroVoo()
 {
     system("chcp 65001 > nul");
@@ -423,6 +474,16 @@ void Voo::cadastroVoo()
     voo.salvarVoos();
 }
 
+/********************************************************
+* NAME : void Voo::listarVoo()
+* DESCRIPTION : Lista todos os voos cadastrados.
+* INPUTS :
+* PARAMETERS : Nenhum
+* RETURN :
+* Type : void
+* Error code :
+* Values : Nenhum
+*******************************************************/
 void Voo::listarVoo()
 {
     system("cls");
