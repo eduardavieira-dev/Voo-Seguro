@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
+#include <limits>
 #include "Reserva.h"
 #include "Assento.h"
 #include "Voo.h"
@@ -13,6 +14,68 @@ extern vector<Assento> assentos;
 extern vector<Passageiro> passageiros;
 
 vector<Reserva> reservas;
+
+void alteraDadosAssento(vector<Assento> &assentos)
+{
+    // Abrindo o arquivo em modo binário e truncando o conteúdo
+    ofstream arquivo("assentos.dat", ios::out | ios::binary);
+
+    if (arquivo.is_open())
+    {
+        // Escrevendo os dados do vetor no arquivo
+        for (size_t i = 0; i < assentos.size(); i++)
+        {
+            int numAssento = assentos[i].getNumAssento();
+            int codVoo = assentos[i].getCodVoo();
+            bool status = assentos[i].getStatusAssento();
+
+            arquivo.write(reinterpret_cast<char *>(&numAssento), sizeof(numAssento));
+            arquivo.write(reinterpret_cast<char *>(&codVoo), sizeof(codVoo));
+            arquivo.write(reinterpret_cast<char *>(&status), sizeof(status));
+        }
+        arquivo.close();
+    }
+    else
+    {
+        cerr << "Erro ao abrir o arquivo assentos.dat!" << endl;
+    }
+}
+
+void alteraDadosPassageiro(vector<Passageiro> &passageiros)
+{
+    // Abrindo o arquivo em modo binário e truncando o conteúdo
+    ofstream arquivo("passageiros.dat", ios::out | ios::binary);
+
+    if (arquivo.is_open())
+    {
+        // Escrevendo os dados do vetor no arquivo
+        for (size_t i = 0; i < passageiros.size(); i++)
+        {
+            int id = passageiros[i].getID();
+            string nome = passageiros[i].getNome();
+            string telefone = passageiros[i].getTelefone();
+            bool fidelidade = passageiros[i].getFidelidade();
+            int pontuacao = passageiros[i].getPontuacao();
+            int numResidencia = passageiros[i].getNumResidencia();
+            string cidade = passageiros[i].getCidade();
+            string rua = passageiros[i].getRua();
+
+            arquivo.write(reinterpret_cast<char *>(&id), sizeof(id));
+            arquivo.write(nome.c_str(), nome.size() + 1);
+            arquivo.write(telefone.c_str(), telefone.size() + 1);
+            arquivo.write(cidade.c_str(), cidade.size() + 1);
+            arquivo.write(rua.c_str(), rua.size() + 1);
+            arquivo.write(reinterpret_cast<char *>(&numResidencia), sizeof(numResidencia));
+            arquivo.write(reinterpret_cast<char *>(&fidelidade), sizeof(fidelidade));
+            arquivo.write(reinterpret_cast<char *>(&pontuacao), sizeof(pontuacao));
+        }
+        arquivo.close();
+    }
+    else
+    {
+        cerr << "Erro ao abrir o arquivo passageiros.dat!" << endl;
+    }
+}
 
 Reserva::Reserva()
 {
@@ -48,9 +111,6 @@ void Reserva::cadastroReserva()
 
     int codVoo = 0, numAssento = 0, codPassageiro = 0;
     bool verificaExistenciaVoo = false;
-    bool verificaExistenciaAssento = false;
-    bool verificaExistenciaPassageiro = false;
-    bool verificaVooAtivo = false;
 
     cout << "Digite o código do voo: \n";
     cin >> codVoo;
@@ -63,45 +123,74 @@ void Reserva::cadastroReserva()
             verificaExistenciaVoo = true;
             if (voos[i].getStatus() == "Ativo")
             {
-                verificaVooAtivo = true;
+                bool verificaExistenciaAssento = false;
                 cout << "Digite o número do assento: \n";
-                cin >> numAssento;
-                cin.ignore();
+                while (!(cin >> numAssento))
+                {
+                    cout << "Entrada inválida, insira um número." << endl;
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                }
 
                 for (size_t j = 0; j < assentos.size(); j++)
                 {
                     if (assentos[j].getCodVoo() == codVoo && assentos[j].getNumAssento() == numAssento)
                     {
                         verificaExistenciaAssento = true;
-                        cout << "Digite o id do passageiro: \n";
-                        cin >> codPassageiro;
-                        cin.ignore();
-
-                        for (size_t a = 0; a < passageiros.size(); a++)
+                        if (assentos[j].getStatusAssento() == false)
                         {
-                            if (passageiros[a].getID() == codPassageiro)
+                            bool verificaExistenciaPassageiro = false;
+                            cout << "Digite o id do passageiro: \n";
+                            while (!(cin >> codPassageiro))
                             {
-                                verificaExistenciaPassageiro = true;
-                                Reserva NovaReserva(codVoo, numAssento, codPassageiro);
-                                cout << "Reserva cadastrada com sucesso: \n";
-                                cout << "Número do assento: " << NovaReserva.getNumAssentoReserva() << "\n";
-                                cout << "Código do voo: " << NovaReserva.getcodigVooReserva() << "\n";
-                                cout << "Código do passageiro: " << NovaReserva.getCodPassageiroReserva() << "\n";
-                                reservas.push_back(NovaReserva); // Adiciona ao vetor
-                                NovaReserva.salvarReserva();     // Salva apenas o novo assento
-
-                                bool fide = true;
-                                bool statusAssento = true;
-                                passageiros[a].setFidelidade(fide);
-                                passageiros[a].setPontuacao(10);
-                                passageiros[a].salvarDadosPassageiro();
-
-                                assentos[j].setStatusAssento(statusAssento);
-                                assentos[j].salvarAssento();
+                                cout << "Entrada inválida, insira um número." << endl;
+                                cin.clear();
+                                cin.ignore(numeric_limits<streamsize>::max(), '\n');
                             }
+
+                            for (size_t a = 0; a < passageiros.size(); a++)
+                            {
+                                if (passageiros[a].getID() == codPassageiro)
+                                {
+                                    verificaExistenciaPassageiro = true;
+                                    Reserva NovaReserva(codVoo, numAssento, codPassageiro);
+                                    cout << "Reserva cadastrada com sucesso: \n";
+                                    cout << "Número do assento: " << NovaReserva.getNumAssentoReserva() << "\n";
+                                    cout << "Código do voo: " << NovaReserva.getcodigVooReserva() << "\n";
+                                    cout << "Código do passageiro: " << NovaReserva.getCodPassageiroReserva() << "\n";
+                                    reservas.push_back(NovaReserva); // Adiciona ao vetor
+                                    NovaReserva.salvarReserva();     // Salva apenas o novo assento
+
+                                    bool fide = true;
+                                    bool statusAssento = true;
+                                    passageiros[a].setFidelidade(fide);
+                                    passageiros[a].setPontuacao(10);
+                                    alteraDadosPassageiro(passageiros);
+
+                                    assentos[j].setStatusAssento(statusAssento);
+                                    alteraDadosAssento(assentos);
+                                }
+                            }
+                            if (verificaExistenciaPassageiro == false)
+                            {
+                                cout << "Erro: Nenhum passageiro encontrado com o código fornecido." << endl;
+                            }
+                        }
+                        else
+                        {
+                            cout << "Erro: Assento informado está ocupado" << endl;
                         }
                     }
                 }
+
+                if (verificaExistenciaAssento == false)
+                {
+                    cout << "Erro: Não existe assento cadastrado no voo " << codVoo << " com o código fornecido." << endl;
+                }
+            }
+            else
+            {
+                cout << "Erro: O voo informado não está ativo." << endl;
             }
         }
     }
@@ -109,21 +198,6 @@ void Reserva::cadastroReserva()
     if (verificaExistenciaVoo == false)
     {
         cout << "Erro: Nenhum voo encontrado com o código fornecido." << endl;
-    }
-
-    if (verificaVooAtivo == false)
-    {
-        cout << "Erro: O voo informado não está ativo." << endl;
-    }
-
-    if (verificaExistenciaAssento == false)
-    {
-        cout << "O assento informado não existe no Voo " << codVoo << "\nEscolha outro assento ou cadastre o assento no voo antes." << endl;
-    }
-
-    if (verificaExistenciaPassageiro == false)
-    {
-        cout << "Erro: Nenhum passageiro encontrado com o código fornecido." << endl;
     }
 }
 
