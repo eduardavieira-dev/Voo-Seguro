@@ -96,8 +96,8 @@ void Reserva::cadastroReserva()
                                 passageiros[a].setPontuacao(10);
                                 passageiros[a].salvarDadosPassageiro();
 
-                                assentos[a].setStatusAssento(statusAssento);
-                                assentos[a].salvarAssento();
+                                assentos[j].setStatusAssento(statusAssento);
+                                assentos[j].salvarAssento();
                             }
                         }
                     }
