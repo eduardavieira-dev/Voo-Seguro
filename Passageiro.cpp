@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <limits>
 #include "Passageiro.h"
 #include <fstream>
 
@@ -115,34 +116,42 @@ void Passageiro::cadastroPassageiro() {
     string nome, cidade, rua, telefone;
     int numResidencia;
 
-    cout << "Digite o nome do passageiro:\n";
+    cout << "Digite o nome do passageiro:" << endl;
     getline(cin, nome);
 
-    cout << "Digite a cidade onde o passageiro mora:\n";
+    cout << "Digite a cidade onde o passageiro mora:" << endl;
     getline(cin, cidade);
 
-    cout << "Digite o número residencial:\n";
-    cin >> numResidencia;
-    cin.ignore();
+    cout << "Digite o número residencial:" << endl;
+     while(!(cin >> numResidencia)){
+        cout << "Entrada inválida, insira um número." << endl;
+        cin.clear(); 
+        cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
+        }
+        cin.ignore();
 
-    cout << "Digite o nome da rua:\n";
+    cout << "Digite o nome da rua:" << endl;
     getline(cin, rua);
 
-    cout << "Digite o número de telefone (DDD) XXXXX-XXXX:\n";
+    cout << "Digite o número de telefone (DDD) XXXXX-XXXX:" << endl;
     getline(cin, telefone);
 
     // Criação do novo passageiro
     Passageiro NovoPassageiro(nome, telefone, numResidencia, cidade, rua);
-
-    cout << "Dados informados para o cadastro:\n";
-    cout << "Nome: " << NovoPassageiro.getNome() << "\n";
-    cout << "Cidade: " << NovoPassageiro.getCidade() << "\n";
-    cout << "Número Residencial: " << NovoPassageiro.getNumResidencia() << "\n";
-    cout << "Rua: " << NovoPassageiro.getRua() << "\n";
-    cout << "Telefone: " << NovoPassageiro.getTelefone() << "\n";
-
-    passageiros.push_back(NovoPassageiro); // Adiciona ao vetor
-    NovoPassageiro.salvarDadosPassageiro(); // Salva apenas o novo passageiro
+    cout << "+---------------------------------+"<<endl;
+    cout << "| Dados informados para o cadastro:" << endl;
+    cout << "| Nome: " << NovoPassageiro.getNome() << endl;
+    cout << "| Cidade: " << NovoPassageiro.getCidade() << endl;
+    cout << "| Número Residencial: " << NovoPassageiro.getNumResidencia() << endl;
+    cout << "| Rua: " << NovoPassageiro.getRua() << endl;
+    cout << "| Telefone: " << NovoPassageiro.getTelefone() << endl;
+    cout << "+---------------------------------+"<<endl;
+    passageiros.push_back(NovoPassageiro); 
+    NovoPassageiro.salvarDadosPassageiro();
+    cout << "Pressione 'ENTER' para voltar" << endl;
+    
+    cin.get();
+    system("cls");
 }
 
 void Passageiro::listarPassageiros()
@@ -152,20 +161,25 @@ void Passageiro::listarPassageiros()
         cout << "Nenhum passageiro cadastrado." << endl;
     }else{
         for (size_t i = 0; i < passageiros.size(); i++) {
-            cout << "\nInformações do Passageiro " << i + 1 << ":" << endl;
-            cout << "ID: " << passageiros[i].getID() << endl;
-            cout << "Nome: " << passageiros[i].getNome() << endl;
-            cout << "Cidade: " << passageiros[i].getCidade() << endl;
-            cout << "Número residencial: " << passageiros[i].getNumResidencia() << endl;
-            cout << "Rua: " << passageiros[i].getRua() << endl;
-            cout << "Telefone: " << passageiros[i].getTelefone() << endl;
-            cout << "Fidelidade: " << (passageiros[i].getFidelidade() ? "Sim" : "Não") << endl;
-            cout << "Pontos de fidelidade: " << passageiros[i].getPontuacao() << endl;
+            
+            cout << endl;
+            cout << "    Informações do Passageiro " << i + 1 << ":" << endl;
+            cout << "+---------------------------------+"<<endl;
+            cout << "| ID: " << passageiros[i].getID() << endl;
+            cout << "| Nome: " << passageiros[i].getNome() << endl;
+            cout << "| Cidade: " << passageiros[i].getCidade() << endl;
+            cout << "| Número residencial: " << passageiros[i].getNumResidencia() << endl;
+            cout << "| Rua: " << passageiros[i].getRua() << endl;
+            cout << "| Telefone: " << passageiros[i].getTelefone() << endl;
+            cout << "| Fidelidade: " << (passageiros[i].getFidelidade() ? "Sim" : "Não") << endl;
+            cout << "| Pontos de fidelidade: " << passageiros[i].getPontuacao() << endl;
+            cout << "+---------------------------------+"<<endl;
         }
     }
 
     cout << "Pressione 'ENTER' para voltar" << endl;
     cin.get();
+    system("cls");
 }
 
 // Métodos da classe para salvar os dados no arquivo e ler -____________________________________________________

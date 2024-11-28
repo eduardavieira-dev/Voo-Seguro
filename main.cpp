@@ -35,6 +35,7 @@ void menuReserva(Reserva& reserva)
         break;
 
     case 3:
+        system("cls");
         break;
 
     default:
@@ -70,6 +71,7 @@ void menuAssento(Assento& assento)
         break;
 
     case 3:
+        system("cls");
         break;
 
     default:
@@ -105,6 +107,7 @@ void menuPassageiro(Passageiro& pass)
         break;
 
     case 3:
+        system("cls");
         break;
 
     default:
@@ -139,6 +142,7 @@ void menuTripulacao(Tripulacao& tripulacao)
         break;
 
     case 3:
+        system("cls");
         break;
 
     default:
@@ -172,6 +176,7 @@ void menuTripulacao(Tripulacao& tripulacao)
             break;
 
         case 3:
+            system("cls");
             break;
 
         default:
@@ -186,12 +191,12 @@ void menuPesquisa() {
     
     int opcao;
 
-    while (true) {
         cout << "Menu de Pesquisa de passageiros e membros da tripulação" << endl;
-        cout << "1 - Pesquisar Passageiros" << endl;
-        cout << "2 - Pesquisar Membro da Tripulação" << endl;
-        cout << "3 - Voltar" << endl;
-        cout << "Escolha uma opção: ";
+        cout << "+-------------------------------------+" << endl;
+        cout << "| 1 - Pesquisar Passageiros           |" << endl;
+        cout << "| 2 - Pesquisar Membro da Tripulação  |" << endl;
+        cout << "| 3 - Voltar                          |" << endl;
+        cout << "+-------------------------------------+" << endl;
         cin >> opcao;
 
         switch (opcao) {
@@ -202,12 +207,12 @@ void menuPesquisa() {
                 pesquisarTripulacao();
                 break;
             case 3:
+                system("cls");
                 return;
             default:
                 cout << "Opção inválida! Tente novamente." << endl;
                 break;
         }
-    }
 }
 
 
@@ -236,7 +241,6 @@ int main() {
         cout << "|                     |  |            |" << endl;
         cout << "|                      \\/             |" << endl;
         cout << "+-------------------------------------+" << endl;
-
         cout << "|     Escolha o que deseja fazer      |" << endl;
         cout << "+-------------------------------------+" << endl;
         cout << "| 1 - Cadastrar passageiro            |" << endl;
@@ -284,7 +288,6 @@ int main() {
         case 7:
             system("cls");
             menuPesquisa();
-            cout << "escolha 7" << endl;
             break;
 
         case 0:

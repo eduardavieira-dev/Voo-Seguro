@@ -109,15 +109,20 @@ void Assento::cadastroAssento()
         {
             Assento NovoAssento(codVoo, numAssento);
             cout << "Assento cadastrado com sucesso: \n";
-            cout << "Número do assento: " << NovoAssento.getNumAssento() << "\n";
-            cout << "Código do Voo: " << NovoAssento.getCodVoo() << "\n";
-            cout << "Status: " << (NovoAssento.getStatusAssento() ? "Ocupado" : "Livre") << "\n";
+            cout << "+---------------------------------+"<<endl;
+            cout << "| Número do assento: " << NovoAssento.getNumAssento() << "\n";
+            cout << "| Código do Voo: " << NovoAssento.getCodVoo() << "\n";
+            cout << "| Status: " << (NovoAssento.getStatusAssento() ? "Ocupado" : "Livre") << "\n";
+            cout << "+---------------------------------+"<<endl;
             assentos.push_back(NovoAssento);  // Adiciona ao vetor
             NovoAssento.salvarAssento(); // Salva apenas o novo assento
             verificaExistenciaVoo = true;
         }
+        
     }
-
+        cout << "Pressione 'ENTER' para voltar" << endl;
+        cin.get();
+        system("cls");
     if (verificaExistenciaVoo == false)
     {
         cout << "O voo informado não existe. Escolha outro voo ou faça o cadastro de um novo antes." << endl;
@@ -130,10 +135,13 @@ void Assento::ExibirAssentos(){
         cout << "Nenhum assento cadastrado." << endl;
     }else{
         for (size_t i = 0; i < assentos.size(); i++) {
-            cout << "\nInformações do assento " << i + 1 << ":" << endl;
-            cout << "Número: " << assentos[i].getNumAssento() << endl;
-            cout << "Código do voo: " << assentos[i].getCodVoo() << endl;
-            cout << "Status: " << (assentos[i].getStatusAssento() ? "Ocupado" : "Livre") << endl;
+            cout << endl;
+            cout << "     Informações do assento " << i + 1 << ":" << endl;
+            cout << "+---------------------------------+"<<endl;
+            cout << "| Número: " << assentos[i].getNumAssento() << endl;
+            cout << "| Código do voo: " << assentos[i].getCodVoo() << endl;
+            cout << "| Status: " << (assentos[i].getStatusAssento() ? "Ocupado" : "Livre") << endl;
+            cout << "+---------------------------------+"<<endl;
         }
     }
 

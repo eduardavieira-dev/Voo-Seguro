@@ -3,6 +3,7 @@
 #include <vector>
 #include <iomanip>
 #include <fstream>
+#include <limits>
 #include "Tripulacao.h"
 #include "Voo.h"
 
@@ -10,9 +11,6 @@ using namespace std;
 
 #define MAX_VOOS 100
 
-
-
-/* Tripulacao tripulacaoDoVoo; */
 vector<Voo> voos;
 extern vector<Tripulacao> tripulacaoVet;
 
@@ -287,49 +285,76 @@ void Voo::cadastroVoo()
 
     while (!diaValido)
     {
+        
         cout << "Dia (1-31): ";
-        cin >> dia;
-        cin.ignore();
+        while(!(cin >> dia)){
+        cout << "Entrada inválida, insira um número." << endl;
+        cin.clear(); 
+        cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
+        }
         voo.setDia(dia);
         diaValido = (dia > 0 && dia <= 31);
+        
     }
 
     while (!mesValido)
     {
         cout << "Mes (1-12): ";
-        cin >> mes;
-        cin.ignore();
+        while(!(cin >> mes)){
+        cout << "Entrada inválida, insira um número." << endl;
+        cin.clear(); 
+        cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
+        }
         voo.setMes(mes);
         mesValido = (mes > 0 && mes <= 12);
+        
     }
 
     while (!anoValido)
     {
+        
         cout << "Ano: (2024-2030): ";
-        cin >> ano;
-        cin.ignore();
+        while(!(cin >> ano)){
+        cout << "Entrada inválida, insira um número." << endl;
+        cin.clear(); 
+        cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
+        }
         voo.setAno(ano);
         anoValido = (ano > 2023 && ano <= 2030);
     }
 
+
     while (!horaValida || !minutoValido)
-    {
-        cout << "Digite o horário do voo (HH:MM): ";
-        char doisPontos;
-        cin >> hora >> doisPontos >> minuto;
-        cin.ignore();
-        if (doisPontos == ':')
-        {
+{
+    cout << "Digite o horário do voo (HH:MM): ";
+    char doisPontos;
+    
+
+    if (cin >> hora >> doisPontos >> minuto) {
+        if (doisPontos == ':' && hora >= 0 && hora <= 23 && minuto >= 0 && minuto <= 59) {
             voo.setHora(hora);
             voo.setMinuto(minuto);
-            horaValida = (hora >= 0 && hora <= 23);
-            minutoValido = (minuto >= 0 && minuto <= 59);
+            horaValida = true;
+            minutoValido = true;
+        } else {
+            cout << "Horário inválido! Verifique o formato e os valores (HH:MM), com HH entre 00 e 23 e MM entre 00 e 59." << endl;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
         }
+    } else {
+        cout << "Entrada inválida! Por favor, insira números no formato HH:MM." << endl;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
+}
 
     while (!tripulacaoValida) {
     cout << "Informe o código da tripulação: ";
-    cin >> codigoTripulacao; 
+     while(!(cin >> codigoTripulacao)){
+        cout << "Entrada inválida, insira um número." << endl;
+        cin.clear(); 
+        cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
+        }
     cin.ignore();
     
     tripulacaoValida = false;
@@ -351,13 +376,19 @@ void Voo::cadastroVoo()
     }
 
     cout << "Informe o código do avião: ";
-    cin >> codigoAviao;
-    cin.ignore();
+     while(!(cin >> codigoAviao)){
+        cout << "Entrada inválida, insira um número." << endl;
+        cin.clear(); 
+        cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
+        }
     voo.setCodigoAviao(codigoAviao);
 
     cout << "Informe a tarifa: ";
-    cin >> tarifa;
-    cin.ignore();
+     while(!(cin >> tarifa)){
+        cout << "Entrada inválida, insira um número." << endl;
+        cin.clear(); 
+        cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
+        }
     voo.setTarifa(tarifa);
 
     vector<Tripulacao>& tripulantes = tripulacaoVet[codigoTripulacao - 1].getTripulantes();  // Acessa a tripulação específica
@@ -406,14 +437,14 @@ void Voo::listarVoo()
             cout << endl;
             cout << "       Informações do Voo:" << voos[i].getCodigoVoo() << endl;
             cout << "+---------------------------------+"<<endl;
-            cout << "Código de voo: " << voos[i].getCodigoVoo() << endl;
-            cout << "Código do avião: " << voos[i].getCodigoAviao() << endl;
-            cout << "Local de origem: " << voos[i].getOrigem() << endl;
-            cout << "Local de destino: " << voos[i].getDestino() << endl;
-            cout << "Data: " << setfill('0') << setw(2) << voos[i].getDia() << "/" << setfill('0') << setw(2) << voos[i].getMes() << "/" << voos[i].getAno() << endl;
-            cout << "Horário: " << setfill('0') << setw(2) << voos[i].getHora() << ":" << setfill('0') << setw(2) << voos[i].getMinuto() << endl;
-            cout << "Tarifa: " << voos[i].getTarifa() << endl;
-            cout << "Status: " <<voos[i].getStatus() << endl;
+            cout << "| Código de voo: " << voos[i].getCodigoVoo() << endl;
+            cout << "| Código do avião: " << voos[i].getCodigoAviao() << endl;
+            cout << "| Local de origem: " << voos[i].getOrigem() << endl;
+            cout << "| Local de destino: " << voos[i].getDestino() << endl;
+            cout << "| Data: " << setfill('0') << setw(2) << voos[i].getDia() << "/" << setfill('0') << setw(2) << voos[i].getMes() << "/" << voos[i].getAno() << endl;
+            cout << "| Horário: " << setfill('0') << setw(2) << voos[i].getHora() << ":" << setfill('0') << setw(2) << voos[i].getMinuto() << endl;
+            cout << "| Tarifa: " << voos[i].getTarifa() << endl;
+            cout << "| Status: " <<voos[i].getStatus() << endl;
             cout << "+---------------------------------+"<<endl;
         }
     }
@@ -421,43 +452,3 @@ void Voo::listarVoo()
     cout << "Pressione 'ENTER' para voltar" << endl;
     cin.get();
 }
-
-/* void menuVoos (){
-    Voo voo;
-    system("cls");
-    setlocale(LC_ALL, "portuguese");
-
-    int opcao;
-    cout << "Menu de Cadastro de Voos" << endl;
-    cout << "1 - Cadastrar voo" << endl;
-    cout << "2 - Listar voos" << endl;
-    cout << "3 - Voltar" << endl;
-    cout << "Escolha uma opção:" << endl;
-    cin >> opcao;
-    cin.ignore();
-
-    switch(opcao){
-        case 1:
-            voo.cadastroVoo();
-            break;
-
-        case 2:
-            voo.listarVoo();
-            system("cls");
-            break;
-
-        case 3:
-            break;
-
-        default:
-            menuVoos();
-            break;
-    }
-
-}*/
-
-/* int main(){
-
-}
-
- */
