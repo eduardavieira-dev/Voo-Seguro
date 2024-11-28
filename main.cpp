@@ -14,13 +14,12 @@ void menuReserva(Reserva& reserva)
     system("cls");
 
     int opcao;
-    cout << "          Escolha uma opção:          " << endl;
-    cout << "+------------------------------------+" << endl;
-    cout << "| Menu de Cadastro de Reservas:      |" << endl;
-    cout << "| 1 - Cadastrar nova reserva         |" << endl;
-    cout << "| 2 - Listar reservas cadastradas    |" << endl;
-    cout << "| 3 - Voltar                         |" << endl;
-    cout << "+------------------------------------+" << endl;
+    cout << "    Menu de Cadastro de Reservas:    " << endl;
+    cout << "+-----------------------------------+" << endl;
+    cout << "| 1 - Cadastrar nova reserva        |" << endl;
+    cout << "| 2 - Listar reservas cadastradas   |" << endl;
+    cout << "| 3 - Voltar                        |" << endl;
+    cout << "+-----------------------------------+" << endl;
     cin >> opcao;
     cin.ignore();
 
@@ -50,13 +49,12 @@ void menuAssento(Assento& assento)
     system("cls");
 
     int opcao;
-    cout << "+----------------------------------+" << endl;
-    cout << "| Menu de Cadastro de Assento:     |" << endl;
-    cout << "| 1 - Cadastrar novo assento       |" << endl;
-    cout << "| 2 - Listar assentos cadastrados  |" << endl;
-    cout << "| 3 - Voltar                       |" << endl;
-    cout << "| Escolha uma opção:               |" << endl;
-    cout << "+----------------------------------+" << endl;
+    cout << "    Menu de Cadastro de Assento    " << endl;
+    cout << "+---------------------------------+" << endl;
+    cout << "| 1 - Cadastrar novo assento      |" << endl;
+    cout << "| 2 - Listar assentos cadastrados |" << endl;
+    cout << "| 3 - Voltar                      |" << endl;
+    cout << "+---------------------------------+" << endl;
     cin >> opcao;
     cin.ignore();
 
@@ -86,13 +84,12 @@ void menuPassageiro(Passageiro& pass)
     system("cls");
 
     int opcao;
-    cout << "          Escolha uma opção:           " << endl;
-    cout << "+-------------------------------------+" << endl;
-    cout << "| Menu de Cadastro de Passageiros:    |" << endl;
-    cout << "| 1 - Cadastrar novo passageiro       |" << endl;
-    cout << "| 2 - Listar passageiros cadastrados  |" << endl;
-    cout << "| 3 - Voltar                          |" << endl;
-    cout << "+-------------------------------------+" << endl;
+    cout << "   Menu de Cadastro de Passageiros:   " << endl;
+    cout << "+------------------------------------+" << endl;
+    cout << "| 1 - Cadastrar novo passageiro      |" << endl;
+    cout << "| 2 - Listar passageiros cadastrados |" << endl;
+    cout << "| 3 - Voltar                         |" << endl;
+    cout << "+------------------------------------+" << endl;
     cin >> opcao;
     cin.ignore();
 
@@ -121,13 +118,12 @@ void menuTripulacao(Tripulacao& tripulacao)
     system("cls");
 
      int opcao;
-    cout << "        Escolha uma opção:         " << endl;
-    cout << "+---------------------------------+" << endl;
-    cout << "| Menu de Cadastro de Tripulação  |" << endl;
-    cout << "| 1 - Cadastrar tripulação        |" << endl;
-    cout << "| 2 - Listar tripulação           |" << endl;
-    cout << "| 3 - Voltar                      |" << endl;
-    cout << "+---------------------------------+" << endl;
+    cout << "   Menu de Cadastro de Tripulação   " << endl;
+    cout << "+----------------------------------+" << endl;
+    cout << "| 1 - Cadastrar tripulação         |" << endl;
+    cout << "| 2 - Listar tripulação            |" << endl;
+    cout << "| 3 - Voltar                       |" << endl;
+    cout << "+----------------------------------+" << endl;
     cin >> opcao;
     cin.ignore();
 
@@ -154,13 +150,12 @@ void menuTripulacao(Tripulacao& tripulacao)
     system("cls");
 
     int opcao;
-    cout << "      Escolha uma opção:     " << endl;
-    cout << "+---------------------------+" << endl;
-    cout << "| Menu de Cadastro de Voos  |" << endl;
-    cout << "| 1 - Cadastrar voo         |" << endl;
-    cout << "| 2 - Listar voos           |" << endl;
-    cout << "| 3 - Voltar                |" << endl;
-    cout << "+---------------------------+" << endl;
+    cout << "   Menu de Cadastro de Voos   " << endl;
+    cout << "+----------------------------+" << endl;
+    cout << "| 1 - Cadastrar voo          |" << endl;
+    cout << "| 2 - Listar voos            |" << endl;
+    cout << "| 3 - Voltar                 |" << endl;
+    cout << "+----------------------------+" << endl;
     cin >> opcao;
     cin.ignore();
 

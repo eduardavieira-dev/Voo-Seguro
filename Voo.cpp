@@ -38,7 +38,7 @@ void Voo::salvarVoos()
             arquivo.write(reinterpret_cast<char *>(&voos[i].hora), sizeof(voos[i].hora));
             arquivo.write(reinterpret_cast<char *>(&voos[i].minuto), sizeof(voos[i].minuto));
             arquivo.write(reinterpret_cast<char *>(&voos[i].tarifa), sizeof(voos[i].tarifa));
-            
+            arquivo.write(voos[i].status.c_str(), voos[i].status.size() + 1);
         }
         arquivo.close();
     }
@@ -62,7 +62,7 @@ void Voo::carregarVoos()
             arquivo.read(reinterpret_cast<char *>(&hora), sizeof(hora));
             arquivo.read(reinterpret_cast<char *>(&minuto), sizeof(minuto));
             arquivo.read(reinterpret_cast<char *>(&tarifa), sizeof(tarifa));
-            
+            getline(arquivo, status, '\0');
 
             Voo novoVoo;
             novoVoo.setCodigoVoo(codigoVoo);
@@ -75,7 +75,7 @@ void Voo::carregarVoos()
             novoVoo.setHora(hora);
             novoVoo.setMinuto(minuto);
             novoVoo.setTarifa(tarifa);
-           
+            novoVoo.setStatus(status == "Ativo" ? 1 : 2);
 
             voos.push_back(novoVoo);
             contagemVoo++;
@@ -273,19 +273,21 @@ void Voo::cadastroVoo()
         cout << "Não há tripulação cadastrada. Cadastre uma tripulação antes de cadastrar um voo." << endl;
         return; 
     }
-    cout << "Informe a origem do voo:" << endl;
+    cout << "Informe a origem do voo." << endl;
+    cout <<"Origem: ";
     getline(cin, origem);
     voo.setOrigem(origem);
 
-    cout << "Informe o destino do voo:" << endl;
+    cout << "Informe o destino do voo." << endl;
+    cout << "Destino: ";
     getline(cin, destino);
     voo.setDestino(destino);
 
-    cout << "Informe a data do voo:" << endl;
+    cout << "Informe a data do voo." << endl;
 
     while (!diaValido)
     {
-        cout << "Dia (1-31):" << endl;
+        cout << "Dia (1-31): ";
         cin >> dia;
         cin.ignore();
         voo.setDia(dia);
@@ -294,7 +296,7 @@ void Voo::cadastroVoo()
 
     while (!mesValido)
     {
-        cout << "Mes (1-12):" << endl;
+        cout << "Mes (1-12): ";
         cin >> mes;
         cin.ignore();
         voo.setMes(mes);
@@ -303,7 +305,7 @@ void Voo::cadastroVoo()
 
     while (!anoValido)
     {
-        cout << "Ano: (2024-2030)" << endl;
+        cout << "Ano: (2024-2030): ";
         cin >> ano;
         cin.ignore();
         voo.setAno(ano);
@@ -326,7 +328,7 @@ void Voo::cadastroVoo()
     }
 
     while (!tripulacaoValida) {
-    cout << "Informe o código da tripulação:" << endl;
+    cout << "Informe o código da tripulação: ";
     cin >> codigoTripulacao; 
     cin.ignore();
     
@@ -348,12 +350,12 @@ void Voo::cadastroVoo()
         }
     }
 
-    cout << "Informe o código do avião:" << endl;
+    cout << "Informe o código do avião: ";
     cin >> codigoAviao;
     cin.ignore();
     voo.setCodigoAviao(codigoAviao);
 
-    cout << "Informe a tarifa:" << endl;
+    cout << "Informe a tarifa: ";
     cin >> tarifa;
     cin.ignore();
     voo.setTarifa(tarifa);
@@ -401,7 +403,9 @@ void Voo::listarVoo()
     {
         for (int i = 0; i < contagemVoo; i++)
         {
-            cout << "\nInformações de Voo:" << endl;
+            cout << endl;
+            cout << "       Informações do Voo:" << voos[i].getCodigoVoo() << endl;
+            cout << "+---------------------------------+"<<endl;
             cout << "Código de voo: " << voos[i].getCodigoVoo() << endl;
             cout << "Código do avião: " << voos[i].getCodigoAviao() << endl;
             cout << "Local de origem: " << voos[i].getOrigem() << endl;
@@ -409,7 +413,8 @@ void Voo::listarVoo()
             cout << "Data: " << setfill('0') << setw(2) << voos[i].getDia() << "/" << setfill('0') << setw(2) << voos[i].getMes() << "/" << voos[i].getAno() << endl;
             cout << "Horário: " << setfill('0') << setw(2) << voos[i].getHora() << ":" << setfill('0') << setw(2) << voos[i].getMinuto() << endl;
             cout << "Tarifa: " << voos[i].getTarifa() << endl;
-            cout << "Status:" <<voos[i].getStatus() << endl;
+            cout << "Status: " <<voos[i].getStatus() << endl;
+            cout << "+---------------------------------+"<<endl;
         }
     }
 

@@ -3,6 +3,7 @@
 #include <vector>
 #include <iomanip>
 #include <fstream>
+#include <limits>
 #include "Tripulacao.h"
 
 using namespace std;
@@ -161,23 +162,36 @@ void Tripulacao::cadastrarTripulacao()
 
     for (int i = 0; i < 3; i++)
     {
+        system("cls");
         cargoValido = false;
-        cout << "Informe o nome do tripulante:" << i + 1 << endl;
+        cout << "Informe o nome do tripulante " << i + 1 <<"."<< endl; 
+        cout << "Nome: ";
         getline(cin, nome);
         tripulacao.setNome(nome);
 
-        cout << "Informe o telefone do tripulante:" << i + 1 << endl;
-        cin >> telefone;
-        cin.ignore();
+        cout << "Informe o telefone do tripulante " << i + 1 <<"."<< endl; 
+        cout << "Telefone: ";
+        while (!(cin >> telefone)) {
+        cout << "Entrada inválida, insira um número." << endl;
+        cin.clear(); 
+        cin.ignore(); 
+        }
+        
         tripulacao.setTelefone(telefone);
 
         while (!cargoValido)
         {
-            cout << "Informe o cargo tripulante:" << i + 1 << endl;
+            
+            cout << "Informe o cargo tripulante " << i + 1 <<"."<< endl; 
             cout << "1- Piloto" << endl;
             cout << "2- Copiloto" << endl;
             cout << "3- Comissário" << endl;
-            cin >> cargo;
+
+            while(!(cin >> cargo)){
+            cout << "Entrada inválida, insira um número." << endl;
+            cin.clear();
+            cin.ignore();
+            }
             cin.ignore();
             tripulacao.setCargo(cargo);
             cargoValido = (cargo >= 1 && cargo <= 3);
@@ -203,7 +217,7 @@ void Tripulacao::cadastrarTripulacao()
 
 void Tripulacao::listarTripulacao()
 {
-
+    system("cls");
     if (contagemTripulacao == 0)
     {
         cout << "Nenhuma tripulação cadastrada." << endl;
@@ -213,14 +227,16 @@ void Tripulacao::listarTripulacao()
 
         for (int i = 0; i < contagemTripulacao; i++)
         {
-            cout << "Tripulação: " << tripulacaoVet[i].getCodigoTripulacao() << endl;
-
+                cout << endl;
+                cout << "           Tripulação: " << tripulacaoVet[i].getCodigoTripulacao() << endl;
+                cout << "+---------------------------------+"<<endl;
             for (int j = 0; j < 3; j++)
             {
-                cout << "Nome: " << tripulacaoVet[i].tripulantes[j].getNome() << endl;
-                cout << "Telefone: " << tripulacaoVet[i].tripulantes[j].getTelefone() << endl;
-                cout << "Cargo: " << tripulacaoVet[i].tripulantes[j].getCargo() << endl;
-                cout << "Código do tripulante: " << tripulacaoVet[i].tripulantes[j].getCodigoTripulante() << endl;
+                cout << "| Nome: " << tripulacaoVet[i].tripulantes[j].getNome()<< endl;
+                cout << "| Telefone: " << tripulacaoVet[i].tripulantes[j].getTelefone()<< endl;
+                cout << "| Cargo: " << tripulacaoVet[i].tripulantes[j].getCargo()<< endl;
+                cout << "| Código do tripulante: " << tripulacaoVet[i].tripulantes[j].getCodigoTripulante()<< endl;
+                cout << "+---------------------------------+"<<endl;
             }
         }
     }
