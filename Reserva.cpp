@@ -176,7 +176,7 @@ void Reserva::listaReservas()
     {
         for (size_t i = 0; i < reservas.size(); i++)
         {
-            cout << "\nInformações da reserva " << i + 1 << ":" << endl;
+            cout << "Informações da reserva " << i + 1 << ":" << endl;
             cout << "Número do assento: " << reservas[i].getNumAssentoReserva() << endl;
             cout << "Código do voo: " << reservas[i].getcodigVooReserva() << endl;
             cout << "Código do passageiro: " << reservas[i].getCodPassageiroReserva() << endl;

@@ -159,7 +159,7 @@ void Tripulacao::cadastrarTripulacao()
     string nome;
     int telefone, codigoTripulante, codigoTripulacao, cargo;
     bool cargoValido = false;
-
+    
     for (int i = 0; i < 3; i++)
     {
         system("cls");
@@ -168,13 +168,13 @@ void Tripulacao::cadastrarTripulacao()
         cout << "Nome: ";
         getline(cin, nome);
         tripulacao.setNome(nome);
-
+        
         cout << "Informe o telefone do tripulante " << i + 1 <<"."<< endl; 
         cout << "Telefone: ";
         while (!(cin >> telefone)) {
         cout << "Entrada inválida, insira um número." << endl;
         cin.clear(); 
-        cin.ignore(); 
+        cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
         }
         
         tripulacao.setTelefone(telefone);
@@ -190,7 +190,7 @@ void Tripulacao::cadastrarTripulacao()
             while(!(cin >> cargo)){
             cout << "Entrada inválida, insira um número." << endl;
             cin.clear();
-            cin.ignore();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
             }
             cin.ignore();
             tripulacao.setCargo(cargo);
@@ -212,7 +212,6 @@ void Tripulacao::cadastrarTripulacao()
     tripulacaoVet.push_back(tripulacao);
 
     tripulacao.salvarTripulacao();
-    /* menuTripulacao(); */
 }
 
 void Tripulacao::listarTripulacao()
@@ -242,95 +241,5 @@ void Tripulacao::listarTripulacao()
     }
     cout << "Pressione 'ENTER' para voltar" << endl;
     cin.get();
-   /*  menuTripulacao(); */
 
 }
-
-/* int Tripulacao::getTotalTripulacao(){
-    return contagemTripulacao;
-}
-
-Tripulacao* Tripulacao::getTripulacaoPorCodigo(int codigoTripulacao)
-{
-   for (int i = 0; i < contagemTripulacao; i++) 
-   {
-        if(tripulacaoVet[i].codigoTripulacao == codigoTripulacao) 
-        {
-            return &tripulacaoVet[i];
-        }
-   }
-
-   return nullptr;
-} */
-
-/* bool Tripulacao::elegivelVoo(int codigoTripulacao){
-       Tripulacao* tripulacao = this->getTripulacaoPorCodigo(codigoTripulacao);
-
-        bool pilotoEncontrado = false;
-        bool copilotoEncontrado = false;
-
-        for (int i = 0; i < tripulacao->tripulantes.capacity(); i++)
-        {
-            for (int j = 0; j < 3; j++)
-            {
-                pilotoEncontrado = tripulacaoVet[i].tripulantes[j].getCargo() == "Piloto";
-                copilotoEncontrado = tripulacaoVet[i].tripulantes[j].getCargo() == "Copiloto";
-            }
-        }
-
-        return pilotoEncontrado && copilotoEncontrado;
-} */
-
-
-
-
-
-
-
-
-
-
-
-
-/*  
-void menuTripulacao()
-{
-
-    Tripulacao tripulacao;
-    system("cls");
-
-    int opcao;
-    cout << "Menu de Cadastro de Tripulação" << endl;
-    cout << "1 - Cadastrar tripulação" << endl;
-    cout << "2 - Listar tripulação" << endl;
-    cout << "3 - Voltar" << endl;
-    cout << "Escolha uma opção:" << endl;
-    cin >> opcao;
-    cin.ignore();
-
-    switch (opcao)
-    {
-    case 1:
-        tripulacao.cadastrarTripulacao();
-        break;
-
-    case 2:
-        tripulacao.listarTripulacao();
-        break;
-
-    case 3:
-        break;
-
-    default:
-        menuTripulacao();
-        break;
-    }
-}
-
-int main()
-{
-    Tripulacao tripu;
-    tripu.carregarTripulacao();
-    system("chcp 65001");
-    menuTripulacao();
-} */
