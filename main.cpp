@@ -9,7 +9,6 @@
 
 using namespace std;
 
-// Função para gerar o menu de ações para reservas
 void menuReserva(Reserva& reserva)
 {
     system("cls");
@@ -45,7 +44,6 @@ void menuReserva(Reserva& reserva)
     }
 }
 
-// Função para gerar o menu de ações para assentos
 void menuAssento(Assento& assento)
 {
     system("cls");
@@ -81,7 +79,7 @@ void menuAssento(Assento& assento)
     }
 }
 
-// Função para gerar o menu de ações para passageiros
+
 void menuPassageiro(Passageiro& pass)
 {
     system("cls");
@@ -198,7 +196,7 @@ void menuPesquisa() {
         cout << "| 3 - Voltar                          |" << endl;
         cout << "+-------------------------------------+" << endl;
         cin >> opcao;
-
+        cin.ignore();
         switch (opcao) {
             case 1:
                 pesquisarPassageiro();

@@ -1,3 +1,23 @@
+/********************************************************
+* FILENAME : reserva.cpp
+* DESCRIPTION : Funções para gerenciar reservas de assentos de voo.
+*               Inclui cadastro, listagem, e salvamento de reservas.
+* PUBLIC FUNCTIONS :
+* void alteraDadosAssento(vector<Assento> &assentos)
+* void alteraDadosPassageiro(vector<Passageiro> &passageiros)
+* Reserva::Reserva()
+* Reserva::Reserva(int codigVooReserva, int numeroAssentoReserva, int codPassageiroReserva)
+* void Reserva::cadastroReserva()
+* void Reserva::salvarReserva()
+* void Reserva::carregarReservas()
+* void Reserva::listaReservas()
+* NOTES :
+* Essas funções fazem parte do sistema de gerenciamento de reservas de voos;
+* A funcionalidade principal envolve a criação, armazenamento e leitura de dados de reservas de passageiros e assentos.
+*
+* AUTHOR : Laura
+* START DATE : 16 Jan 99
+********************************************************/
 #include <iostream>
 #include <vector>
 #include <fstream>
@@ -15,6 +35,16 @@ extern vector<Passageiro> passageiros;
 
 vector<Reserva> reservas;
 
+/********************************************************
+* NAME : void alteraDadosAssento(vector<Assento> &assentos)
+* DESCRIPTION : Altera os dados dos assentos e os salva no arquivo binário.
+* INPUTS :
+* PARAMETERS :
+* vector<Assento> &assentos : vetor com os assentos a serem atualizados.
+* RETURN :
+* Type : void
+* Error code :
+********************************************************/
 void alteraDadosAssento(vector<Assento> &assentos)
 {
     // Abrindo o arquivo em modo binário e truncando o conteúdo
@@ -41,6 +71,16 @@ void alteraDadosAssento(vector<Assento> &assentos)
     }
 }
 
+/********************************************************
+* NAME : void alteraDadosPassageiro(vector<Passageiro> &passageiros)
+* DESCRIPTION : Altera os dados dos passageiros e os salva no arquivo binário.
+* INPUTS :
+* PARAMETERS :
+* vector<Passageiro> &passageiros : vetor com os passageiros a serem atualizados.
+* RETURN :
+* Type : void
+* Error code :
+********************************************************/
 void alteraDadosPassageiro(vector<Passageiro> &passageiros)
 {
     // Abrindo o arquivo em modo binário e truncando o conteúdo
@@ -105,6 +145,16 @@ int Reserva::getCodPassageiroReserva()
     return codPassageiroReserva;
 }
 
+/********************************************************
+* NAME : void Reserva::cadastroReserva()
+* DESCRIPTION : Cadastro de uma nova reserva de voo.
+* INPUTS :
+* PARAMETERS :
+* Nenhum.
+* RETURN :
+* Type : void
+* Error code :
+********************************************************/
 void Reserva::cadastroReserva()
 {
     system("cls");
@@ -205,6 +255,16 @@ void Reserva::cadastroReserva()
     }
 }
 
+/********************************************************
+* NAME : void Reserva::salvarReserva()
+* DESCRIPTION : Salva os dados de uma reserva no arquivo binário.
+* INPUTS :
+* PARAMETERS :
+* Nenhum.
+* RETURN :
+* Type : void
+* Error code :
+********************************************************/
 void Reserva::salvarReserva()
 {
     ofstream arquivo("reservas.dat", ios::app | ios::binary);
@@ -219,6 +279,16 @@ void Reserva::salvarReserva()
     }
 }
 
+/********************************************************
+* NAME : void Reserva::carregarReservas()
+* DESCRIPTION : Carrega todas as reservas a partir do arquivo binário.
+* INPUTS :
+* PARAMETERS :
+* Nenhum.
+* RETURN :
+* Type : void
+* Error code :
+********************************************************/
 void Reserva::carregarReservas()
 {
     ifstream arquivo("reservas.dat", ios::binary);
@@ -243,6 +313,16 @@ void Reserva::carregarReservas()
     }
 }
 
+/********************************************************
+* NAME : void Reserva::listaReservas()
+* DESCRIPTION : Lista todas as reservas armazenadas.
+* INPUTS :
+* PARAMETERS :
+* Nenhum.
+* RETURN :
+* Type : void
+* Error code :
+********************************************************/
 void Reserva::listaReservas()
 {
     system("cls");
@@ -265,6 +345,16 @@ void Reserva::listaReservas()
     cin.get();
 }
 
+/********************************************************
+* NAME : void Reserva::baixaReservas()
+* DESCRIPTION : Dar baixa em uma reserva.
+* INPUTS :
+* PARAMETERS :
+* Nenhum.
+* RETURN :
+* Type : void
+* Error code :
+********************************************************/
 void Reserva::baixaReserva()
 {
     system("cls");
