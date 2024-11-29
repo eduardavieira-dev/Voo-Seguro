@@ -168,7 +168,7 @@ void Assento::cadastroAssento()
         if (voos[i].getCodigoVoo() == codVoo)
         {
             Assento NovoAssento(codVoo, numAssento);
-            cout << "Assento cadastrado com sucesso: \n";
+            cout << "Assento cadastrado com sucesso." << endl;
             cout << "+---------------------------------+" << endl;
             cout << "| Número do assento: " << NovoAssento.getNumAssento() << "\n";
             cout << "| Código do Voo: " << NovoAssento.getCodVoo() << "\n";
@@ -185,7 +185,7 @@ void Assento::cadastroAssento()
     
     if (verificaExistenciaVoo == false)
     {
-        cout << "O voo informado não existe. Escolha outro voo ou faça o cadastro de um novo antes." << endl;
+        cout << "Erro: o voo informado não existe." << endl;
     }
 }
 

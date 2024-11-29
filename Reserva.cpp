@@ -117,6 +117,33 @@ void alteraDadosPassageiro(vector<Passageiro> &passageiros)
     }
 }
 
+void alteraDadosReserva(vector<Reserva> &reservas)
+{
+    // Abrindo o arquivo em modo binário e truncando o conteúdo
+    ofstream arquivo("reservas.dat", ios::out | ios::binary);
+
+    if (arquivo.is_open())
+    {
+        // Escrevendo os dados do vetor no arquivo
+        for (size_t i = 0; i < reservas.size(); i++)
+        {
+            int codigVooReserva = reservas[i].getcodigVooReserva();
+            int numeroAssentoReserva = reservas[i].getNumAssentoReserva();
+            int codPassageiroReserva = reservas[i].getCodPassageiroReserva();
+
+            arquivo.write(reinterpret_cast<char *>(&codigVooReserva), sizeof(codigVooReserva));
+            arquivo.write(reinterpret_cast<char *>(&numeroAssentoReserva), sizeof(numeroAssentoReserva));
+            arquivo.write(reinterpret_cast<char *>(&codPassageiroReserva), sizeof(codPassageiroReserva));
+            arquivo.close();
+        }
+        arquivo.close();
+    }
+    else
+    {
+        cerr << "Erro ao abrir o arquivo reservas.dat!" << endl;
+    }
+}
+
 Reserva::Reserva()
 {
     codigVooReserva = 0;
@@ -420,13 +447,27 @@ void Reserva::baixaReserva()
                             verificaAssentoBaixa = true;
                             passageiros[i].setPontuacao(-10);
                             alteraDadosPassageiro(passageiros);
-                            for(size_t g = 0; g < assentos.size(); g++){
-                                if(assentos[g].getStatusAssento() == true && assentos[g].getCodVoo() == salvaCodVoo && assentos[g].getNumAssento() == assentoBaixa){
+                            for (size_t g = 0; g < assentos.size(); g++)
+                            {
+                                if (assentos[g].getStatusAssento() == true && assentos[g].getCodVoo() == salvaCodVoo && assentos[g].getNumAssento() == assentoBaixa)
+                                {
                                     assentos[g].setStatusAssento(false);
                                     alteraDadosAssento(assentos);
                                 }
                             }
 
+                            reservas.erase(reservas.begin() + b);
+                            alteraDadosReserva(reservas);
+                            cout << "Reserva cancelada com sucesso." << endl;
+
+                            cout << "\nValor da tarifa a pagar:" << endl;
+                            for (size_t t = 0; t < voos.size(); t++)
+                            {
+                                if (voos[t].getCodigoVoo() == salvaCodVoo)
+                                {
+                                    cout << "R$ " << voos[t].getTarifa() << endl;
+                                }
+                            }
                         }
                     }
 

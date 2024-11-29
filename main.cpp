@@ -9,7 +9,40 @@
 
 using namespace std;
 
-void menuReserva(Reserva& reserva)
+// Função para gerar o menu de ações para Baixa de Reservas
+void menuBaixa(Reserva &reserva)
+{
+    system("cls");
+
+    int opcao;
+    cout << "    Menu de Baixa de Reservas:    " << endl;
+    cout << "+-----------------------------------+" << endl;
+    cout << "| 1 - Realizar baixa em reserva     |" << endl;
+    cout << "| 2 - Voltar                        |" << endl;
+    cout << "+-----------------------------------+" << endl;
+    cin >> opcao;
+    cin.ignore();
+
+    switch (opcao)
+    {
+    case 1:
+        system("cls");
+        reserva.baixaReserva();
+        break;
+
+    case 2:
+        system("cls");
+        break;
+
+    default:
+        cout << "Opção inválida. Tente novamente!" << endl;
+        menuBaixa(reserva);
+        break;
+    }
+}
+
+// Função para gerar o menu de ações para reservas
+void menuReserva(Reserva &reserva)
 {
     system("cls");
 
@@ -26,10 +59,12 @@ void menuReserva(Reserva& reserva)
     switch (opcao)
     {
     case 1:
+        system("cls");
         reserva.cadastroReserva();
         break;
 
     case 2:
+        system("cls");
         reserva.listaReservas();
         break;
 
@@ -44,7 +79,8 @@ void menuReserva(Reserva& reserva)
     }
 }
 
-void menuAssento(Assento& assento)
+// Função para gerar o menu de ações para assentos
+void menuAssento(Assento &assento)
 {
     system("cls");
 
@@ -61,10 +97,12 @@ void menuAssento(Assento& assento)
     switch (opcao)
     {
     case 1:
+        system("cls");
         assento.cadastroAssento();
         break;
 
     case 2:
+        system("cls");
         assento.ExibirAssentos();
         break;
 
@@ -79,8 +117,8 @@ void menuAssento(Assento& assento)
     }
 }
 
-
-void menuPassageiro(Passageiro& pass)
+// Função para gerar o menu de ações para passageiros
+void menuPassageiro(Passageiro &pass)
 {
     system("cls");
 
@@ -97,10 +135,12 @@ void menuPassageiro(Passageiro& pass)
     switch (opcao)
     {
     case 1:
+        system("cls");
         pass.cadastroPassageiro();
         break;
 
     case 2:
+        system("cls");
         pass.listarPassageiros();
         break;
 
@@ -115,11 +155,11 @@ void menuPassageiro(Passageiro& pass)
     }
 }
 
-void menuTripulacao(Tripulacao& tripulacao)
+void menuTripulacao(Tripulacao &tripulacao)
 {
     system("cls");
 
-     int opcao;
+    int opcao;
     cout << "   Menu de Cadastro de Tripulação   " << endl;
     cout << "+----------------------------------+" << endl;
     cout << "| 1 - Cadastrar tripulação         |" << endl;
@@ -132,10 +172,12 @@ void menuTripulacao(Tripulacao& tripulacao)
     switch (opcao)
     {
     case 1:
+        system("cls");
         tripulacao.cadastrarTripulacao();
         break;
 
     case 2:
+        system("cls");
         tripulacao.listarTripulacao();
         break;
 
@@ -144,11 +186,13 @@ void menuTripulacao(Tripulacao& tripulacao)
         break;
 
     default:
+        system("cls");
         menuTripulacao(tripulacao);
         break;
     }
 }
-    void menuVoos (Voo& voo){
+void menuVoos(Voo &voo)
+{
 
     system("cls");
 
@@ -162,60 +206,62 @@ void menuTripulacao(Tripulacao& tripulacao)
     cin >> opcao;
     cin.ignore();
 
-    switch(opcao){
-        case 1:
+    switch (opcao)
+    {
+    case 1:
+        voo.cadastroVoo();
+        break;
 
-            voo.cadastroVoo();
-            break;
+    case 2:
+        voo.listarVoo();
+        system("cls");
+        break;
 
-        case 2:
-            voo.listarVoo();
-            system("cls");
-            break;
+    case 3:
+        system("cls");
+        break;
 
-        case 3:
-            system("cls");
-            break;
-
-        default:
-            menuVoos(voo);
-            break;
+    default:
+        menuVoos(voo);
+        break;
     }
-
 }
-void menuPesquisa() {
+void menuPesquisa()
+{
     system("chcp 65001");
     system("cls");
-    
+
     int opcao;
 
-        cout << "Menu de Pesquisa de passageiros e membros da tripulação" << endl;
-        cout << "+-------------------------------------+" << endl;
-        cout << "| 1 - Pesquisar Passageiros           |" << endl;
-        cout << "| 2 - Pesquisar Membro da Tripulação  |" << endl;
-        cout << "| 3 - Voltar                          |" << endl;
-        cout << "+-------------------------------------+" << endl;
-        cin >> opcao;
-        cin.ignore();
-        switch (opcao) {
-            case 1:
-                pesquisarPassageiro();
-                break;
-            case 2:
-                pesquisarTripulacao();
-                break;
-            case 3:
-                system("cls");
-                return;
-            default:
-                cout << "Opção inválida! Tente novamente." << endl;
-                break;
-        }
+    cout << "Menu de Pesquisa de passageiros e membros da tripulação" << endl;
+    cout << "+-------------------------------------+" << endl;
+    cout << "| 1 - Pesquisar Passageiros           |" << endl;
+    cout << "| 2 - Pesquisar Membro da Tripulação  |" << endl;
+    cout << "| 3 - Voltar                          |" << endl;
+    cout << "+-------------------------------------+" << endl;
+    cin >> opcao;
+
+    switch (opcao)
+    {
+    case 1:
+        system("cls");
+        pesquisarPassageiro();
+        break;
+    case 2:
+        system("cls");
+        pesquisarTripulacao();
+        break;
+    case 3:
+        system("cls");
+        return;
+    default:
+        cout << "Opção inválida! Tente novamente." << endl;
+        break;
+    }
 }
 
-
-
-int main() {
+int main()
+{
     system("chcp 65001 > nul");
     int escolha;
     Voo voo;
@@ -230,7 +276,8 @@ int main() {
     voo.carregarVoos();
     reserva.carregarReservas();
 
-    do {
+    do
+    {
         cout << "+-------------------------------------+" << endl;
         cout << "|            __                       |" << endl;
         cout << "|            \\ \\ _______________      |" << endl;
@@ -252,7 +299,8 @@ int main() {
         cout << "+-------------------------------------+" << endl;
         cin >> escolha;
 
-        switch (escolha) {
+        switch (escolha)
+        {
         case 1:
             system("cls");
             menuPassageiro(pass);
@@ -280,7 +328,7 @@ int main() {
 
         case 6:
             system("cls");
-            cout << "escolha 6" << endl;
+            menuBaixa(reserva);
             break;
 
         case 7:
@@ -303,4 +351,3 @@ int main() {
 
     return 0;
 }
-
