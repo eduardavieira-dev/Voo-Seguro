@@ -24,6 +24,7 @@
 #include <vector>
 #include <fstream>
 #include <limits>
+#include <iomanip>
 #include "Assento.h"
 #include "Voo.h"
 
@@ -135,16 +136,16 @@ void Assento::carregarAssentos()
 }
 
 /********************************************************************************************************
-* NAME : cadastroAssento()
-* DESCRIPTION : Realiza o cadastro de um novo assento para um voo, verificando se o voo existe.
-* INPUTS : int codVoo - Código do voo ao qual o assento será atribuído.
-*          int numAssento - Número do assento que está sendo cadastrado.
-* PARAMETERS :
-* RETURN :
-* Type : void
-* Error: Código de voo invalido: O voo selecionado não existe ou o valor digitado não é um número
-*        Número de assento invalido: O assento selecionado não existe ou o valor digitado não é um número
-*********************************************************************************************************/
+ * NAME : cadastroAssento()
+ * DESCRIPTION : Realiza o cadastro de um novo assento para um voo, verificando se o voo existe.
+ * INPUTS : int codVoo - Código do voo ao qual o assento será atribuído.
+ *          int numAssento - Número do assento que está sendo cadastrado.
+ * PARAMETERS :
+ * RETURN :
+ * Type : void
+ * Error: Código de voo invalido: O voo selecionado não existe ou o valor digitado não é um número
+ *        Número de assento invalido: O assento selecionado não existe ou o valor digitado não é um número
+ *********************************************************************************************************/
 void Assento::cadastroAssento()
 {
     system("cls");
@@ -197,6 +198,7 @@ void Assento::cadastroAssento()
                 cout << "| Código do Voo: " << NovoAssento.getCodVoo() << "\n";
                 cout << "| Status: " << (NovoAssento.getStatusAssento() ? "Ocupado" : "Livre") << "\n";
                 cout << "+---------------------------------+" << endl;
+                cin.get();
             }
         }
     }
@@ -211,17 +213,17 @@ void Assento::cadastroAssento()
 }
 
 /*****************************************************************************************************************
-* NAME : ExibirAssentos()
-* DESCRIPTION : Exibe as informações de todos os assentos cadastrados, mostrando seu status (livre ou ocupado).
-* INPUTS :
-* PARAMETERS :
-* RETURN :
-* Type : void
-* Values :  Se houver assentos cadastrados, exibe as informações detalhadas
-*           de cada assento: Número, código do voo selecionado e status ('Ocupado', 'Livre') 
-*           Caso não possua assentos cadastrados, 
-*           exibe uma mensagem informando que não há assentos cadastrados.
-*****************************************************************************************************************/
+ * NAME : ExibirAssentos()
+ * DESCRIPTION : Exibe as informações de todos os assentos cadastrados, mostrando seu status (livre ou ocupado).
+ * INPUTS :
+ * PARAMETERS :
+ * RETURN :
+ * Type : void
+ * Values :  Se houver assentos cadastrados, exibe as informações detalhadas
+ *           de cada assento: Número, código do voo selecionado e status ('Ocupado', 'Livre')
+ *           Caso não possua assentos cadastrados,
+ *           exibe uma mensagem informando que não há assentos cadastrados.
+ *****************************************************************************************************************/
 void Assento::ExibirAssentos()
 {
     system("cls");
@@ -231,15 +233,54 @@ void Assento::ExibirAssentos()
     }
     else
     {
+        // Encontrar o menor e o maior código de voo no vetor de assentos
+        int menorCodigo = 100;
+        int maiorCodigo = 0;
+
         for (size_t i = 0; i < assentos.size(); i++)
         {
-            cout << endl;
-            cout << "     Informações do assento " << i + 1 << ":" << endl;
-            cout << "+---------------------------------+" << endl;
-            cout << "| Número: " << assentos[i].getNumAssento() << endl;
-            cout << "| Código do voo: " << assentos[i].getCodVoo() << endl;
-            cout << "| Status: " << (assentos[i].getStatusAssento() ? "Ocupado" : "Livre") << endl;
-            cout << "+---------------------------------+" << endl;
+            if (assentos[i].getCodVoo() < menorCodigo)
+            {
+                menorCodigo = assentos[i].getCodVoo();
+            }
+            if (assentos[i].getCodVoo() > maiorCodigo)
+            {
+                maiorCodigo = assentos[i].getCodVoo();
+            }
+        }
+
+        // Exibir os assentos agrupados por voo, de menor para maior código
+        for (int codigoAtual = menorCodigo; codigoAtual <= maiorCodigo; codigoAtual++)
+        {
+            bool vooEncontrado = false;
+
+            // Verifica se há algum assento para o código de voo atual
+            for (size_t j = 0; j < assentos.size(); j++)
+            {
+                if (assentos[j].getCodVoo() == codigoAtual)
+                {
+                    if (!vooEncontrado)
+                    {
+                        // Exibe o cabeçalho do voo na primeira vez que encontrar
+                        cout << "\n   Voo " << codigoAtual << endl;
+                        cout << "+---------------------------------+" << endl;
+                        cout << "|  Número do assento |   Status   |" << endl;
+                        cout << "+---------------------------------+" << endl;
+                        vooEncontrado = true;
+                    }
+
+                    // Exibe os detalhes do assento
+                    cout << "| " << setw(18) << assentos[j].getNumAssento()
+                         << " | " << setw(10)
+                         << (assentos[j].getStatusAssento() ? "Ocupado" : "Livre")
+                         << " |" << endl;
+                }
+            }
+
+            if (vooEncontrado)
+            {
+                cout << "+---------------------------------+" << endl;
+            }
         }
     }
 
