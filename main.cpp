@@ -256,6 +256,7 @@ void menuPesquisa()
         return;
     default:
         cout << "Opção inválida! Tente novamente." << endl;
+        menuPesquisa();
         break;
     }
 }
@@ -278,7 +279,7 @@ int main()
 
     do
     {
-        cout << "+-------------------------------------+" << endl;
+        cout << "\n+-------------------------------------+" << endl;
         cout << "|            __                       |" << endl;
         cout << "|            \\ \\ _______________      |" << endl;
         cout << "|     VOO     \\   O O O O O O |_|\\    |" << endl;
