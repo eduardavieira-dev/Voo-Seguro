@@ -1,25 +1,25 @@
 /********************************************************
-* FILENAME : Assento.cpp
-* DESCRIPTION : Implementação de cadastro, exibição e 
-*               gerenciamento de assentos de voos. A classe 
-*               permite registrar novos assentos, exibir as 
-*               informações dos assentos cadastrados e 
-*               gerenciar o status de ocupação (livre/ocupado).
-* PUBLIC FUNCTIONS :
-*
-*   void salvarAssento()                    - Salva os dados do assento em um arquivo binário.
-*   void carregarAssentos()                 - Carrega os dados dos assentos de um arquivo binário.
-*   void cadastroAssento()                  - Realiza o cadastro de um novo assento para um voo.
-*   void ExibirAssentos()                   - Exibe todos os assentos cadastrados com seus status.
-*
-* NOTES :
-* Esta classe gerencia os assentos de voos, incluindo a funcionalidade de cadastro,
-* exibição e controle de status (livre ou ocupado). Os dados dos assentos são salvos
-* em um arquivo binário para persistência e podem ser carregados novamente ao iniciar o programa.
-*
-* AUTHOR : Laura
-* START DATE : 22 Nov 24
-********************************************************/
+ * FILENAME : Assento.cpp
+ * DESCRIPTION : Implementação de cadastro, exibição e
+ *               gerenciamento de assentos de voos. A classe
+ *               permite registrar novos assentos, exibir as
+ *               informações dos assentos cadastrados e
+ *               gerenciar o status de ocupação (livre/ocupado).
+ * PUBLIC FUNCTIONS :
+ *
+ *   void salvarAssento()                    - Salva os dados do assento em um arquivo binário.
+ *   void carregarAssentos()                 - Carrega os dados dos assentos de um arquivo binário.
+ *   void cadastroAssento()                  - Realiza o cadastro de um novo assento para um voo.
+ *   void ExibirAssentos()                   - Exibe todos os assentos cadastrados com seus status.
+ *
+ * NOTES :
+ * Esta classe gerencia os assentos de voos, incluindo a funcionalidade de cadastro,
+ * exibição e controle de status (livre ou ocupado). Os dados dos assentos são salvos
+ * em um arquivo binário para persistência e podem ser carregados novamente ao iniciar o programa.
+ *
+ * AUTHOR : Laura
+ * START DATE : 22 Nov 24
+ ********************************************************/
 #include <iostream>
 #include <vector>
 #include <fstream>
@@ -78,13 +78,13 @@ bool Assento::getStatusAssento()
 }
 
 /********************************************************
-* NAME : salvarAssento()
-* DESCRIPTION : Salva os dados do assento em um arquivo binário.
-* INPUTS :
-* PARAMETERS : Nenhum.
-* RETURN :
-* Type : void
-********************************************************/
+ * NAME : salvarAssento()
+ * DESCRIPTION : Salva os dados do assento em um arquivo binário.
+ * INPUTS :
+ * PARAMETERS : Nenhum.
+ * RETURN :
+ * Type : void
+ ********************************************************/
 void Assento::salvarAssento()
 {
     ofstream arquivo("assentos.dat", ios::app | ios::binary);
@@ -100,13 +100,13 @@ void Assento::salvarAssento()
 }
 
 /********************************************************
-* NAME : carregarAssentos()
-* DESCRIPTION : Carrega os dados dos assentos de um arquivo binário para o vetor de assentos.
-* INPUTS :
-* PARAMETERS : Nenhum.
-* RETURN :
-* Type : void
-********************************************************/
+ * NAME : carregarAssentos()
+ * DESCRIPTION : Carrega os dados dos assentos de um arquivo binário para o vetor de assentos.
+ * INPUTS :
+ * PARAMETERS : Nenhum.
+ * RETURN :
+ * Type : void
+ ********************************************************/
 void Assento::carregarAssentos()
 {
     ifstream arquivo("assentos.dat", ios::binary);
@@ -133,13 +133,13 @@ void Assento::carregarAssentos()
 }
 
 /********************************************************
-* NAME : cadastroAssento()
-* DESCRIPTION : Realiza o cadastro de um novo assento para um voo, verificando se o voo existe.
-* INPUTS :
-* PARAMETERS : Nenhum.
-* RETURN :
-* Type : void
-********************************************************/
+ * NAME : cadastroAssento()
+ * DESCRIPTION : Realiza o cadastro de um novo assento para um voo, verificando se o voo existe.
+ * INPUTS :
+ * PARAMETERS : Nenhum.
+ * RETURN :
+ * Type : void
+ ********************************************************/
 void Assento::cadastroAssento()
 {
     system("cls");
@@ -155,18 +155,18 @@ void Assento::cadastroAssento()
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
 
-    cout << "Digite o número do assento: \n";
-    while (!(cin >> numAssento))
-    {
-        cout << "Entrada inválida, insira um número." << endl;
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    }
-
     for (int i = 0; i < voos.size(); i++)
     {
         if (voos[i].getCodigoVoo() == codVoo)
         {
+            cout << "Digite o número do assento: \n";
+            while (!(cin >> numAssento))
+            {
+                cout << "Entrada inválida, insira um número." << endl;
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            }
+            
             Assento NovoAssento(codVoo, numAssento);
             cout << "Assento cadastrado com sucesso." << endl;
             cout << "+---------------------------------+" << endl;
@@ -179,10 +179,7 @@ void Assento::cadastroAssento()
             verificaExistenciaVoo = true;
         }
     }
-    cout << "Pressione 'ENTER' para voltar" << endl;
-    cin.get();
-    system("cls");
-    
+
     if (verificaExistenciaVoo == false)
     {
         cout << "Erro: o voo informado não existe." << endl;
@@ -190,13 +187,13 @@ void Assento::cadastroAssento()
 }
 
 /********************************************************
-* NAME : ExibirAssentos()
-* DESCRIPTION : Exibe as informações de todos os assentos cadastrados, mostrando seu status (livre ou ocupado).
-* INPUTS :
-* PARAMETERS : Nenhum.
-* RETURN :
-* Type : void
-********************************************************/
+ * NAME : ExibirAssentos()
+ * DESCRIPTION : Exibe as informações de todos os assentos cadastrados, mostrando seu status (livre ou ocupado).
+ * INPUTS :
+ * PARAMETERS : Nenhum.
+ * RETURN :
+ * Type : void
+ ********************************************************/
 void Assento::ExibirAssentos()
 {
     system("cls");
