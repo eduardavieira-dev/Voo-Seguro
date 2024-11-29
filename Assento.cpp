@@ -29,6 +29,8 @@
 
 using namespace std;
 
+#define MAX_ASSENTOS 100
+
 extern vector<Voo> voos;
 
 vector<Assento> assentos;
@@ -144,7 +146,7 @@ void Assento::cadastroAssento()
 {
     system("cls");
 
-    int codVoo, numAssento;
+    int codVoo = 0, numAssento = 0;
     bool verificaExistenciaVoo = false;
 
     cout << "Digite o código do voo: \n";
@@ -159,24 +161,40 @@ void Assento::cadastroAssento()
     {
         if (voos[i].getCodigoVoo() == codVoo)
         {
-            cout << "Digite o número do assento: \n";
-            while (!(cin >> numAssento))
-            {
-                cout << "Entrada inválida, insira um número." << endl;
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            }
-            
-            Assento NovoAssento(codVoo, numAssento);
-            cout << "Assento cadastrado com sucesso." << endl;
-            cout << "+---------------------------------+" << endl;
-            cout << "| Número do assento: " << NovoAssento.getNumAssento() << "\n";
-            cout << "| Código do Voo: " << NovoAssento.getCodVoo() << "\n";
-            cout << "| Status: " << (NovoAssento.getStatusAssento() ? "Ocupado" : "Livre") << "\n";
-            cout << "+---------------------------------+" << endl;
-            assentos.push_back(NovoAssento); // Adiciona ao vetor
-            NovoAssento.salvarAssento();     // Salva apenas o novo assento
             verificaExistenciaVoo = true;
+
+            // Conta os assentos já cadastrados para este voo
+            int totalAssentos = 0;
+            for (size_t j = 0; j < assentos.size(); j++)
+            {
+                if (assentos[j].getCodVoo() == codVoo)
+                {
+                    totalAssentos++;
+                }
+            }
+
+            // Verifica se ainda há espaço para mais assentos
+            if (totalAssentos == MAX_ASSENTOS)
+            {
+                cout << "Erro: O voo já atingiu o limite máximo de 100 assentos cadastrados." << endl;
+            }
+            else if (totalAssentos < MAX_ASSENTOS)
+            {
+                // Define o número do próximo assento
+                numAssento = totalAssentos + 1;
+
+                // Cria e cadastra o novo assento
+                Assento NovoAssento(codVoo, numAssento);
+                assentos.push_back(NovoAssento); // Adiciona ao vetor
+                NovoAssento.salvarAssento();     // Salva apenas o novo assento
+
+                cout << "Assento cadastrado com sucesso." << endl;
+                cout << "+---------------------------------+" << endl;
+                cout << "| Número do assento: " << NovoAssento.getNumAssento() << "\n";
+                cout << "| Código do Voo: " << NovoAssento.getCodVoo() << "\n";
+                cout << "| Status: " << (NovoAssento.getStatusAssento() ? "Ocupado" : "Livre") << "\n";
+                cout << "+---------------------------------+" << endl;
+            }
         }
     }
 
