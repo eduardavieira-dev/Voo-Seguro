@@ -117,6 +117,16 @@ void alteraDadosPassageiro(vector<Passageiro> &passageiros)
     }
 }
 
+/********************************************************
+* NAME : void alteraDadosReserva(vector<Reserva> &reservas)
+* DESCRIPTION : Altera os dados das reservas e os salva no arquivo binário.
+* INPUTS :
+* PARAMETERS :
+* vector<Reserva> &reservas : vetor com as reservas a serem atualizadas.
+* RETURN :
+* Type : void
+* Error code :
+********************************************************/
 void alteraDadosReserva(vector<Reserva> &reservas)
 {
     // Abrindo o arquivo em modo binário e truncando o conteúdo
@@ -167,6 +177,7 @@ int Reserva::getNumAssentoReserva()
 {
     return numeroAssentoReserva;
 }
+
 int Reserva::getCodPassageiroReserva()
 {
     return codPassageiroReserva;
@@ -393,7 +404,7 @@ void Reserva::baixaReserva()
     int assentoBaixa = 0, codPassageiro = 0;
     bool verificaExistenciaPassageiro = false;
     int contadorReservas = 0;
-    int salvaCodVoo = 0;
+    int codVooBaixa = 0;
 
     cout << "Digite o código do passageiro: \n";
     while (!(cin >> codPassageiro))
@@ -445,17 +456,24 @@ void Reserva::baixaReserva()
                         cin.ignore(numeric_limits<streamsize>::max(), '\n');
                     }
 
+                    cout << "Informe o voo do assento que deseja realizar a baixa: " << endl;
+                    while (!(cin >> codVooBaixa))
+                    {
+                        cout << "Entrada inválida, insira um número." << endl;
+                        cin.clear();
+                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    }
+
                     for (size_t b = 0; b < reservas.size(); b++)
                     {
-                        if (reservas[b].getCodPassageiroReserva() == codPassageiro && reservas[b].getNumAssentoReserva() == assentoBaixa)
+                        if (reservas[b].getCodPassageiroReserva() == codPassageiro && reservas[b].getNumAssentoReserva() == assentoBaixa && reservas[b].getcodigVooReserva() == codVooBaixa)
                         {
-                            salvaCodVoo = reservas[b].getcodigVooReserva();
                             verificaAssentoBaixa = true;
                             passageiros[i].setPontuacao(-10);
                             alteraDadosPassageiro(passageiros);
                             for (size_t g = 0; g < assentos.size(); g++)
                             {
-                                if (assentos[g].getStatusAssento() == true && assentos[g].getCodVoo() == salvaCodVoo && assentos[g].getNumAssento() == assentoBaixa)
+                                if (assentos[g].getStatusAssento() == true && assentos[g].getCodVoo() == codVooBaixa && assentos[g].getNumAssento() == assentoBaixa)
                                 {
                                     assentos[g].setStatusAssento(false);
                                     alteraDadosAssento(assentos);
@@ -469,7 +487,7 @@ void Reserva::baixaReserva()
                             cout << "\nValor da tarifa a pagar:" << endl;
                             for (size_t t = 0; t < voos.size(); t++)
                             {
-                                if (voos[t].getCodigoVoo() == salvaCodVoo)
+                                if (voos[t].getCodigoVoo() == codVooBaixa)
                                 {
                                     cout << "R$ " << voos[t].getTarifa() << endl;
                                 }
@@ -479,13 +497,13 @@ void Reserva::baixaReserva()
 
                     if (verificaAssentoBaixa == false)
                     {
-                        cout << "Erro: O assento informado não consta nas reservas do passageiro. Tente novamente" << endl;
+                        cout << "Erro: O assento informado não consta nas reservas do passageiro ou o voo informado não corresponde ao assento cadastrado na reserva." << endl;
                     }
                 }
             }
             else
             {
-                cout << "Não possui reservas" << endl;
+                cout << passageiros[i].getNome() << " não possui reservas." << endl;
             }
         }
     }
