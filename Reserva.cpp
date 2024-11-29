@@ -235,10 +235,12 @@ void Reserva::cadastroReserva()
                                 {
                                     verificaExistenciaPassageiro = true;
                                     Reserva NovaReserva(codVoo, numAssento, codPassageiro);
-                                    cout << "Reserva cadastrada com sucesso: \n";
-                                    cout << "Número do assento: " << NovaReserva.getNumAssentoReserva() << "\n";
-                                    cout << "Código do voo: " << NovaReserva.getcodigVooReserva() << "\n";
-                                    cout << "Código do passageiro: " << NovaReserva.getCodPassageiroReserva() << "\n";
+                                    cout << "   Reserva cadastrada com sucesso:" << endl;
+                                    cout << "+---------------------------------+" << endl;
+                                    cout << "| Número do assento: " << NovaReserva.getNumAssentoReserva() << endl;
+                                    cout << "| Código do voo: " << NovaReserva.getcodigVooReserva() << endl;
+                                    cout << "| Código do passageiro: " << NovaReserva.getCodPassageiroReserva() << endl;
+                                    cout << "+---------------------------------+" << endl;
                                     reservas.push_back(NovaReserva); // Adiciona ao vetor
                                     NovaReserva.salvarReserva();     // Salva apenas o novo assento
 
@@ -361,10 +363,12 @@ void Reserva::listaReservas()
     {
         for (size_t i = 0; i < reservas.size(); i++)
         {
-            cout << "Informações da reserva " << i + 1 << ":" << endl;
-            cout << "Número do assento: " << reservas[i].getNumAssentoReserva() << endl;
-            cout << "Código do voo: " << reservas[i].getcodigVooReserva() << endl;
-            cout << "Código do passageiro: " << reservas[i].getCodPassageiroReserva() << endl;
+            cout << "  Informações da reserva " << i + 1 << ":" << endl;
+            cout << "+---------------------------------+" << endl;
+            cout << "| Número do assento: " << reservas[i].getNumAssentoReserva() << endl;
+            cout << "| Código do voo: " << reservas[i].getcodigVooReserva() << endl;
+            cout << "| Código do passageiro: " << reservas[i].getCodPassageiroReserva() << endl;
+            cout << "+---------------------------------+" << endl;
         }
     }
 
@@ -405,8 +409,9 @@ void Reserva::baixaReserva()
         {
             verificaExistenciaPassageiro = true;
             cout << passageiros[i].getNome() << " possue:" << endl;
-            cout << "Fidelidade: " << (passageiros[i].getFidelidade() ? "Sim" : "Não") << endl;
-            cout << "Pontos de fidelidade: " << passageiros[i].getPontuacao() << endl;
+            cout << "+---------------------------------+" << endl;
+            cout << "| Fidelidade: " << (passageiros[i].getFidelidade() ? "Sim" : "Não") << endl;
+            cout << "| Pontos de fidelidade: " << passageiros[i].getPontuacao() << endl;
 
             for (size_t j = 0; j < reservas.size(); j++)
             {
@@ -418,15 +423,16 @@ void Reserva::baixaReserva()
 
             if (contadorReservas != 0)
             {
-                cout << "Número de reservas: " << contadorReservas << endl;
-                cout << "Assentos reservados: " << endl;
+                cout << "| Número de reservas: " << contadorReservas << endl;
+                cout << "| Assentos reservados: " << endl;
                 for (size_t a = 0; a < reservas.size(); a++)
                 {
                     if (reservas[a].getCodPassageiroReserva() == codPassageiro)
                     {
-                        cout << "Assento " << reservas[a].getNumAssentoReserva() << " - " << "Voo: " << reservas[a].getcodigVooReserva() << endl;
+                        cout << "| Assento " << reservas[a].getNumAssentoReserva() << " - " << "Voo: " << reservas[a].getcodigVooReserva() << endl;
                     }
                 }
+                cout << "+---------------------------------+" << endl;
 
                 bool verificaAssentoBaixa = false;
                 while (verificaAssentoBaixa == false)
