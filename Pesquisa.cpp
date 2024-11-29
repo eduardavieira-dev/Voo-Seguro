@@ -2,17 +2,19 @@
  * FILENAME : Pesquisa.cpp
  * DESCRIPTION : Pesquisa de passageiros e tripulantes.
  * PUBLIC FUNCTIONS :
- *   void pesquisarPassageiro()
- *   void pesquisarTripulacao()
- *   void pesquisarIdTripulante()
- *   void pesquisarNomeTripulante()
- *   void pesquisarIdPassageiro()
- *   void pesquisarNomePassageiro()
+ *   void pesquisarPassageiro()             - Permite selecionar o como deseja pesquisar um passageiro
+ *   void pesquisarTripulacao()             - Permite selecionar o como deseja pesquisar um tripulante.
+ *   void pesquisarIdTripulante()           - Pesquisa por um tripulante por meio do seu código.
+ *   void pesquisarNomeTripulante()         - Pesquisa por um tripulante por meio do seu nome.
+ *   void pesquisarIdPassageiro()           - Pesquisa por um passageiro por meio do seu código.
+ *   void pesquisarNomePassageiro()         - Pesquisa por um passageiro por meio do seu nome.
+ * 
  * NOTES :
  *   As funções permitem realizar pesquisas de passageiros e tripulantes
  *   com base no nome ou ID.
  *   Essas funções acessam e exibem informações de passageiros e tripulantes
  *   armazenadas em vetores.
+ * 
  * AUTHOR : Eduarda
  * START DATE : 28 Nov 2024
  ********************************************************/
@@ -22,6 +24,7 @@
 #include <vector>
 #include <iomanip>
 #include <fstream>
+#include <limits>
 #include "Pesquisa.h"
 #include "Passageiro.h"
 #include "Tripulacao.h"
@@ -36,10 +39,10 @@ extern vector<Tripulacao> tripulacaoVet;
 // Implementação do método de pesquisa de passageiros
 /********************************************************
  * NAME : void pesquisarPassageiro()
- * DESCRIPTION : Pesquisa de passageiros por nome ou ID.
+ * DESCRIPTION : Menu para selecionar método de pesquisa de passageiro (ID ou Nome);
  * INPUTS :
  * PARAMETERS :
- * Nenhum.
+ *
  * RETURN :
  * Type : void
  * Error code :
@@ -80,10 +83,10 @@ void pesquisarPassageiro()
 // Implementação do método de pesquisa de tripulação
 /********************************************************
  * NAME : void pesquisarTripulacao()
- * DESCRIPTION : Pesquisa de tripulantes por nome ou código.
+ * DESCRIPTION : Menu para selecionar método de pesquisa de tripulante (ID ou Nome);
  * INPUTS :
  * PARAMETERS :
- * Nenhum.
+ *
  * RETURN :
  * Type : void
  * Error code :
@@ -123,12 +126,12 @@ void pesquisarTripulacao()
 /********************************************************
  * NAME : void pesquisarIdTripulante()
  * DESCRIPTION : Pesquisa um tripulante através de seu ID.
- * INPUTS :
+ * INPUTS : int codTripulante - Código do tripulante para pesquisa
  * PARAMETERS :
- * Nenhum.
+ *
  * RETURN :
  * Type : void
- * Error code :
+ * Error : Tripulante inexistente: O tripulante selecionado não existe ou o valor informado não é um número.
  ********************************************************/
 void pesquisarIdTripulante()
 {
@@ -138,7 +141,12 @@ void pesquisarIdTripulante()
 
     cout << "Pesquisa id tripulante" << endl;
     cout << "Informe o código do Tripulante:" << endl;
-    cin >> codTripulante;
+    while (!(cin >> codTripulante))
+    {
+        cout << "Entrada inválida, insira um número." << endl;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
     cin.ignore();
     system("cls");
 
@@ -166,6 +174,10 @@ void pesquisarIdTripulante()
             }
         }
     }
+    if (verificaExistenciaTripulante == false)
+    {
+        cout << "Tripulante inexistente!" << endl;
+    }
     cout << "Pressione 'ENTER' para voltar" << endl;
     cin.get();
     system("cls");
@@ -174,18 +186,18 @@ void pesquisarIdTripulante()
 /********************************************************
  * NAME : void pesquisarNomeTripulante()
  * DESCRIPTION : Pesquisa um tripulante através de seu nome.
- * INPUTS :
+* INPUTS : string nomeTripulante - Nome do tripulante para pesquisa
  * PARAMETERS :
- * Nenhum.
+ *
  * RETURN :
  * Type : void
- * Error code :
+ * Error : tripulante inexistente: O tripulante selecionado não existe.
  ********************************************************/
 void pesquisarNomeTripulante()
 {
     system("cls");
     string nomeTripulante;
-
+    bool verificaExistenciaTripulante = false;
     cout << "Pesquisa nome tripulante" << endl;
     cout << "Informe o nome do Tripulante:" << endl;
     getline(cin, nomeTripulante);
@@ -196,6 +208,10 @@ void pesquisarNomeTripulante()
 
         for (int j = 0; j < tripulantes.size(); j++)
         {
+            if (tripulantes[j].getNome() == nomeTripulante)
+            {
+                verificaExistenciaTripulante = true;
+            }
 
             if (tripulantes[j].getNome() == nomeTripulante)
             {
@@ -209,6 +225,10 @@ void pesquisarNomeTripulante()
             }
         }
     }
+    if (verificaExistenciaTripulante == false)
+    {
+        cout << "Tripulante inexistente!" << endl;
+    }
     cout << "Pressione 'ENTER' para voltar" << endl;
     cin.get();
     system("cls");
@@ -216,13 +236,13 @@ void pesquisarNomeTripulante()
 
 /********************************************************
  * NAME : void pesquisarIdPassageiro()
- * DESCRIPTION : Pesquisa um passageiro através de seu ID.
- * INPUTS :
+ * DESCRIPTION : Pesquisa um passageiro através de seu ID e mostra suas informações.
+ * INPUTS : int codPassageiro - Código do passageiro para pesquisa
  * PARAMETERS :
- * Nenhum.
+ *
  * RETURN :
  * Type : void
- * Error code :
+ * Error : Pasageiro inexistente: O passageiro selecionado não existe ou o valor informado não é um número.
  ********************************************************/
 void pesquisarIdPassageiro()
 {
@@ -233,7 +253,12 @@ void pesquisarIdPassageiro()
     int contadorVoos = 0;
 
     cout << "Informe o código do Passageiro:" << endl;
-    cin >> codPassageiro;
+    while (!(cin >> codPassageiro))
+    {
+        cout << "Entrada inválida, insira um número." << endl;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
     cin.ignore();
     system("cls");
     for (size_t i = 0; i < passageiros.size(); i++)
@@ -288,13 +313,13 @@ void pesquisarIdPassageiro()
 
 /********************************************************
  * NAME : void pesquisarNomePassageiro()
- * DESCRIPTION : Pesquisa um passageiro através de seu nome.
- * INPUTS :
+ * DESCRIPTION : Pesquisa um passageiro através de seu nome e mostra suas informações.
+ * INPUTS : string NomePassageiro - Nome do passageiro para pesquisa
  * PARAMETERS :
- * Nenhum.
+ *
  * RETURN :
  * Type : void
- * Error code :
+ * Error : Pasageiro inexistente: O passageiro selecionado não existe.
  ********************************************************/
 void pesquisarNomePassageiro()
 {

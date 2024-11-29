@@ -134,16 +134,21 @@ string Passageiro::getRua()
 
 // Função para cadastro______________________________________________________________________________________
 
-/********************************************************
- * NAME : void Passageiro::cadastroPassageiro()
- * DESCRIPTION : Realiza o cadastro de um novo passageiro.
- * INPUTS :
- * PARAMETERS : Nenhum
- * RETURN :
- * Type : void
- * Error code :
- * Values : Nenhum
- *******************************************************/
+/*******************************************************************************************
+* NAME : void Passageiro::cadastroPassageiro()
+* DESCRIPTION : Realiza o cadastro de um novo passageiro.
+* INPUTS : string nome - Nome do passageiro.
+*           string cidade - Cidade do passageiro.
+*           int numResidencia - Número de residência do passageiro.
+*           string rua - Nome da rua onde o passageiro mora.
+*           string telefone - Número de telefone do passageiro.
+* PARAMETERS : 
+* RETURN :
+* Type : void
+* Error: Nome já cadastrado: Caso o nome já esteja em uso, o sistema solicita um sobrenome.
+*         Número residencial inválido: O valor digitado deve ser um número.
+*         Telefone inválido: Caso o telefone informado não siga o formato correto.
+********************************************************************************************/
 void Passageiro::cadastroPassageiro()
 {
     system("chcp 65001 > nul");
@@ -204,16 +209,22 @@ void Passageiro::cadastroPassageiro()
     system("cls");
 }
 
-/********************************************************
- * NAME : void Passageiro::listarPassageiros()
- * DESCRIPTION : Lista todos os passageiros cadastrados.
- * INPUTS :
- * PARAMETERS : Nenhum
- * RETURN :
- * Type : void
- * Error code :
- * Values : Nenhum
- *******************************************************/
+/******************************************************************************
+* NAME : void Passageiro::listarPassageiros()
+* DESCRIPTION : Lista todos os passageiros cadastrados 
+*               e exibe suas informações detalhadas.
+* INPUTS :
+* PARAMETERS : 
+* RETURN :
+* Type : void
+* Error code :
+* Values : Se houver passageiros cadastrados, exibe as informações detalhadas
+*           de cada passageiro: Nome, cidade, numero residencial, telefone, 
+*           se possui fidelidade ou não e se caso sim, quantos pontos possui
+*           e o identificador do passageiro(ID).
+*           Caso não possua passageiros cadastrados, 
+*           exibe uma mensagem informando que não há passageiros cadastrados.
+*******************************************************************************/
 void Passageiro::listarPassageiros()
 {
     system("cls");
@@ -246,12 +257,12 @@ void Passageiro::listarPassageiros()
     system("cls");
 }
 
-// Métodos da classe para salvar os dados no arquivo e ler -____________________________________________________
+// Métodos da classe para salvar os dados no arquivo e ler
 /********************************************************
  * NAME : void Passageiro::salvarPassageiros()
  * DESCRIPTION : Salva os passageiros cadastrados em um arquivo binário.
  * INPUTS :
- * PARAMETERS : Nenhum
+ * PARAMETERS : 
  * RETURN :
  * Type : void
  * Error code :
@@ -281,7 +292,7 @@ void Passageiro::salvarDadosPassageiro()
  * NAME : void Passageiro::carregarPassageiros()
  * DESCRIPTION : Carrega os passageiros a partir de um arquivo binário.
  * INPUTS :
- * PARAMETERS : Nenhum
+ * PARAMETERS : 
  * RETURN :
  * Type : void
  * Error code :

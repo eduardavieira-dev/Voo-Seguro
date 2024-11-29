@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstdlib>
+#include <limits>
 #include "Voo.h"
 #include "Tripulacao.h"
 #include "Passageiro.h"
@@ -11,8 +12,7 @@ using namespace std;
 
 // Função para gerar o menu de ações para Baixa de Reservas
 void menuBaixa(Reserva &reserva)
-{
-    system("cls");
+{   
 
     int opcao;
     cout << "    Menu de Baixa de Reservas:    " << endl;
@@ -20,7 +20,11 @@ void menuBaixa(Reserva &reserva)
     cout << "| 1 - Realizar baixa em reserva     |" << endl;
     cout << "| 2 - Voltar                        |" << endl;
     cout << "+-----------------------------------+" << endl;
-    cin >> opcao;
+    while(!(cin >> opcao)){
+    cout << "Entrada inválida, insira um número." << endl;
+    cin.clear(); 
+    cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
+    }
     cin.ignore();
 
     switch (opcao)
@@ -35,7 +39,8 @@ void menuBaixa(Reserva &reserva)
         break;
 
     default:
-        cout << "Opção inválida. Tente novamente!" << endl;
+        system("cls");
+        cout << "   Opção inválida. Tente novamente!" << endl;
         menuBaixa(reserva);
         break;
     }
@@ -44,7 +49,6 @@ void menuBaixa(Reserva &reserva)
 // Função para gerar o menu de ações para reservas
 void menuReserva(Reserva &reserva)
 {
-    system("cls");
 
     int opcao;
     cout << "    Menu de Cadastro de Reservas:    " << endl;
@@ -53,7 +57,11 @@ void menuReserva(Reserva &reserva)
     cout << "| 2 - Listar reservas cadastradas   |" << endl;
     cout << "| 3 - Voltar                        |" << endl;
     cout << "+-----------------------------------+" << endl;
-    cin >> opcao;
+    while(!(cin >> opcao)){
+    cout << "Entrada inválida, insira um número." << endl;
+    cin.clear(); 
+    cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
+    }
     cin.ignore();
 
     switch (opcao)
@@ -73,7 +81,8 @@ void menuReserva(Reserva &reserva)
         break;
 
     default:
-        cout << "Opção inválida. Tente novamente!" << endl;
+        system("cls");
+        cout << "   Opção inválida. Tente novamente!" << endl;
         menuReserva(reserva);
         break;
     }
@@ -82,7 +91,6 @@ void menuReserva(Reserva &reserva)
 // Função para gerar o menu de ações para assentos
 void menuAssento(Assento &assento)
 {
-    system("cls");
 
     int opcao;
     cout << "    Menu de Cadastro de Assento    " << endl;
@@ -91,7 +99,11 @@ void menuAssento(Assento &assento)
     cout << "| 2 - Listar assentos cadastrados |" << endl;
     cout << "| 3 - Voltar                      |" << endl;
     cout << "+---------------------------------+" << endl;
-    cin >> opcao;
+    while(!(cin >> opcao)){
+    cout << "Entrada inválida, insira um número." << endl;
+    cin.clear(); 
+    cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
+    }
     cin.ignore();
 
     switch (opcao)
@@ -111,7 +123,8 @@ void menuAssento(Assento &assento)
         break;
 
     default:
-        cout << "Opção inválida. Tente novamente!" << endl;
+        system("cls");
+        cout << "   Opção inválida. Tente novamente!" << endl;
         menuAssento(assento);
         break;
     }
@@ -120,7 +133,6 @@ void menuAssento(Assento &assento)
 // Função para gerar o menu de ações para passageiros
 void menuPassageiro(Passageiro &pass)
 {
-    system("cls");
 
     int opcao;
     cout << "   Menu de Cadastro de Passageiros:   " << endl;
@@ -129,7 +141,11 @@ void menuPassageiro(Passageiro &pass)
     cout << "| 2 - Listar passageiros cadastrados |" << endl;
     cout << "| 3 - Voltar                         |" << endl;
     cout << "+------------------------------------+" << endl;
-    cin >> opcao;
+    while(!(cin >> opcao)){
+    cout << "Entrada inválida, insira um número." << endl;
+    cin.clear(); 
+    cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
+    }
     cin.ignore();
 
     switch (opcao)
@@ -149,7 +165,8 @@ void menuPassageiro(Passageiro &pass)
         break;
 
     default:
-        cout << "Opção inválida. Tente novamente!" << endl;
+        system("cls");
+        cout << "   Opção inválida. Tente novamente!" << endl;
         menuPassageiro(pass);
         break;
     }
@@ -157,7 +174,6 @@ void menuPassageiro(Passageiro &pass)
 
 void menuTripulacao(Tripulacao &tripulacao)
 {
-    system("cls");
 
     int opcao;
     cout << "   Menu de Cadastro de Tripulação   " << endl;
@@ -166,7 +182,11 @@ void menuTripulacao(Tripulacao &tripulacao)
     cout << "| 2 - Listar tripulação            |" << endl;
     cout << "| 3 - Voltar                       |" << endl;
     cout << "+----------------------------------+" << endl;
-    cin >> opcao;
+    while(!(cin >> opcao)){
+    cout << "Entrada inválida, insira um número." << endl;
+    cin.clear(); 
+    cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
+    }
     cin.ignore();
 
     switch (opcao)
@@ -187,14 +207,13 @@ void menuTripulacao(Tripulacao &tripulacao)
 
     default:
         system("cls");
+        cout << "   Opção inválida. Tente novamente!" << endl;
         menuTripulacao(tripulacao);
         break;
     }
 }
 void menuVoos(Voo &voo)
 {
-
-    system("cls");
 
     int opcao;
     cout << "   Menu de Cadastro de Voos   " << endl;
@@ -203,7 +222,11 @@ void menuVoos(Voo &voo)
     cout << "| 2 - Listar voos            |" << endl;
     cout << "| 3 - Voltar                 |" << endl;
     cout << "+----------------------------+" << endl;
-    cin >> opcao;
+    while(!(cin >> opcao)){
+    cout << "Entrada inválida, insira um número." << endl;
+    cin.clear(); 
+    cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
+    }
     cin.ignore();
 
     switch (opcao)
@@ -222,14 +245,15 @@ void menuVoos(Voo &voo)
         break;
 
     default:
+        system("cls");
+        cout << "   Opção inválida. Tente novamente!" << endl;
         menuVoos(voo);
         break;
     }
 }
 void menuPesquisa()
 {
-    system("chcp 65001");
-    system("cls");
+    system("chcp 65001 > nul");
 
     int opcao;
 
@@ -239,8 +263,12 @@ void menuPesquisa()
     cout << "| 2 - Pesquisar Membro da Tripulação  |" << endl;
     cout << "| 3 - Voltar                          |" << endl;
     cout << "+-------------------------------------+" << endl;
-    cin >> opcao;
-
+    while(!(cin >> opcao)){
+    cout << "Entrada inválida, insira um número." << endl;
+    cin.clear(); 
+    cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
+    }
+    cin.ignore();
     switch (opcao)
     {
     case 1:
@@ -255,6 +283,7 @@ void menuPesquisa()
         system("cls");
         return;
     default:
+        system("cls");
         cout << "Opção inválida! Tente novamente." << endl;
         menuPesquisa();
         break;
@@ -298,7 +327,11 @@ int main()
         cout << "| 7 - Pesquisa                        |" << endl;
         cout << "| 0 - Sair                            |" << endl;
         cout << "+-------------------------------------+" << endl;
-        cin >> escolha;
+        while(!(cin >> escolha)){
+        cout << "Entrada inválida, insira um número." << endl;
+        cin.clear(); 
+        cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
+        }
 
         switch (escolha)
         {

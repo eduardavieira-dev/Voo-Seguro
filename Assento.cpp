@@ -83,7 +83,7 @@ bool Assento::getStatusAssento()
  * NAME : salvarAssento()
  * DESCRIPTION : Salva os dados do assento em um arquivo binário.
  * INPUTS :
- * PARAMETERS : Nenhum.
+ * PARAMETERS :
  * RETURN :
  * Type : void
  ********************************************************/
@@ -105,7 +105,7 @@ void Assento::salvarAssento()
  * NAME : carregarAssentos()
  * DESCRIPTION : Carrega os dados dos assentos de um arquivo binário para o vetor de assentos.
  * INPUTS :
- * PARAMETERS : Nenhum.
+ * PARAMETERS :
  * RETURN :
  * Type : void
  ********************************************************/
@@ -134,14 +134,17 @@ void Assento::carregarAssentos()
     }
 }
 
-/********************************************************
- * NAME : cadastroAssento()
- * DESCRIPTION : Realiza o cadastro de um novo assento para um voo, verificando se o voo existe.
- * INPUTS :
- * PARAMETERS : Nenhum.
- * RETURN :
- * Type : void
- ********************************************************/
+/********************************************************************************************************
+* NAME : cadastroAssento()
+* DESCRIPTION : Realiza o cadastro de um novo assento para um voo, verificando se o voo existe.
+* INPUTS : int codVoo - Código do voo ao qual o assento será atribuído.
+*          int numAssento - Número do assento que está sendo cadastrado.
+* PARAMETERS :
+* RETURN :
+* Type : void
+* Error: Código de voo invalido: O voo selecionado não existe ou o valor digitado não é um número
+*        Número de assento invalido: O assento selecionado não existe ou o valor digitado não é um número
+*********************************************************************************************************/
 void Assento::cadastroAssento()
 {
     system("cls");
@@ -202,16 +205,23 @@ void Assento::cadastroAssento()
     {
         cout << "Erro: o voo informado não existe." << endl;
     }
+    cout << "Pressione 'ENTER' para voltar" << endl;
+    cin.get();
+    system("cls");
 }
 
-/********************************************************
- * NAME : ExibirAssentos()
- * DESCRIPTION : Exibe as informações de todos os assentos cadastrados, mostrando seu status (livre ou ocupado).
- * INPUTS :
- * PARAMETERS : Nenhum.
- * RETURN :
- * Type : void
- ********************************************************/
+/*****************************************************************************************************************
+* NAME : ExibirAssentos()
+* DESCRIPTION : Exibe as informações de todos os assentos cadastrados, mostrando seu status (livre ou ocupado).
+* INPUTS :
+* PARAMETERS :
+* RETURN :
+* Type : void
+* Values :  Se houver assentos cadastrados, exibe as informações detalhadas
+*           de cada assento: Número, código do voo selecionado e status ('Ocupado', 'Livre') 
+*           Caso não possua assentos cadastrados, 
+*           exibe uma mensagem informando que não há assentos cadastrados.
+*****************************************************************************************************************/
 void Assento::ExibirAssentos()
 {
     system("cls");

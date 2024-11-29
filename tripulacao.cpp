@@ -41,7 +41,7 @@ int contagemTripulante = 0;
 * NAME : void Tripulacao::salvarTripulacao()
 * DESCRIPTION : Salva os tripulacao cadastrados em um arquivo binário.
 * INPUTS :
-* PARAMETERS : Nenhum
+* PARAMETERS : 
 * RETURN :
 * Type : void
 * Error code :
@@ -81,7 +81,7 @@ void Tripulacao::salvarTripulacao()
 * NAME : void Tripulacao::carregarTripulacao()
 * DESCRIPTION : Carrega a tripulacao a partir de um arquivo binário.
 * INPUTS :
-* PARAMETERS : Nenhum
+* PARAMETERS : 
 * RETURN :
 * Type : void
 * Error code :
@@ -197,16 +197,20 @@ void Tripulacao::setCodigoTripulacao(int codigoTripulacao)
     this->codigoTripulacao = codigoTripulacao;
 }
 
-/********************************************************
-* NAME : void Tripulacao::cadastroTripulacao()
-* DESCRIPTION : Realiza o cadastro de uma nova tripulação.
-* INPUTS :
-* PARAMETERS : Nenhum
+/************************************************************************************************
+* NAME : void Tripulacao::cadastrarTripulacao()
+* DESCRIPTION : Carrega a tripulacao a partir de um arquivo binário.
+* INPUTS :  string nome - Nome do tripulante
+*           int telefone - Telefone do tripulante
+*           int cargo - Cargo do tripulante (1 para Piloto, 2 para Copiloto, 3 para Comissário)
+*           int codigoTripulante - Código único do tripulante
+* PARAMETERS : 
 * RETURN :
 * Type : void
-* Error code :
-* Values : Nenhum
-*******************************************************/
+* Error:  Telefone inválido: Deve ser inserido um número
+*         Cargo inválido: Cargo inserido seja um numero invalido ou não seja um número
+*
+*************************************************************************************************/
 void Tripulacao::cadastrarTripulacao()
 {
     system("chcp 65001 > nul");
@@ -272,6 +276,21 @@ void Tripulacao::cadastrarTripulacao()
     tripulacao.salvarTripulacao();
 }
 
+
+/***********************************************************************
+* NAME : void Voo::listarVoo()
+* DESCRIPTION : Lista todas as tripulações e tripulantes cadastrados 
+*               e exibe suas informações detalhadas.
+* INPUTS :
+* PARAMETERS : 
+* RETURN :
+* Type : void
+* Error code :
+* Values : Se houver tripulção cadastrada, exibe as informações detalhadas
+*          de cada tripulação: O nome do tripulante, o telefone, seu cargo e seu código
+*          Caso não possua tripulação cadastrada, 
+*          exibe uma mensagem informando que não há tripulações cadastradas.
+************************************************************************/
 void Tripulacao::listarTripulacao()
 {
     system("cls");

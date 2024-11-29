@@ -14,7 +14,7 @@
 * em um arquivo binário, além de realizar o cadastro e a listagem de voos.
 *
 * AUTHOR : Eric
-* START DATE : 22 Nov 24
+* START DATE : 26 Nov 24
 ********************************************************/
 
 
@@ -40,7 +40,7 @@ int contagemVoo = 0;
 * NAME : void Voo::salvarVoos()
 * DESCRIPTION : Salva os voos cadastrados em um arquivo binário.
 * INPUTS :
-* PARAMETERS : Nenhum
+* PARAMETERS : 
 * RETURN :
 * Type : void
 * Error code :
@@ -77,7 +77,7 @@ void Voo::salvarVoos()
 * NAME : void Voo::carregarVoos()
 * DESCRIPTION : Carrega os voos a partir de um arquivo binário.
 * INPUTS :
-* PARAMETERS : Nenhum
+* PARAMETERS : 
 * RETURN :
 * Type : void
 * Error code :
@@ -289,16 +289,35 @@ void Voo::setDestino(string destino)
 }
 
 
-/********************************************************
+/****************************************************************************
 * NAME : void Voo::cadastroVoo()
 * DESCRIPTION : Realiza o cadastro de um novo voo.
-* INPUTS :
-* PARAMETERS : Nenhum
+* INPUTS : string origem - Origem do voo
+*          string destino - Destino do voo
+*          int codigoAviao - Código do avião
+*          int tarifa - Valor da tarifa do voo
+*          int status - Status do voo (1 para Ativo, 2 para Inativo)
+*          int dia - Dia da data do voo
+*          int mes - Mês da data do voo
+*          int ano - Ano da data do voo
+*          int hora - Hora de partida do voo
+*          int minuto - Minuto de partida do voo
+*          int codigoTripulacao - Código da tripulação responsável pelo voo
+*
+* PARAMETERS : 
 * RETURN :
 * Type : void
-* Error code :
-* Values : Nenhum
-*******************************************************/
+*
+* Error: Não há tripulação cadastrada, 
+*        Dia inválido: deve estar entre 1 e 31 e deve ser um número,
+*        Mês inválido: deve estar entre 1 e 12 e deve ser um número,
+*        Ano inválido: deve ser entre 2024 e 2030 e deve ser um número,
+*        Hora inválida:  deve estar entre 0 e 23 e deve ser um número,
+*        Minuto inválido: deve estar entre 0 e 59 e deve ser um número,
+*        Código de tripulação inválido: (tripulação não encontrada ou em uso,
+*        Falta de piloto ou copiloto: status do voo será inativo.
+*
+*****************************************************************************/
 void Voo::cadastroVoo()
 {
     system("chcp 65001 > nul");
@@ -474,16 +493,21 @@ void Voo::cadastroVoo()
     voo.salvarVoos();
 }
 
-/********************************************************
+/***********************************************************************
 * NAME : void Voo::listarVoo()
-* DESCRIPTION : Lista todos os voos cadastrados.
+* DESCRIPTION : Lista todos os voos cadastrados 
+*               e exibe suas informações detalhadas.
 * INPUTS :
-* PARAMETERS : Nenhum
+* PARAMETERS : 
 * RETURN :
 * Type : void
 * Error code :
-* Values : Nenhum
-*******************************************************/
+* Values : Se houver voos cadastrados, exibe as informações detalhadas
+*          de cada voo: código do voo, código do avião, origem, destino,
+*          data, horário, tarifa e status.
+*          Caso não possua voos cadastrados, 
+*          exibe uma mensagem informando que não há voos cadastrados.
+************************************************************************/
 void Voo::listarVoo()
 {
     system("cls");
