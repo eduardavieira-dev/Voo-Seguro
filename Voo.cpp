@@ -67,6 +67,11 @@ void Voo::salvarVoos()
             arquivo.write(reinterpret_cast<char *>(&voos[i].minuto), sizeof(voos[i].minuto));
             arquivo.write(reinterpret_cast<char *>(&voos[i].tarifa), sizeof(voos[i].tarifa));
             arquivo.write(voos[i].status.c_str(), voos[i].status.size() + 1);
+
+            int codigoTripulacao = voos[i].getCodigoVoo(); // Exemplo: se tiver um código associado
+            arquivo.write(reinterpret_cast<char *>(&codigoTripulacao), sizeof(codigoTripulacao));
+            bool tripulacaoEmUso = tripulacaoVet[codigoTripulacao - 1].getTripulacaoEmUso();
+            arquivo.write(reinterpret_cast<char *>(&tripulacaoEmUso), sizeof(tripulacaoEmUso));
         }
         arquivo.close();
     }
@@ -102,6 +107,12 @@ void Voo::carregarVoos()
             arquivo.read(reinterpret_cast<char *>(&tarifa), sizeof(tarifa));
             getline(arquivo, status, '\0');
 
+            int codigoTripulacao;
+            arquivo.read(reinterpret_cast<char *>(&codigoTripulacao), sizeof(codigoTripulacao));
+
+            bool tripulacaoEmUso;
+            arquivo.read(reinterpret_cast<char *>(&tripulacaoEmUso), sizeof(tripulacaoEmUso));
+
             Voo novoVoo;
             novoVoo.setCodigoVoo(codigoVoo);
             novoVoo.setCodigoAviao(codigoAviao);
@@ -114,6 +125,8 @@ void Voo::carregarVoos()
             novoVoo.setMinuto(minuto);
             novoVoo.setTarifa(tarifa);
             novoVoo.setStatus(status == "Ativo" ? 1 : 2);
+
+            tripulacaoVet[codigoTripulacao - 1].setTripulacaoEmUso(tripulacaoEmUso);
 
             voos.push_back(novoVoo);
             contagemVoo++;
@@ -339,6 +352,8 @@ void Voo::cadastroVoo()
 
     if (tripulacaoVet.empty()) {
         cout << "Não há tripulação cadastrada. Cadastre uma tripulação antes de cadastrar um voo." << endl;
+        cout << "Pressione 'ENTER' para voltar" << endl;
+        cin.get();
         return; 
     }
     cout << "Informe a origem do voo." << endl;
@@ -432,7 +447,9 @@ void Voo::cadastroVoo()
     for (int i = 0; i < tripulacaoVet.size(); i++) {
     if (tripulacaoVet[i].getCodigoTripulacao() == codigoTripulacao) {
         if (tripulacaoVet[i].getTripulacaoEmUso()) {
-            cout << "Tripulação já está em uso. Tente usar outro código" << endl;
+            cout << "Tripulação já está em uso." << endl;
+            cout << "Pressione 'ENTER' para voltar" << endl;
+            cin.get();
             return;
         }
         tripulacaoVet[i].setTripulacaoEmUso(true);
@@ -522,6 +539,7 @@ void Voo::listarVoo()
             cout << endl;
             cout << "       Informações do Voo:" << voos[i].getCodigoVoo() << endl;
             cout << "+---------------------------------+"<<endl;
+            cout << "| Tripulação do Voo: " << tripulacaoVet[i].getCodigoTripulacao() << endl;
             cout << "| Código de voo: " << voos[i].getCodigoVoo() << endl;
             cout << "| Código do avião: " << voos[i].getCodigoAviao() << endl;
             cout << "| Local de origem: " << voos[i].getOrigem() << endl;
