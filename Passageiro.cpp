@@ -154,10 +154,20 @@ void Passageiro::cadastroPassageiro()
     system("chcp 65001 > nul");
     system("cls");
     string nome, cidade, rua, telefone;
-    int numResidencia;
+    int numResidencia = 0;
 
     cout << "Digite o nome do passageiro:" << endl;
     getline(cin, nome);
+
+    if (nome == "")
+    {
+        while (nome == "")
+        {
+            cout << "Erro: espaço em branco. Digite o nome do passaeiro para prosseguir." << endl;
+            getline(cin, nome);
+        }
+        system("cls");
+    }
 
     if (passageiros.size() > 0)
     {
@@ -176,6 +186,16 @@ void Passageiro::cadastroPassageiro()
     cout << "Digite a cidade onde o passageiro mora:" << endl;
     getline(cin, cidade);
 
+    if (cidade == "")
+    {
+        while (cidade == "")
+        {
+            cout << "Erro: espaço em branco. Digite a cidade do passaeiro para prosseguir." << endl;
+            getline(cin, cidade);
+        }
+        system("cls");
+    }
+
     cout << "Digite o número residencial:" << endl;
     while (!(cin >> numResidencia))
     {
@@ -188,8 +208,28 @@ void Passageiro::cadastroPassageiro()
     cout << "Digite o nome da rua:" << endl;
     getline(cin, rua);
 
+    if (rua == "")
+    {
+        while (rua == "")
+        {
+            cout << "Erro: espaço em branco. Digite a rua do passaeiro para prosseguir." << endl;
+            getline(cin, rua);
+        }
+        system("cls");
+    }
+
     cout << "Digite o número de telefone (DDD) XXXXX-XXXX:" << endl;
     getline(cin, telefone);
+
+    if (telefone == "")
+    {
+        while (telefone == "")
+        {
+            cout << "Erro: espaço em branco. Digite o telefone do passaeiro para prosseguir." << endl;
+            getline(cin, telefone);
+        }
+        system("cls");
+    }
 
     // Criação do novo passageiro
     Passageiro NovoPassageiro(nome, telefone, numResidencia, cidade, rua);
