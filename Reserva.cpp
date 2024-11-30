@@ -1,24 +1,24 @@
 /********************************************************
-* FILENAME : reserva.cpp
-* DESCRIPTION : Funções para gerenciar reservas de assentos de voo.
-*               Inclui cadastro, listagem, e salvamento de reservas.
-* PUBLIC FUNCTIONS :
-* void alteraDadosAssento(vector<Assento> &assentos)            - Realiza a alteração de dados de um assento e os salva em um arquivo binário.
-* void alteraDadosPassageiro(vector<Passageiro> &passageiros)   - Realiza a alteração de dados de um passageiro e os salva em um arquivo binário.
-* void Reserva::cadastroReserva()                               - Realiza o cadastro de uma nova reserva.
-* void Reserva::salvarReserva()                                 - Salva os dados de uma reserva em um arquivo binário.
-* void Reserva::carregarReservas()                              - Carrega os dados de uma reserva em um arquivo binário.
-* void Reserva::listaReservas()                                 - Lista todos as reservas cadastradas.
-* Reserva::Reserva()
-* Reserva::Reserva(int codigVooReserva, int numeroAssentoReserva, int codPassageiroReserva)
-*
-* NOTES :
-* Essas funções fazem parte do sistema de gerenciamento de reservas de voos;
-* A funcionalidade principal envolve a criação, armazenamento e leitura de dados de reservas de passageiros e assentos.
-*
-* AUTHOR : Laura
-* START DATE : 16 Jan 99
-********************************************************/
+ * FILENAME : reserva.cpp
+ * DESCRIPTION : Funções para gerenciar reservas de assentos de voo.
+ *               Inclui cadastro, listagem, e salvamento de reservas.
+ * PUBLIC FUNCTIONS :
+ * void alteraDadosAssento(vector<Assento> &assentos)            - Realiza a alteração de dados de um assento e os salva em um arquivo binário.
+ * void alteraDadosPassageiro(vector<Passageiro> &passageiros)   - Realiza a alteração de dados de um passageiro e os salva em um arquivo binário.
+ * void Reserva::cadastroReserva()                               - Realiza o cadastro de uma nova reserva.
+ * void Reserva::salvarReserva()                                 - Salva os dados de uma reserva em um arquivo binário.
+ * void Reserva::carregarReservas()                              - Carrega os dados de uma reserva em um arquivo binário.
+ * void Reserva::listaReservas()                                 - Lista todos as reservas cadastradas.
+ * Reserva::Reserva()
+ * Reserva::Reserva(int codigVooReserva, int numeroAssentoReserva, int codPassageiroReserva)
+ *
+ * NOTES :
+ * Essas funções fazem parte do sistema de gerenciamento de reservas de voos;
+ * A funcionalidade principal envolve a criação, armazenamento e leitura de dados de reservas de passageiros e assentos.
+ *
+ * AUTHOR : Laura
+ * START DATE : 16 Jan 99
+ ********************************************************/
 #include <iostream>
 #include <vector>
 #include <fstream>
@@ -37,15 +37,15 @@ extern vector<Passageiro> passageiros;
 vector<Reserva> reservas;
 
 /********************************************************
-* NAME : void alteraDadosAssento(vector<Assento> &assentos)
-* DESCRIPTION : Altera os dados dos assentos e os salva no arquivo binário.
-* INPUTS :
-* PARAMETERS :
-* vector<Assento> &assentos : vetor com os assentos a serem atualizados.
-* RETURN :
-* Type : void
-* Error : Caso o arquivo não for aberto corretamente exibe mensagem  de erro ao abrir o arquivo
-********************************************************/
+ * NAME : void alteraDadosAssento(vector<Assento> &assentos)
+ * DESCRIPTION : Altera os dados dos assentos e os salva no arquivo binário.
+ * INPUTS :
+ * PARAMETERS :
+ * vector<Assento> &assentos : vetor com os assentos a serem atualizados.
+ * RETURN :
+ * Type : void
+ * Error : Caso o arquivo não for aberto corretamente exibe mensagem  de erro ao abrir o arquivo
+ ********************************************************/
 void alteraDadosAssento(vector<Assento> &assentos)
 {
     // Abrindo o arquivo em modo binário e truncando o conteúdo
@@ -73,15 +73,15 @@ void alteraDadosAssento(vector<Assento> &assentos)
 }
 
 /********************************************************
-* NAME : void alteraDadosPassageiro(vector<Passageiro> &passageiros)
-* DESCRIPTION : Altera os dados dos passageiros e os salva no arquivo binário.
-* INPUTS :
-* PARAMETERS :
-* vector<Passageiro> &passageiros : vetor com os passageiros a serem atualizados.
-* RETURN :
-* Type : void
-* Error : Caso o arquivo não for aberto corretamente exibe mensagem  de erro ao abrir o arquivo
-********************************************************/
+ * NAME : void alteraDadosPassageiro(vector<Passageiro> &passageiros)
+ * DESCRIPTION : Altera os dados dos passageiros e os salva no arquivo binário.
+ * INPUTS :
+ * PARAMETERS :
+ * vector<Passageiro> &passageiros : vetor com os passageiros a serem atualizados.
+ * RETURN :
+ * Type : void
+ * Error : Caso o arquivo não for aberto corretamente exibe mensagem  de erro ao abrir o arquivo
+ ********************************************************/
 void alteraDadosPassageiro(vector<Passageiro> &passageiros)
 {
     // Abrindo o arquivo em modo binário e truncando o conteúdo
@@ -119,15 +119,15 @@ void alteraDadosPassageiro(vector<Passageiro> &passageiros)
 }
 
 /********************************************************
-* NAME : void alteraDadosReserva(vector<Reserva> &reservas)
-* DESCRIPTION : Altera os dados das reservas e os salva no arquivo binário.
-* INPUTS :
-* PARAMETERS :
-* vector<Reserva> &reservas : vetor com as reservas a serem atualizadas.
-* RETURN :
-* Type : void
-* Error : Caso o arquivo não for aberto corretamente exibe mensagem  de erro ao abrir o arquivo
-********************************************************/
+ * NAME : void alteraDadosReserva(vector<Reserva> &reservas)
+ * DESCRIPTION : Altera os dados das reservas e os salva no arquivo binário.
+ * INPUTS :
+ * PARAMETERS :
+ * vector<Reserva> &reservas : vetor com as reservas a serem atualizadas.
+ * RETURN :
+ * Type : void
+ * Error : Caso o arquivo não for aberto corretamente exibe mensagem  de erro ao abrir o arquivo
+ ********************************************************/
 void alteraDadosReserva(vector<Reserva> &reservas)
 {
     // Abrindo o arquivo em modo binário e truncando o conteúdo
@@ -185,21 +185,21 @@ int Reserva::getCodPassageiroReserva()
 }
 
 /******************************************************************************************************************
-* NAME : void Reserva::cadastroReserva()
-* DESCRIPTION : Cadastro de uma nova reserva de voo.
-* INPUTS :  int codVoo - Código de voo em que a reserva será feita.
-*           int numAssento - Número do assento que será reservado.
-*           int codPassageiro - Código do passageiro que está realizando a reserva.
-* PARAMETERS :
-*
-* RETURN :
-* Type : void
-* Error: Código de voo invalido: O voo selecionado não existe ou o valor digitado não é um número.
-*        Voo inativo: O voo informado não está ativo.
-*        Assento inexistente: O assento selecionado não existe ou o valor informado não é um número.
-*        Assento ocupado: O assento informado já está reservado.
-*        ID do passageiro inválido: Não existe passageiro com o ID informado ou o valor informado não é um número.
-*******************************************************************************************************************/
+ * NAME : void Reserva::cadastroReserva()
+ * DESCRIPTION : Cadastro de uma nova reserva de voo.
+ * INPUTS :  int codVoo - Código de voo em que a reserva será feita.
+ *           int numAssento - Número do assento que será reservado.
+ *           int codPassageiro - Código do passageiro que está realizando a reserva.
+ * PARAMETERS :
+ *
+ * RETURN :
+ * Type : void
+ * Error: Código de voo invalido: O voo selecionado não existe ou o valor digitado não é um número.
+ *        Voo inativo: O voo informado não está ativo.
+ *        Assento inexistente: O assento selecionado não existe ou o valor informado não é um número.
+ *        Assento ocupado: O assento informado já está reservado.
+ *        ID do passageiro inválido: Não existe passageiro com o ID informado ou o valor informado não é um número.
+ *******************************************************************************************************************/
 void Reserva::cadastroReserva()
 {
     system("cls");
@@ -208,11 +208,18 @@ void Reserva::cadastroReserva()
     bool verificaExistenciaVoo = false;
 
     cout << "Digite o código do voo: \n";
-    while (!(cin >> codVoo))
+    while (!(cin >> codVoo) || codVoo <= 0)
     {
-        cout << "Entrada inválida, insira um número." << endl;
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        if (codVoo <= 0)
+        {
+            cout << "Entrada inválida, insira um número maior que zero." << endl;
+        }
+        else
+        {
+            cout << "Entrada inválida, insira um número." << endl;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
     }
 
     for (size_t i = 0; i < voos.size(); i++)
@@ -224,11 +231,18 @@ void Reserva::cadastroReserva()
             {
                 bool verificaExistenciaAssento = false;
                 cout << "Digite o número do assento: \n";
-                while (!(cin >> numAssento))
+                while (!(cin >> numAssento) || numAssento <= 0)
                 {
-                    cout << "Entrada inválida, insira um número." << endl;
-                    cin.clear();
-                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    if (numAssento <= 0)
+                    {
+                        cout << "Entrada inválida, insira um número maior que zero." << endl;
+                    }
+                    else
+                    {
+                        cout << "Entrada inválida, insira um número." << endl;
+                        cin.clear();
+                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    }
                 }
 
                 for (size_t j = 0; j < assentos.size(); j++)
@@ -303,15 +317,15 @@ void Reserva::cadastroReserva()
 }
 
 /********************************************************
-* NAME : void Reserva::salvarReserva()
-* DESCRIPTION : Salva os dados de uma reserva no arquivo binário.
-* INPUTS :
-* PARAMETERS :
-*
-* RETURN :
-* Type : void
-* Error code :
-********************************************************/
+ * NAME : void Reserva::salvarReserva()
+ * DESCRIPTION : Salva os dados de uma reserva no arquivo binário.
+ * INPUTS :
+ * PARAMETERS :
+ *
+ * RETURN :
+ * Type : void
+ * Error code :
+ ********************************************************/
 void Reserva::salvarReserva()
 {
     ofstream arquivo("reservas.dat", ios::app | ios::binary);
@@ -327,15 +341,15 @@ void Reserva::salvarReserva()
 }
 
 /********************************************************
-* NAME : void Reserva::carregarReservas()
-* DESCRIPTION : Carrega todas as reservas a partir do arquivo binário.
-* INPUTS :
-* PARAMETERS :
-*
-* RETURN :
-* Type : void
-* Error code :
-********************************************************/
+ * NAME : void Reserva::carregarReservas()
+ * DESCRIPTION : Carrega todas as reservas a partir do arquivo binário.
+ * INPUTS :
+ * PARAMETERS :
+ *
+ * RETURN :
+ * Type : void
+ * Error code :
+ ********************************************************/
 void Reserva::carregarReservas()
 {
     ifstream arquivo("reservas.dat", ios::binary);
@@ -361,18 +375,18 @@ void Reserva::carregarReservas()
 }
 
 /********************************************************
-* NAME : void Reserva::listaReservas()
-* DESCRIPTION : Lista todas as reservas armazenadas.
-* INPUTS :
-* PARAMETERS :
-*
-* RETURN :
-* Type : void
-* Error: Se houver reservas cadastradas, exibe as informações detalhadas
-*        de cada reserva: Número do assento, código do voo selecionado e código do passageiro que fez a reserva. 
-*        Caso não possua reservas cadastradas, 
-*        exibe uma mensagem informando que não há reservas cadastradas.
-********************************************************/
+ * NAME : void Reserva::listaReservas()
+ * DESCRIPTION : Lista todas as reservas armazenadas.
+ * INPUTS :
+ * PARAMETERS :
+ *
+ * RETURN :
+ * Type : void
+ * Error: Se houver reservas cadastradas, exibe as informações detalhadas
+ *        de cada reserva: Número do assento, código do voo selecionado e código do passageiro que fez a reserva.
+ *        Caso não possua reservas cadastradas,
+ *        exibe uma mensagem informando que não há reservas cadastradas.
+ ********************************************************/
 void Reserva::listaReservas()
 {
     system("cls");
@@ -398,23 +412,23 @@ void Reserva::listaReservas()
 }
 
 /********************************************************
-* NAME : void Reserva::baixaReservas()
-* DESCRIPTION : Esta função permite que o usuário realize o cancelamento de uma reserva 
-*               de um passageiro. Ela remove a reserva do sistema, libera o assento 
-*               correspondente e ajusta a pontuação de fidelidade do passageiro.
-*
-* INPUTS : int codPassageiro - Caódigo do passageiro para identificar a reserva
-*          int assentoBaixa - Npumero de assento para ser cancelado.
-*          int codVooBaixa - Código do voo para o cancelamento.
-*
-* PARAMETERS :
-*
-* RETURN :
-* Type : void
-* Error: Passageiro não encontrado: Passageiro informado não existe ou o valor digitado não é um número.
-*        Assento ou reserva não encontrada: Mensagem de erro caso o assento e voo informados não correspondam à reserva do passageiro.
-*        Falta de reservas: Caso o passageiro não possua reservas no sistema.
-********************************************************/
+ * NAME : void Reserva::baixaReservas()
+ * DESCRIPTION : Esta função permite que o usuário realize o cancelamento de uma reserva
+ *               de um passageiro. Ela remove a reserva do sistema, libera o assento
+ *               correspondente e ajusta a pontuação de fidelidade do passageiro.
+ *
+ * INPUTS : int codPassageiro - Caódigo do passageiro para identificar a reserva
+ *          int assentoBaixa - Npumero de assento para ser cancelado.
+ *          int codVooBaixa - Código do voo para o cancelamento.
+ *
+ * PARAMETERS :
+ *
+ * RETURN :
+ * Type : void
+ * Error: Passageiro não encontrado: Passageiro informado não existe ou o valor digitado não é um número.
+ *        Assento ou reserva não encontrada: Mensagem de erro caso o assento e voo informados não correspondam à reserva do passageiro.
+ *        Falta de reservas: Caso o passageiro não possua reservas no sistema.
+ ********************************************************/
 void Reserva::baixaReserva()
 {
     system("cls");
