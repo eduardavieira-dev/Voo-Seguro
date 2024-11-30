@@ -439,11 +439,18 @@ void Reserva::baixaReserva()
     int codVooBaixa = 0;
 
     cout << "Digite o código do passageiro: \n";
-    while (!(cin >> codPassageiro))
+    while (!(cin >> codPassageiro) || codPassageiro <= 0)
     {
-        cout << "Entrada inválida, insira um número." << endl;
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        if (codPassageiro <= 0)
+        {
+            cout << "Entrada inválida, insira um número maior que zero." << endl;
+        }
+        else
+        {
+            cout << "Entrada inválida, insira um número." << endl;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
     }
 
     for (size_t i = 0; i < passageiros.size(); i++)
@@ -481,19 +488,33 @@ void Reserva::baixaReserva()
                 while (verificaAssentoBaixa == false)
                 {
                     cout << "Informe qual assento deseja realizar a baixa: " << endl;
-                    while (!(cin >> assentoBaixa))
+                    while (!(cin >> assentoBaixa) || assentoBaixa <= 0)
                     {
-                        cout << "Entrada inválida, insira um número." << endl;
-                        cin.clear();
-                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                        if (assentoBaixa <= 0)
+                        {
+                            cout << "Entrada inválida, insira um número maior que zero." << endl;
+                        }
+                        else
+                        {
+                            cout << "Entrada inválida, insira um número." << endl;
+                            cin.clear();
+                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                        }
                     }
 
                     cout << "Informe o voo do assento que deseja realizar a baixa: " << endl;
-                    while (!(cin >> codVooBaixa))
+                    while (!(cin >> codVooBaixa) || codVooBaixa <= 0)
                     {
-                        cout << "Entrada inválida, insira um número." << endl;
-                        cin.clear();
-                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                        if (codVooBaixa <= 0)
+                        {
+                            cout << "Entrada inválida, insira um número maior que zero." << endl;
+                        }
+                        else
+                        {
+                            cout << "Entrada inválida, insira um número." << endl;
+                            cin.clear();
+                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                        }
                     }
 
                     for (size_t b = 0; b < reservas.size(); b++)
