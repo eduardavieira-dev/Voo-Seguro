@@ -135,20 +135,20 @@ string Passageiro::getRua()
 // Função para cadastro______________________________________________________________________________________
 
 /*******************************************************************************************
-* NAME : void Passageiro::cadastroPassageiro()
-* DESCRIPTION : Realiza o cadastro de um novo passageiro.
-* INPUTS : string nome - Nome do passageiro.
-*           string cidade - Cidade do passageiro.
-*           int numResidencia - Número de residência do passageiro.
-*           string rua - Nome da rua onde o passageiro mora.
-*           string telefone - Número de telefone do passageiro.
-* PARAMETERS : 
-* RETURN :
-* Type : void
-* Error: Nome já cadastrado: Caso o nome já esteja em uso, o sistema solicita um sobrenome.
-*         Número residencial inválido: O valor digitado deve ser um número.
-*         Telefone inválido: Caso o telefone informado não siga o formato correto.
-********************************************************************************************/
+ * NAME : void Passageiro::cadastroPassageiro()
+ * DESCRIPTION : Realiza o cadastro de um novo passageiro.
+ * INPUTS : string nome - Nome do passageiro.
+ *           string cidade - Cidade do passageiro.
+ *           int numResidencia - Número de residência do passageiro.
+ *           string rua - Nome da rua onde o passageiro mora.
+ *           string telefone - Número de telefone do passageiro.
+ * PARAMETERS :
+ * RETURN :
+ * Type : void
+ * Error: Nome já cadastrado: Caso o nome já esteja em uso, o sistema solicita um sobrenome.
+ *         Número residencial inválido: O valor digitado deve ser um número.
+ *         Telefone inválido: Caso o telefone informado não siga o formato correto.
+ ********************************************************************************************/
 void Passageiro::cadastroPassageiro()
 {
     system("chcp 65001 > nul");
@@ -197,11 +197,18 @@ void Passageiro::cadastroPassageiro()
     }
 
     cout << "Digite o número residencial:" << endl;
-    while (!(cin >> numResidencia))
+    while (!(cin >> numResidencia) || numResidencia <= 0)
     {
-        cout << "Entrada inválida, insira um número." << endl;
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        if (numResidencia <= 0)
+        {
+            cout << "Entrada inválida, insira um número maior que zero." << endl;
+        }
+        else
+        {
+            cout << "Entrada inválida, insira um número." << endl;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
     }
     cin.ignore();
 
@@ -231,6 +238,19 @@ void Passageiro::cadastroPassageiro()
         system("cls");
     }
 
+    if (passageiros.size() > 0)
+    {
+        for (size_t i = 0; i < passageiros.size(); i++)
+        {
+            while (passageiros[i].getTelefone() == telefone)
+            {
+                cout << "Este telefone já pertence a outro passageiro cadastrado." << endl;
+                cout << "Digite novamente o telefone do passageiro:" << endl;
+                getline(cin, telefone);
+                i = 0;
+            }
+        }
+    }
     // Criação do novo passageiro
     Passageiro NovoPassageiro(nome, telefone, numResidencia, cidade, rua);
     cout << "+---------------------------------+" << endl;
@@ -250,21 +270,21 @@ void Passageiro::cadastroPassageiro()
 }
 
 /******************************************************************************
-* NAME : void Passageiro::listarPassageiros()
-* DESCRIPTION : Lista todos os passageiros cadastrados 
-*               e exibe suas informações detalhadas.
-* INPUTS :
-* PARAMETERS : 
-* RETURN :
-* Type : void
-* Error code :
-* Values : Se houver passageiros cadastrados, exibe as informações detalhadas
-*           de cada passageiro: Nome, cidade, numero residencial, telefone, 
-*           se possui fidelidade ou não e se caso sim, quantos pontos possui
-*           e o identificador do passageiro(ID).
-*           Caso não possua passageiros cadastrados, 
-*           exibe uma mensagem informando que não há passageiros cadastrados.
-*******************************************************************************/
+ * NAME : void Passageiro::listarPassageiros()
+ * DESCRIPTION : Lista todos os passageiros cadastrados
+ *               e exibe suas informações detalhadas.
+ * INPUTS :
+ * PARAMETERS :
+ * RETURN :
+ * Type : void
+ * Error code :
+ * Values : Se houver passageiros cadastrados, exibe as informações detalhadas
+ *           de cada passageiro: Nome, cidade, numero residencial, telefone,
+ *           se possui fidelidade ou não e se caso sim, quantos pontos possui
+ *           e o identificador do passageiro(ID).
+ *           Caso não possua passageiros cadastrados,
+ *           exibe uma mensagem informando que não há passageiros cadastrados.
+ *******************************************************************************/
 void Passageiro::listarPassageiros()
 {
     system("cls");
@@ -302,7 +322,7 @@ void Passageiro::listarPassageiros()
  * NAME : void Passageiro::salvarPassageiros()
  * DESCRIPTION : Salva os passageiros cadastrados em um arquivo binário.
  * INPUTS :
- * PARAMETERS : 
+ * PARAMETERS :
  * RETURN :
  * Type : void
  * Error code :
@@ -332,7 +352,7 @@ void Passageiro::salvarDadosPassageiro()
  * NAME : void Passageiro::carregarPassageiros()
  * DESCRIPTION : Carrega os passageiros a partir de um arquivo binário.
  * INPUTS :
- * PARAMETERS : 
+ * PARAMETERS :
  * RETURN :
  * Type : void
  * Error code :
