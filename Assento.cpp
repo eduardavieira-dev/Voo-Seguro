@@ -154,11 +154,18 @@ void Assento::cadastroAssento()
     bool verificaExistenciaVoo = false;
 
     cout << "Digite o código do voo: \n";
-    while (!(cin >> codVoo))
+    while (!(cin >> codVoo) || codVoo <= 0)
     {
-        cout << "Entrada inválida, insira um número." << endl;
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        if (codVoo <= 0)
+        {
+            cout << "Entrada inválida, insira um número maior que zero." << endl;
+        }
+        else
+        {
+            cout << "Entrada inválida, insira um número." << endl;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
     }
 
     for (int i = 0; i < voos.size(); i++)
@@ -271,9 +278,9 @@ void Assento::ExibirAssentos()
 
                     // Exibe os detalhes do assento
                     cout << "| " << setw(18) << assentos[j].getNumAssento()
-                         << " | " << setw(10)
-                         << (assentos[j].getStatusAssento() ? "Ocupado" : "Livre")
-                         << " |" << endl;
+                        << " | " << setw(10)
+                        << (assentos[j].getStatusAssento() ? "Ocupado" : "Livre")
+                        << " |" << endl;
                 }
             }
 
