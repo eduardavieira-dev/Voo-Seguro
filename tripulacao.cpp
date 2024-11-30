@@ -264,7 +264,6 @@ void Tripulacao::cadastrarTripulacao()
         tripulacao.setCodigoTripulante(codigoTripulante);
 
         tripulacao.tripulantes.push_back(tripulacao);
-        cout << "cotnage"<<contagemTripulante;
     }
 
     contagemTripulacao++;
@@ -274,6 +273,7 @@ void Tripulacao::cadastrarTripulacao()
     tripulacaoVet.push_back(tripulacao);
 
     tripulacao.salvarTripulacao();
+    system("cls");
 }
 
 
