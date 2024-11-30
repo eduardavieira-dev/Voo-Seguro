@@ -156,6 +156,9 @@ void Assento::cadastroAssento()
     cout << "Digite o código do voo: \n";
     while (!(cin >> codVoo) || codVoo <= 0)
     {
+        cin.clear();                                         // Limpa o estado de erro do cin
+        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Remove o restante da entrada inválida do buffer
+
         if (codVoo <= 0)
         {
             cout << "Entrada inválida, insira um número maior que zero." << endl;
@@ -163,8 +166,6 @@ void Assento::cadastroAssento()
         else
         {
             cout << "Entrada inválida, insira um número." << endl;
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
         }
     }
 
