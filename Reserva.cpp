@@ -210,6 +210,9 @@ void Reserva::cadastroReserva()
     cout << "Digite o código do voo: \n";
     while (!(cin >> codVoo) || codVoo <= 0)
     {
+        cin.clear();                                         // Limpa o estado de erro do cin
+        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Remove o restante da entrada inválida do buffer
+
         if (codVoo <= 0)
         {
             cout << "Entrada inválida, insira um número maior que zero." << endl;
@@ -217,8 +220,6 @@ void Reserva::cadastroReserva()
         else
         {
             cout << "Entrada inválida, insira um número." << endl;
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
         }
     }
 
@@ -233,6 +234,9 @@ void Reserva::cadastroReserva()
                 cout << "Digite o número do assento: \n";
                 while (!(cin >> numAssento) || numAssento <= 0)
                 {
+                    cin.clear();                                         // Limpa o estado de erro do cin
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Remove o restante da entrada inválida do buffer
+
                     if (numAssento <= 0)
                     {
                         cout << "Entrada inválida, insira um número maior que zero." << endl;
@@ -240,8 +244,6 @@ void Reserva::cadastroReserva()
                     else
                     {
                         cout << "Entrada inválida, insira um número." << endl;
-                        cin.clear();
-                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
                     }
                 }
 
@@ -254,11 +256,19 @@ void Reserva::cadastroReserva()
                         {
                             bool verificaExistenciaPassageiro = false;
                             cout << "Digite o id do passageiro: \n";
-                            while (!(cin >> codPassageiro))
+                            while (!(cin >> codPassageiro) || codPassageiro <= 0)
                             {
-                                cout << "Entrada inválida, insira um número." << endl;
-                                cin.clear();
-                                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                                cin.clear();                                         // Limpa o estado de erro do cin
+                                cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Remove o restante da entrada inválida do buffer
+
+                                if (codPassageiro <= 0)
+                                {
+                                    cout << "Entrada inválida, insira um número maior que zero." << endl;
+                                }
+                                else
+                                {
+                                    cout << "Entrada inválida, insira um número." << endl;
+                                }
                             }
 
                             for (size_t a = 0; a < passageiros.size(); a++)
@@ -276,13 +286,11 @@ void Reserva::cadastroReserva()
                                     reservas.push_back(NovaReserva); // Adiciona ao vetor
                                     NovaReserva.salvarReserva();     // Salva apenas o novo assento
 
-                                    bool fide = true;
-                                    bool statusAssento = true;
-                                    passageiros[a].setFidelidade(fide);
+                                    passageiros[a].setFidelidade(true);
                                     passageiros[a].setPontuacao(10);
                                     alteraDadosPassageiro(passageiros);
 
-                                    assentos[j].setStatusAssento(statusAssento);
+                                    assentos[j].setStatusAssento(true);
                                     alteraDadosAssento(assentos);
                                 }
                             }
@@ -441,6 +449,9 @@ void Reserva::baixaReserva()
     cout << "Digite o código do passageiro: \n";
     while (!(cin >> codPassageiro) || codPassageiro <= 0)
     {
+        cin.clear();                                         // Limpa o estado de erro do cin
+        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Remove o restante da entrada inválida do buffer
+
         if (codPassageiro <= 0)
         {
             cout << "Entrada inválida, insira um número maior que zero." << endl;
@@ -448,8 +459,6 @@ void Reserva::baixaReserva()
         else
         {
             cout << "Entrada inválida, insira um número." << endl;
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
         }
     }
 
@@ -490,6 +499,9 @@ void Reserva::baixaReserva()
                     cout << "Informe qual assento deseja realizar a baixa: " << endl;
                     while (!(cin >> assentoBaixa) || assentoBaixa <= 0)
                     {
+                        cin.clear();                                         // Limpa o estado de erro do cin
+                        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Remove o restante da entrada inválida do buffer
+
                         if (assentoBaixa <= 0)
                         {
                             cout << "Entrada inválida, insira um número maior que zero." << endl;
@@ -497,14 +509,15 @@ void Reserva::baixaReserva()
                         else
                         {
                             cout << "Entrada inválida, insira um número." << endl;
-                            cin.clear();
-                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
                         }
                     }
 
                     cout << "Informe o voo do assento que deseja realizar a baixa: " << endl;
                     while (!(cin >> codVooBaixa) || codVooBaixa <= 0)
                     {
+                        cin.clear();                                         // Limpa o estado de erro do cin
+                        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Remove o restante da entrada inválida do buffer
+
                         if (codVooBaixa <= 0)
                         {
                             cout << "Entrada inválida, insira um número maior que zero." << endl;
@@ -512,8 +525,6 @@ void Reserva::baixaReserva()
                         else
                         {
                             cout << "Entrada inválida, insira um número." << endl;
-                            cin.clear();
-                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
                         }
                     }
 

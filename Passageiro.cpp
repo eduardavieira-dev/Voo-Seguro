@@ -199,6 +199,9 @@ void Passageiro::cadastroPassageiro()
     cout << "Digite o número residencial:" << endl;
     while (!(cin >> numResidencia) || numResidencia <= 0)
     {
+        cin.clear();                                         // Limpa o estado de erro do cin
+        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Remove o restante da entrada inválida do buffer
+
         if (numResidencia <= 0)
         {
             cout << "Entrada inválida, insira um número maior que zero." << endl;
@@ -206,8 +209,6 @@ void Passageiro::cadastroPassageiro()
         else
         {
             cout << "Entrada inválida, insira um número." << endl;
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
         }
     }
     cin.ignore();
