@@ -141,7 +141,7 @@ void pesquisarIdTripulante()
 
     cout << "Pesquisa id tripulante" << endl;
     cout << "Informe o código do Tripulante:" << endl;
-    while (!(cin >> codTripulante))
+    while (!(cin >> codTripulante)|| codTripulante<=0)
     {
         cout << "Entrada inválida, insira um número." << endl;
         cin.clear();
@@ -253,7 +253,7 @@ void pesquisarIdPassageiro()
     int contadorVoos = 0;
 
     cout << "Informe o código do Passageiro:" << endl;
-    while (!(cin >> codPassageiro))
+    while (!(cin >> codPassageiro) || codPassageiro <= 0)
     {
         cout << "Entrada inválida, insira um número." << endl;
         cin.clear();
