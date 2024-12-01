@@ -206,13 +206,13 @@ string removerEspacos(const string &str)
  * NAME : void Tripulacao::cadastrarTripulacao()
  * DESCRIPTION : Carrega a tripulacao a partir de um arquivo binário.
  * INPUTS :  string nome - Nome do tripulante
- *           int telefone - Telefone do tripulante
+ *           string telefone - Telefone do tripulante
  *           int cargo - Cargo do tripulante (1 para Piloto, 2 para Copiloto, 3 para Comissário)
  *           int codigoTripulante - Código único do tripulante
  * PARAMETERS :
  * RETURN :
  * Type : void
- * Error:  Telefone inválido: Deve ser inserido um número
+ * Error:  Telefone inválido: Deve ser inserido um número e deve ter no minimo 8 digitos
  *         Cargo inválido: Cargo inserido seja um numero invalido ou não seja um número
  *
  *************************************************************************************************/

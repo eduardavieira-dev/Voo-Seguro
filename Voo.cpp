@@ -322,12 +322,14 @@ void Voo::setDestino(string destino)
 * Type : void
 *
 * Error: Não há tripulação cadastrada, 
-*        Dia inválido: deve estar entre 1 e 31 e deve ser um número,
-*        Mês inválido: deve estar entre 1 e 12 e deve ser um número,
-*        Ano inválido: deve ser entre 2024 e 2030 e deve ser um número,
-*        Hora inválida:  deve estar entre 0 e 23 e deve ser um número,
-*        Minuto inválido: deve estar entre 0 e 59 e deve ser um número,
-*        Código de tripulação inválido: (tripulação não encontrada ou em uso,
+*        Dia inválido: deve estar entre 1 e 31 e deve ser um número.
+*        Mês inválido: deve estar entre 1 e 12 e deve ser um número.
+*        Ano inválido: deve ser entre 2024 e 2030 e deve ser um número.
+*        Hora inválida:  deve estar entre 0 e 23 e deve ser um número.
+*        Minuto inválido: deve estar entre 0 e 59 e deve ser um número.
+*        Código de tripulação inválido: Tripulação deve existir e não pode estar em uso.
+*        Código de avião inválido: Codigo de avião não pode estar em uso e deve ser um número.
+*        Tarifa invalida: Tarifa não pode ser negativa e deve ser um número.
 *        Falta de piloto ou copiloto: status do voo será inativo.
 *
 *****************************************************************************/
@@ -502,8 +504,8 @@ void Voo::cadastroVoo()
 }
 
     cout << "Informe a tarifa: ";
-     while(!(cin >> tarifa)){
-        cout << "Entrada inválida, insira um número." << endl;
+     while(!(cin >> tarifa) || tarifa < 0){
+        cout << "Entrada inválida, tente novamente." << endl;
         cin.clear(); 
         cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
         }
