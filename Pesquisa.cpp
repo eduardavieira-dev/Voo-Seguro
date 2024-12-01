@@ -141,13 +141,30 @@ void pesquisarIdTripulante()
 
     cout << "Pesquisa id tripulante" << endl;
     cout << "Informe o código do Tripulante:" << endl;
-    while (!(cin >> codTripulante)|| codTripulante<=0)
+       while (true)
     {
-        cout << "Entrada inválida, insira um número." << endl;
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        if (cin.peek() == '\n') 
+        {
+            cout << "Entrada inválida, insira um número." << endl;
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Limpa o buffer
+            continue; // Volta para solicitar a entrada
+        }
+
+        if (!(cin >> codTripulante) || codTripulante <= 0) // Valida a entrada
+        {
+            cout << "Entrada inválida, insira um número." << endl;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Limpa o buffer
+        }
+        else
+        {
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Limpa o restante da linha
+            break; // Sai do loop se a entrada for válida
+        }
     }
-    cin.ignore();
+
+
+
     system("cls");
 
     for (int i = 0; i < tripulacaoVet.size(); i++)
@@ -253,13 +270,28 @@ void pesquisarIdPassageiro()
     int contadorVoos = 0;
 
     cout << "Informe o código do Passageiro:" << endl;
-    while (!(cin >> codPassageiro) || codPassageiro <= 0)
+        while (true)
     {
-        cout << "Entrada inválida, insira um número." << endl;
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        if (cin.peek() == '\n') 
+        {
+            cout << "Entrada inválida, insira um número." << endl;
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Limpa o buffer
+            continue; // Volta para solicitar a entrada
+        }
+
+        if (!(cin >> codPassageiro) || codPassageiro <= 0) // Valida a entrada
+        {
+            cout << "Entrada inválida, insira um número." << endl;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Limpa o buffer
+        }
+        else
+        {
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Limpa o restante da linha
+            break; // Sai do loop se a entrada for válida
+        }
     }
-    cin.ignore();
+  
     system("cls");
     for (size_t i = 0; i < passageiros.size(); i++)
     {
@@ -301,7 +333,8 @@ void pesquisarIdPassageiro()
             }
         }
     }
-    if (verificaExistenciaPassageiro == false)
+    // Mensagem caso o passageiro não exista
+    if (!verificaExistenciaPassageiro)
     {
         cout << "Passageiro inexistente!" << endl;
     }
