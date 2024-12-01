@@ -13,8 +13,8 @@
  * O código realiza o armazenamento e a leitura de informações dos passageiros
  * em um arquivo binário, além de realizar o cadastro e a listagem de passageiros.
  *
- * AUTHOR : Laura
- * START DATE : 22 Nov 24
+ * AUTHOR : Laura Campos Pontara Lopes
+ * START DATE : 19 Nov 24
  ********************************************************/
 
 #include <iostream>

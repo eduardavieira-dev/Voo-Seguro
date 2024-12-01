@@ -16,8 +16,8 @@
  * Essas funções fazem parte do sistema de gerenciamento de reservas de voos;
  * A funcionalidade principal envolve a criação, armazenamento e leitura de dados de reservas de passageiros e assentos.
  *
- * AUTHOR : Laura
- * START DATE : 16 Jan 99
+ * AUTHOR : Laura Campos Pontara Lopes
+ * START DATE : 26 Nov 24
  ********************************************************/
 #include <iostream>
 #include <vector>

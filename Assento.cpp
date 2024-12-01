@@ -17,7 +17,7 @@
  * exibição e controle de status (livre ou ocupado). Os dados dos assentos são salvos
  * em um arquivo binário para persistência e podem ser carregados novamente ao iniciar o programa.
  *
- * AUTHOR : Laura
+ * AUTHOR : Laura Campos Pontara Lopes
  * START DATE : 22 Nov 24
  ********************************************************/
 #include <iostream>
