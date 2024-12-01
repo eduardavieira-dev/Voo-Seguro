@@ -189,6 +189,7 @@ void Assento::cadastroAssento()
             if (totalAssentos == MAX_ASSENTOS)
             {
                 cout << "Erro: O voo já atingiu o limite máximo de 100 assentos cadastrados." << endl;
+                cin.get();
             }
             else if (totalAssentos < MAX_ASSENTOS)
             {
@@ -214,6 +215,7 @@ void Assento::cadastroAssento()
     if (verificaExistenciaVoo == false)
     {
         cout << "Erro: o voo informado não existe." << endl;
+        cin.get();
     }
     cout << "Pressione 'ENTER' para voltar" << endl;
     cin.get();
