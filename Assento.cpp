@@ -159,7 +159,7 @@ void Assento::cadastroAssento()
         cin.clear();                                         // Limpa o estado de erro do cin
         cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Remove o restante da entrada inválida do buffer
 
-        if (codVoo <= 0)
+        if (codVoo && codVoo <= 0)
         {
             cout << "Entrada inválida, insira um número maior que zero." << endl;
         }
