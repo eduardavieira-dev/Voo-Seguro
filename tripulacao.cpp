@@ -198,6 +198,7 @@ string removerEspacos(const string &str)
 {
     string resultado = str;
     resultado.erase(remove(resultado.begin(), resultado.end(), ' '), resultado.end());
+    resultado.erase(remove(resultado.begin(), resultado.end(), '-'), resultado.end());
     return resultado;
 }
 
@@ -251,6 +252,13 @@ void Tripulacao::cadastrarTripulacao()
         }
 
         telefone = removerEspacos(telefone);
+
+         while (telefone.length() < 8) 
+        {
+            cout << "Erro: O telefone deve ter pelo menos 8 dígitos. Digite um valor válido." << endl;
+            getline(cin, telefone);
+            telefone = removerEspacos(telefone);
+        }
 
         for (int j = 0; j < i; j++) {
             if (removerEspacos(tripulacao.tripulantes[j].getTelefone()) == telefone) {
