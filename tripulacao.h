@@ -9,7 +9,7 @@ using namespace std;
 class Tripulacao{
     private:
     string nome;
-    int telefone;
+    string telefone;
     string cargo;
     int codigoTripulante;
     int codigoTripulacao;
@@ -18,7 +18,7 @@ class Tripulacao{
 
     public:
     string getNome();
-    int getTelefone();
+    string getTelefone();
     string getCargo();
     int getCodigoTripulante();
     int getCodigoTripulacao();
@@ -26,7 +26,7 @@ class Tripulacao{
     vector<Tripulacao>& getTripulantes();
 
     void setNome(string nome);
-    void setTelefone(int telefone);
+    void setTelefone(string telefone);
     void setCargo(int cargo);
     void setCodigoTripulante(int codigoTripulante);
     void setCodigoTripulacao(int codigoTripulacao);

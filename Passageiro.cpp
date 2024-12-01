@@ -163,7 +163,7 @@ void Passageiro::cadastroPassageiro()
     {
         while (nome == "")
         {
-            cout << "Erro: espaço em branco. Digite o nome do passaeiro para prosseguir." << endl;
+            cout << "Erro: espaço em branco. Digite o nome do passageiro para prosseguir." << endl;
             getline(cin, nome);
         }
         system("cls");
@@ -220,7 +220,7 @@ void Passageiro::cadastroPassageiro()
     {
         while (rua == "")
         {
-            cout << "Erro: espaço em branco. Digite a rua do passaeiro para prosseguir." << endl;
+            cout << "Erro: espaço em branco. Digite a rua do passageiro para prosseguir." << endl;
             getline(cin, rua);
         }
         system("cls");
@@ -233,7 +233,7 @@ void Passageiro::cadastroPassageiro()
     {
         while (telefone == "")
         {
-            cout << "Erro: espaço em branco. Digite o telefone do passaeiro para prosseguir." << endl;
+            cout << "Erro: espaço em branco. Digite o telefone do passageiro para prosseguir." << endl;
             getline(cin, telefone);
         }
         system("cls");

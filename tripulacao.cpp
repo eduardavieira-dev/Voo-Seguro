@@ -1,27 +1,28 @@
 /********************************************************
-* FILENAME : Tripulacao.cpp
-* DESCRIPTION : Implementação de cadastro, listagem, salvamento e carregamento de tripulações  e tripulantes.
-*                          
-* PUBLIC FUNCTIONS :
-*   void Tripulacao::salvarTripulacao()     - Salva a tripulação cadastrada em um arquivo binário.
-*   void Tripulacao::carregarTripulacao()   - Carrega os dados das tripulações a partir de um arquivo binário.
-*   void Tripulacao::cadastrarTripulacao()  - Realiza o cadastro de uma nova tripulação.
-*   void Tripulacao::listarTripulacao()     - Lista todas as tripulações cadastradas.
-*
-* NOTES :
-* Esse código gerencia informações sobre tripulações e tripulantes, 
-* incluindo funcionalidades para cadastrar, listar, salvar e carregar os dados 
-* de tripulação a partir de arquivos binários. Cada tripulação pode ter até 
-* 3 tripulantes (piloto, copiloto e comissário).
-*
-* AUTHOR : Eric
-* START DATE : 22 Nov 24
-********************************************************/
+ * FILENAME : Tripulacao.cpp
+ * DESCRIPTION : Implementação de cadastro, listagem, salvamento e carregamento de tripulações  e tripulantes.
+ *
+ * PUBLIC FUNCTIONS :
+ *   void Tripulacao::salvarTripulacao()     - Salva a tripulação cadastrada em um arquivo binário.
+ *   void Tripulacao::carregarTripulacao()   - Carrega os dados das tripulações a partir de um arquivo binário.
+ *   void Tripulacao::cadastrarTripulacao()  - Realiza o cadastro de uma nova tripulação.
+ *   void Tripulacao::listarTripulacao()     - Lista todas as tripulações cadastradas.
+ *
+ * NOTES :
+ * Esse código gerencia informações sobre tripulações e tripulantes,
+ * incluindo funcionalidades para cadastrar, listar, salvar e carregar os dados
+ * de tripulação a partir de arquivos binários. Cada tripulação pode ter até
+ * 3 tripulantes (piloto, copiloto e comissário).
+ *
+ * AUTHOR : Eric
+ * START DATE : 22 Nov 24
+ ********************************************************/
 
 #include <iostream>
 #include <string>
 #include <vector>
 #include <iomanip>
+#include <algorithm>
 #include <fstream>
 #include <limits>
 #include "Tripulacao.h"
@@ -38,15 +39,15 @@ int contagemTripulacao = 0;
 int contagemTripulante = 0;
 
 /********************************************************
-* NAME : void Tripulacao::salvarTripulacao()
-* DESCRIPTION : Salva os tripulacao cadastrados em um arquivo binário.
-* INPUTS :
-* PARAMETERS : 
-* RETURN :
-* Type : void
-* Error code :
-* Values : Nenhum
-*******************************************************/
+ * NAME : void Tripulacao::salvarTripulacao()
+ * DESCRIPTION : Salva os tripulacao cadastrados em um arquivo binário.
+ * INPUTS :
+ * PARAMETERS :
+ * RETURN :
+ * Type : void
+ * Error code :
+ * Values : Nenhum
+ *******************************************************/
 void Tripulacao::salvarTripulacao()
 {
     ofstream arquivo("tripulacao.dat", ios::binary);
@@ -66,7 +67,7 @@ void Tripulacao::salvarTripulacao()
             for (int j = 0; j < 3; j++)
             {
                 arquivo.write(tripulacaoVet[i].tripulantes[j].getNome().c_str(), tripulacaoVet[i].tripulantes[j].getNome().size() + 1);
-                arquivo.write(reinterpret_cast<char *>(&tripulacaoVet[i].tripulantes[j].telefone), sizeof(tripulacaoVet[i].tripulantes[j].telefone));
+                arquivo.write(tripulacaoVet[i].tripulantes[j].getTelefone().c_str(), tripulacaoVet[i].tripulantes[j].getTelefone().size() + 1);
                 arquivo.write(tripulacaoVet[i].tripulantes[j].getCargo().c_str(), tripulacaoVet[i].tripulantes[j].getCargo().size() + 1);
                 arquivo.write(reinterpret_cast<char *>(&tripulacaoVet[i].tripulantes[j].codigoTripulante), sizeof(tripulacaoVet[i].tripulantes[j].codigoTripulante));
             }
@@ -75,18 +76,16 @@ void Tripulacao::salvarTripulacao()
     }
 }
 
-
-
 /********************************************************
-* NAME : void Tripulacao::carregarTripulacao()
-* DESCRIPTION : Carrega a tripulacao a partir de um arquivo binário.
-* INPUTS :
-* PARAMETERS : 
-* RETURN :
-* Type : void
-* Error code :
-* Values : Nenhum
-*******************************************************/
+ * NAME : void Tripulacao::carregarTripulacao()
+ * DESCRIPTION : Carrega a tripulacao a partir de um arquivo binário.
+ * INPUTS :
+ * PARAMETERS :
+ * RETURN :
+ * Type : void
+ * Error code :
+ * Values : Nenhum
+ *******************************************************/
 void Tripulacao::carregarTripulacao()
 {
     ifstream arquivo("tripulacao.dat", ios::binary);
@@ -105,11 +104,12 @@ void Tripulacao::carregarTripulacao()
             for (int j = 0; j < 3; j++)
             {
                 string nome;
-                int telefone, codigoTripulante;
+                string telefone;
                 string cargo;
+                int codigoTripulante;
 
                 getline(arquivo, nome, '\0');
-                arquivo.read(reinterpret_cast<char *>(&telefone), sizeof(telefone));
+                getline(arquivo, telefone, '\0');
                 getline(arquivo, cargo, '\0');
                 arquivo.read(reinterpret_cast<char *>(&codigoTripulante), sizeof(codigoTripulante));
 
@@ -119,7 +119,7 @@ void Tripulacao::carregarTripulacao()
                 tripulante.setCargo(cargo == "Piloto" ? 1 : (cargo == "Copiloto" ? 2 : 3));
                 tripulante.setCodigoTripulante(codigoTripulante);
 
-                novaTripulacao.tripulantes.push_back(tripulante);  // Adicionando ao vetor tripulantes da tripulação
+                novaTripulacao.tripulantes.push_back(tripulante); // Adicionando ao vetor tripulantes da tripulação
             }
 
             tripulacaoVet.push_back(novaTripulacao);
@@ -128,14 +128,12 @@ void Tripulacao::carregarTripulacao()
     }
 }
 
-
-
 string Tripulacao::getNome()
 {
     return nome;
 }
 
-int Tripulacao::getTelefone()
+string Tripulacao::getTelefone()
 {
     return telefone;
 }
@@ -160,7 +158,7 @@ void Tripulacao::setNome(string nome)
     this->nome = nome;
 }
 
-void Tripulacao::setTelefone(int telefone)
+void Tripulacao::setTelefone(string telefone)
 {
     this->telefone = telefone;
 }
@@ -196,62 +194,114 @@ void Tripulacao::setCodigoTripulacao(int codigoTripulacao)
 {
     this->codigoTripulacao = codigoTripulacao;
 }
+string removerEspacos(const string &str)
+{
+    string resultado = str;
+    resultado.erase(remove(resultado.begin(), resultado.end(), ' '), resultado.end());
+    return resultado;
+}
 
 /************************************************************************************************
-* NAME : void Tripulacao::cadastrarTripulacao()
-* DESCRIPTION : Carrega a tripulacao a partir de um arquivo binário.
-* INPUTS :  string nome - Nome do tripulante
-*           int telefone - Telefone do tripulante
-*           int cargo - Cargo do tripulante (1 para Piloto, 2 para Copiloto, 3 para Comissário)
-*           int codigoTripulante - Código único do tripulante
-* PARAMETERS : 
-* RETURN :
-* Type : void
-* Error:  Telefone inválido: Deve ser inserido um número
-*         Cargo inválido: Cargo inserido seja um numero invalido ou não seja um número
-*
-*************************************************************************************************/
+ * NAME : void Tripulacao::cadastrarTripulacao()
+ * DESCRIPTION : Carrega a tripulacao a partir de um arquivo binário.
+ * INPUTS :  string nome - Nome do tripulante
+ *           int telefone - Telefone do tripulante
+ *           int cargo - Cargo do tripulante (1 para Piloto, 2 para Copiloto, 3 para Comissário)
+ *           int codigoTripulante - Código único do tripulante
+ * PARAMETERS :
+ * RETURN :
+ * Type : void
+ * Error:  Telefone inválido: Deve ser inserido um número
+ *         Cargo inválido: Cargo inserido seja um numero invalido ou não seja um número
+ *
+ *************************************************************************************************/
 void Tripulacao::cadastrarTripulacao()
 {
     system("chcp 65001 > nul");
     system("cls");
     Tripulacao tripulacao;
 
-    string nome;
-    int telefone, codigoTripulante, codigoTripulacao, cargo;
+    string nome, telefone;
+    int codigoTripulante, codigoTripulacao, cargo;
     bool cargoValido = false;
-    
+    bool telefoneDuplicado;
+
     for (int i = 0; i < 3; i++)
     {
         system("cls");
+        telefoneDuplicado = false;
         cargoValido = false;
-        cout << "Informe o nome do tripulante " << i + 1 <<"."<< endl; 
+        cout << "Informe o nome do tripulante " << i + 1 << "." << endl;
         cout << "Nome: ";
         getline(cin, nome);
-        tripulacao.setNome(nome);
-        
-        cout << "Informe o telefone do tripulante " << i + 1 <<"."<< endl; 
-        cout << "Telefone: ";
-        while (!(cin >> telefone)) {
-        cout << "Entrada inválida, insira um número." << endl;
-        cin.clear(); 
-        cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
+        while (nome == "")
+        {
+            cout << "Erro: espaço em branco. Digite o nome do tripulante para prosseguir." << endl;
+            getline(cin, nome);
         }
-        
+        tripulacao.setNome(nome);
+
+        cout << "Informe o telefone do tripulante " << i + 1 << "." << endl;
+        cout << "Telefone: ";
+        getline(cin, telefone);
+        while (telefone.empty())
+        {
+            cout << "Erro: O telefone não pode ser vazio. Insira o telefone corretamente." << endl;
+            getline(cin, telefone);
+        }
+
+        telefone = removerEspacos(telefone);
+
+        for (int j = 0; j < i; j++) {
+            if (removerEspacos(tripulacao.tripulantes[j].getTelefone()) == telefone) {
+                telefoneDuplicado = true;
+            }
+        }
+
+        for (int k = 0; k < contagemTripulacao && !telefoneDuplicado; k++) {
+            for (int l = 0; l < 3 && !telefoneDuplicado; l++) {
+                if (removerEspacos(tripulacaoVet[k].tripulantes[l].getTelefone()) == telefone) {
+                    telefoneDuplicado = true;
+                }
+            }
+        }
+
+        while (telefoneDuplicado) {
+            cout << "Erro: Este telefone já está cadastrado. Insira um telefone diferente." << endl;
+            getline(cin, telefone);
+
+            telefone = removerEspacos(telefone);
+            telefoneDuplicado = false; 
+
+            for (int j = 0; j < i; j++) {
+                if (removerEspacos(tripulacao.tripulantes[j].getTelefone()) == telefone) {
+                    telefoneDuplicado = true;
+                }
+            }
+
+            for (int k = 0; k < contagemTripulacao && !telefoneDuplicado; k++) {
+                for (int l = 0; l < 3 && !telefoneDuplicado; l++) {
+                    if (removerEspacos(tripulacaoVet[k].tripulantes[l].getTelefone()) == telefone) {
+                        telefoneDuplicado = true;
+                    }
+                }
+            }
+        }
         tripulacao.setTelefone(telefone);
 
         while (!cargoValido)
         {
-            
-            cout << "Informe o cargo tripulante " << i + 1 <<"."<< endl; 
+
+            cout << "Informe o cargo tripulante " << i + 1 << "." << endl;
             cout << "1- Piloto" << endl;
             cout << "2- Copiloto" << endl;
             cout << "3- Comissário" << endl;
 
-            while(!(cin >> cargo)){
-            cout << "Entrada inválida, insira um número." << endl;
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            while (!(cin >> cargo))
+            {
+                cout << "Entrada inválida, insira um número." << endl;
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
             }
             cin.ignore();
             tripulacao.setCargo(cargo);
@@ -273,24 +323,28 @@ void Tripulacao::cadastrarTripulacao()
     tripulacaoVet.push_back(tripulacao);
 
     tripulacao.salvarTripulacao();
+    
+    cout << "Tripulação cadastrada com sucesso!"<<endl;
+    cout << "Pressione 'ENTER' para voltar" << endl;
+
+    cin.get();
     system("cls");
 }
 
-
 /***********************************************************************
-* NAME : void Voo::listarVoo()
-* DESCRIPTION : Lista todas as tripulações e tripulantes cadastrados 
-*               e exibe suas informações detalhadas.
-* INPUTS :
-* PARAMETERS : 
-* RETURN :
-* Type : void
-* Error code :
-* Values : Se houver tripulção cadastrada, exibe as informações detalhadas
-*          de cada tripulação: O nome do tripulante, o telefone, seu cargo e seu código
-*          Caso não possua tripulação cadastrada, 
-*          exibe uma mensagem informando que não há tripulações cadastradas.
-************************************************************************/
+ * NAME : void Voo::listarVoo()
+ * DESCRIPTION : Lista todas as tripulações e tripulantes cadastrados
+ *               e exibe suas informações detalhadas.
+ * INPUTS :
+ * PARAMETERS :
+ * RETURN :
+ * Type : void
+ * Error code :
+ * Values : Se houver tripulção cadastrada, exibe as informações detalhadas
+ *          de cada tripulação: O nome do tripulante, o telefone, seu cargo e seu código
+ *          Caso não possua tripulação cadastrada,
+ *          exibe uma mensagem informando que não há tripulações cadastradas.
+ ************************************************************************/
 void Tripulacao::listarTripulacao()
 {
     system("cls");
@@ -303,20 +357,19 @@ void Tripulacao::listarTripulacao()
 
         for (int i = 0; i < contagemTripulacao; i++)
         {
-                cout << endl;
-                cout << "           Tripulação: " << tripulacaoVet[i].getCodigoTripulacao() << endl;
-                cout << "+---------------------------------+"<<endl;
+            cout << endl;
+            cout << "           Tripulação: " << tripulacaoVet[i].getCodigoTripulacao() << endl;
+            cout << "+---------------------------------+" << endl;
             for (int j = 0; j < 3; j++)
             {
-                cout << "| Nome: " << tripulacaoVet[i].tripulantes[j].getNome()<< endl;
-                cout << "| Telefone: " << tripulacaoVet[i].tripulantes[j].getTelefone()<< endl;
-                cout << "| Cargo: " << tripulacaoVet[i].tripulantes[j].getCargo()<< endl;
-                cout << "| Código do tripulante: " << tripulacaoVet[i].tripulantes[j].getCodigoTripulante()<< endl;
-                cout << "+---------------------------------+"<<endl;
+                cout << "| Nome: " << tripulacaoVet[i].tripulantes[j].getNome() << endl;
+                cout << "| Telefone: " << tripulacaoVet[i].tripulantes[j].getTelefone() << endl;
+                cout << "| Cargo: " << tripulacaoVet[i].tripulantes[j].getCargo() << endl;
+                cout << "| Código do tripulante: " << tripulacaoVet[i].tripulantes[j].getCodigoTripulante() << endl;
+                cout << "+---------------------------------+" << endl;
             }
         }
     }
     cout << "Pressione 'ENTER' para voltar" << endl;
     cin.get();
-
 }

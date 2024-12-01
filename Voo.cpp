@@ -239,7 +239,7 @@ void Voo::setDia(int dia)
     }
     else
     {
-        cout << "Dia inválido" << endl;
+        cout << "Dia inválido. Deve ser cadastrado um dia entre 1 e 31." << endl;
     }
 }
 
@@ -251,7 +251,7 @@ void Voo::setMes(int mes)
     }
     else
     {
-        cout << "Mês inválido" << endl;
+        cout << "Mês inválido. Deve ser cadastrado um mês entre 1 e 12." << endl;
     }
 }
 
@@ -344,10 +344,11 @@ void Voo::cadastroVoo()
 
     string origem, destino;
     int codigoAviao, tarifa, status, dia, mes, ano, hora, minuto, codigoTripulacao;
-    bool diaValido = false, mesValido = false, anoValido = false, horaValida = false, minutoValido = false, tripulacaoValida = false;
+    bool diaValido = false, mesValido = false, anoValido = false, horaValida = false, minutoValido = false, tripulacaoValida = false, codigoAviaoValido = false;
     bool temPiloto = false;
     bool temCopiloto = false;
     bool tripulacaoEmUso = false;
+    
     
 
     if (tripulacaoVet.empty()) {
@@ -359,11 +360,27 @@ void Voo::cadastroVoo()
     cout << "Informe a origem do voo." << endl;
     cout <<"Origem: ";
     getline(cin, origem);
+    while (origem == "")
+        {
+            cout << "Erro: espaço em branco. Digite a origem do voo para prosseguir." << endl;
+            getline(cin, origem);
+        }
     voo.setOrigem(origem);
 
-    cout << "Informe o destino do voo." << endl;
-    cout << "Destino: ";
-    getline(cin, destino);
+    do{   
+        cout << "Informe o destino do voo." << endl;
+        cout << "Destino: ";
+        getline(cin, destino);
+        while (destino == "")
+        {
+            cout << "Erro: espaço em branco. Digite o destino do voo para prosseguir." << endl;
+            getline(cin, destino);
+        }
+        if(destino == origem){
+            cout << "O destino deve ser diferente da origem." << endl;
+        }
+    }while(destino == origem);
+
     voo.setDestino(destino);
 
     cout << "Informe a data do voo." << endl;
@@ -422,7 +439,7 @@ void Voo::cadastroVoo()
             horaValida = true;
             minutoValido = true;
         } else {
-            cout << "Horário inválido! Verifique o formato e os valores (HH:MM), com HH entre 00 e 23 e MM entre 00 e 59." << endl;
+            cout << "Horário inválido! Verifique o formato e os valores (HH:MM) com Horas entre 00 e 23 e Minutos entre 00 e 59." << endl;
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
         }
@@ -447,9 +464,10 @@ void Voo::cadastroVoo()
     for (int i = 0; i < tripulacaoVet.size(); i++) {
     if (tripulacaoVet[i].getCodigoTripulacao() == codigoTripulacao) {
         if (tripulacaoVet[i].getTripulacaoEmUso()) {
-            cout << "Tripulação já está em uso." << endl;
+            cout << "Tripulação já está cadastrada em outro voo." << endl;
             cout << "Pressione 'ENTER' para voltar" << endl;
             cin.get();
+            system("cls");
             return;
         }
         tripulacaoVet[i].setTripulacaoEmUso(true);
@@ -462,13 +480,26 @@ void Voo::cadastroVoo()
         }
     }
 
+    while(!codigoAviaoValido){
     cout << "Informe o código do avião: ";
      while(!(cin >> codigoAviao)){
         cout << "Entrada inválida, insira um número." << endl;
         cin.clear(); 
         cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
         }
-    voo.setCodigoAviao(codigoAviao);
+        
+    codigoAviaoValido = true; 
+    for (int i = 0; i < voos.size(); i++) {
+        if (voos[i].getCodigoAviao() == codigoAviao) {
+            cout << "Código de avião já está em uso." << endl;
+            codigoAviaoValido = false; 
+        }
+    }
+
+    if (codigoAviaoValido) {
+        voo.setCodigoAviao(codigoAviao);
+    }
+}
 
     cout << "Informe a tarifa: ";
      while(!(cin >> tarifa)){
@@ -508,6 +539,11 @@ void Voo::cadastroVoo()
     voos.push_back(voo);
 
     voo.salvarVoos();
+    cout << "Voo cadastrado com sucesso!"<<endl;
+    cout << "Pressione 'ENTER' para voltar" << endl;
+
+    cin.get();
+    system("cls");
 }
 
 /***********************************************************************
