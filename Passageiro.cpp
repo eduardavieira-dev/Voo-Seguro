@@ -202,7 +202,7 @@ void Passageiro::cadastroPassageiro()
         cin.clear();                                         // Limpa o estado de erro do cin
         cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Remove o restante da entrada inválida do buffer
 
-        if (numResidencia <= 0)
+        if (numResidencia && numResidencia <= 0)
         {
             cout << "Entrada inválida, insira um número maior que zero." << endl;
         }
