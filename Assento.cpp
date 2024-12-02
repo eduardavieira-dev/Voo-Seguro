@@ -295,6 +295,9 @@ void Assento::ExibirAssentos()
                 cout << "+---------------------------------+" << endl;
             }
         }
+        cout << "Pressione 'ENTER' para voltar" << endl;
+        cin.get();
+        system("cls");
     }
 
     

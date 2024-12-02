@@ -380,4 +380,5 @@ void Tripulacao::listarTripulacao()
     }
     cout << "Pressione 'ENTER' para voltar" << endl;
     cin.get();
+    system("cls");
 }
