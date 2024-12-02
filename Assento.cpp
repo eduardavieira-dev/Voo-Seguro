@@ -240,6 +240,9 @@ void Assento::ExibirAssentos()
     if (assentos.size() == 0)
     {
         cout << "Nenhum assento cadastrado." << endl;
+        cout << "Pressione 'ENTER' para voltar" << endl;
+        cin.get();
+        system("cls");
     }
     else
     {
@@ -294,6 +297,5 @@ void Assento::ExibirAssentos()
         }
     }
 
-    cout << "Pressione 'ENTER' para voltar" << endl;
-    cin.get();
+    
 }
