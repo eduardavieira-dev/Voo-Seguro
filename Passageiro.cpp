@@ -190,7 +190,7 @@ void Passageiro::cadastroPassageiro()
     {
         while (cidade == "")
         {
-            cout << "Erro: espaço em branco. Digite a cidade do passaeiro para prosseguir." << endl;
+            cout << "Erro: espaço em branco. Digite a cidade do passageiro para prosseguir." << endl;
             getline(cin, cidade);
         }
         system("cls");
