@@ -545,7 +545,7 @@ void Voo::cadastroVoo()
     cout << "Pressione 'ENTER' para voltar" << endl;
 
     cin.get();
-    system("cls");
+
 }
 
 /***********************************************************************

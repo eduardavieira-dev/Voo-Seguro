@@ -259,6 +259,13 @@ void Tripulacao::cadastrarTripulacao()
             getline(cin, telefone);
             telefone = removerEspacos(telefone);
         }
+        while (!all_of(telefone.begin(), telefone.end(), [](char c) {
+            return isdigit(c) || c == '(' || c == ')' || c == '-';
+        })) {
+            cout << "Entrada inválida. Digite um número." << endl;
+            getline(cin, telefone);
+            telefone = removerEspacos(telefone);
+        }
 
         for (int j = 0; j < i; j++) {
             if (removerEspacos(tripulacao.tripulantes[j].getTelefone()) == telefone) {
